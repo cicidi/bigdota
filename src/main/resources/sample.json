@@ -1,0 +1,2685 @@
+{
+  "match_id": 3368387319,
+  "barracks_status_dire": 51,
+  "barracks_status_radiant": 63,
+  "chat": [
+    {
+      "time": 2173,
+      "type": "chat",
+      "unit": "Rr",
+      "key": "GG",
+      "slot": 1,
+      "player_slot": 1
+    },
+    {
+      "time": 2174,
+      "type": "chat",
+      "unit": "Carl",
+      "key": "gg",
+      "slot": 3,
+      "player_slot": 3
+    }
+  ],
+  "cluster": 111,
+  "cosmetics": {
+    "4359": 131,
+    "5004": 4,
+    "5006": 4,
+    "5097": 4,
+    "5242": 131,
+    "5561": 129,
+    "6224": 1,
+    "6408": 129,
+    "6409": 129,
+    "6410": 129,
+    "6411": 129,
+    "7012": 3,
+    "7013": 3,
+    "7014": 3,
+    "7015": 3,
+    "7124": 132,
+    "7143": 1,
+    "7293": 2,
+    "7910": 131,
+    "7972": 1,
+    "8043": 132,
+    "8060": 3,
+    "8195": 4,
+    "8577": 2,
+    "8579": 2,
+    "8580": 2,
+    "8928": 132,
+    "9089": 132,
+    "9235": 130,
+    "9264": 1,
+    "9266": 1,
+    "9267": 1,
+    "11368": 128,
+    "11553": 0,
+    "17137": 4,
+    "17138": 132,
+    "17262": 4
+  },
+  "dire_score": 23,
+  "duration": 2173,
+  "engine": 1,
+  "first_blood_time": 122,
+  "game_mode": 2,
+  "human_players": 10,
+  "leagueid": 5401,
+  "lobby_type": 1,
+  "match_seq_num": 2937742106,
+  "negative_votes": 308,
+  "objectives": [
+    {
+      "time": 123,
+      "type": "CHAT_MESSAGE_FIRSTBLOOD",
+      "slot": 1,
+      "key": 5,
+      "player_slot": 1
+    },
+    {
+      "time": 651,
+      "type": "building_kill",
+      "unit": "npc_dota_hero_medusa",
+      "key": "npc_dota_badguys_tower1_top",
+      "slot": 4,
+      "player_slot": 4
+    }
+  ],
+  "picks_bans": [
+    {
+      "is_pick": false,
+      "hero_id": 60,
+      "team": 0,
+      "order": 0,
+      "ord": 0,
+      "match_id": 3368387319
+    },
+    {
+      "is_pick": false,
+      "hero_id": 107,
+      "team": 1,
+      "order": 1,
+      "ord": 1,
+      "match_id": 3368387319
+    }
+  ],
+  "positive_votes": 3602,
+  "radiant_gold_adv": [
+    16263,
+    19049
+  ],
+  "radiant_score": 53,
+  "radiant_win": true,
+  "radiant_xp_adv": [
+    0,
+    281,
+    27988
+  ],
+  "skill": null,
+  "start_time": 1502421614,
+  "teamfights": [
+    {
+      "start": 434,
+      "end": 467,
+      "last_death": 452,
+      "deaths": 3,
+      "players": [
+        {
+          "deaths_pos": {
+            "80": {
+              "158": 1
+            }
+          },
+          "ability_uses": {
+            "chen_test_of_faith": 1
+          },
+          "item_uses": {
+            "tango": 2
+          },
+          "killed": {
+            "npc_dota_hero_wisp": 1
+          },
+          "deaths": 1,
+          "buybacks": 0,
+          "damage": 598,
+          "healing": 0,
+          "gold_delta": 134,
+          "xp_delta": 20,
+          "xp_start": 1313,
+          "xp_end": 1333
+        },
+        {
+          "deaths_pos": {},
+          "ability_uses": {
+            "tinker_laser": 1
+          },
+          "item_uses": {},
+          "killed": {},
+          "deaths": 0,
+          "buybacks": 0,
+          "damage": 0,
+          "healing": 0,
+          "gold_delta": 45,
+          "xp_delta": 170,
+          "xp_start": 2726,
+          "xp_end": 2896
+        },
+        {
+          "deaths_pos": {},
+          "ability_uses": {
+            "earthshaker_fissure": 2
+          },
+          "item_uses": {
+            "tpscroll": 1
+          },
+          "killed": {
+            "npc_dota_hero_ogre_magi": 1
+          },
+          "deaths": 0,
+          "buybacks": 0,
+          "damage": 480,
+          "healing": 0,
+          "gold_delta": 284,
+          "xp_delta": 230,
+          "xp_start": 1883,
+          "xp_end": 2113
+        },
+        {
+          "deaths_pos": {},
+          "ability_uses": {
+            "batrider_sticky_napalm": 3,
+            "batrider_firefly": 1
+          },
+          "item_uses": {
+            "tpscroll": 1,
+            "soul_ring": 1
+          },
+          "killed": {},
+          "deaths": 0,
+          "buybacks": 0,
+          "damage": 0,
+          "healing": 0,
+          "gold_delta": 135,
+          "xp_delta": 205,
+          "xp_start": 2603,
+          "xp_end": 2808
+        },
+        {
+          "deaths_pos": {},
+          "ability_uses": {
+            "medusa_mystic_snake": 2
+          },
+          "item_uses": {
+            "magic_wand": 1
+          },
+          "killed": {
+            "npc_dota_hero_abaddon": 1
+          },
+          "deaths": 0,
+          "buybacks": 0,
+          "damage": 1079,
+          "healing": 105,
+          "gold_delta": 451,
+          "xp_delta": 760,
+          "xp_start": 2739,
+          "xp_end": 3179
+        },
+        {
+          "deaths_pos": {},
+          "ability_uses": {
+            "brewmaster_drunken_haze": 2
+          },
+          "item_uses": {
+            "ward_observer": 1
+          },
+          "killed": {},
+          "deaths": 0,
+          "buybacks": 0,
+          "damage": 0,
+          "healing": 0,
+          "gold_delta": 0,
+          "xp_delta": 10,
+          "xp_start": 1147,
+          "xp_end": 1157
+        },
+        {
+          "deaths_pos": {
+            "100": {
+              "170": 1
+            }
+          },
+          "ability_uses": {
+            "abaddon_death_coil": 1
+          },
+          "item_uses": {
+            "phase_boots": 2,
+            "magic_wand": 1
+          },
+          "killed": {},
+          "deaths": 1,
+          "buybacks": 0,
+          "damage": 391,
+          "healing": 93,
+          "gold_delta": -48,
+          "xp_delta": 160,
+          "xp_start": 2310,
+          "xp_end": 2470
+        },
+        {
+          "deaths_pos": {
+            "88": {
+              "162": 1
+            }
+          },
+          "ability_uses": {
+            "wisp_tether": 1,
+            "wisp_spirits_out": 2,
+            "wisp_spirits_in": 1,
+            "wisp_spirits": 1,
+            "wisp_overcharge": 1
+          },
+          "item_uses": {
+            "bottle": 1,
+            "tpscroll": 1
+          },
+          "killed": {},
+          "deaths": 1,
+          "buybacks": 0,
+          "damage": 232,
+          "healing": 32,
+          "gold_delta": -15,
+          "xp_delta": 115,
+          "xp_start": 948,
+          "xp_end": 1063
+        },
+        {
+          "deaths_pos": {
+            "86": {
+              "162": 1
+            }
+          },
+          "ability_uses": {
+            "ogre_magi_ignite": 1
+          },
+          "item_uses": {
+            "phase_boots": 3,
+            "enchanted_mango": 1,
+            "magic_stick": 1
+          },
+          "killed": {
+            "npc_dota_hero_chen": 1
+          },
+          "deaths": 1,
+          "buybacks": 0,
+          "damage": 216,
+          "healing": 15,
+          "gold_delta": 69,
+          "xp_delta": 200,
+          "xp_start": 2637,
+          "xp_end": 2837
+        },
+        {
+          "deaths_pos": {},
+          "ability_uses": {},
+          "item_uses": {},
+          "killed": {},
+          "deaths": 0,
+          "buybacks": 0,
+          "damage": 38,
+          "healing": 0,
+          "gold_delta": 0,
+          "xp_delta": 40,
+          "xp_start": 2644,
+          "xp_end": 2684
+        }
+      ]
+    },
+    {
+      "start": 2136,
+      "end": 2185,
+      "last_death": 2170,
+      "deaths": 5,
+      "players": [
+        {
+          "deaths_pos": {
+            "178": {
+              "176": 1
+            }
+          },
+          "ability_uses": {
+            "chen_test_of_faith": 2,
+            "chen_penitence": 1
+          },
+          "item_uses": {
+            "dagon": 1,
+            "ward_dispenser": 1,
+            "arcane_boots": 1
+          },
+          "killed": {},
+          "deaths": 1,
+          "buybacks": 0,
+          "damage": 985,
+          "healing": 0,
+          "gold_delta": 395,
+          "xp_delta": 1843,
+          "xp_start": 13413,
+          "xp_end": 15255
+        },
+        {
+          "deaths_pos": {},
+          "ability_uses": {
+            "tinker_rearm": 6,
+            "tinker_heat_seeking_missile": 2,
+            "tinker_laser": 2,
+            "tinker_march_of_the_machines": 2
+          },
+          "item_uses": {
+            "enchanted_mango": 4,
+            "bottle": 11,
+            "blink": 4,
+            "dagon_3": 3,
+            "soul_ring": 5,
+            "travel_boots": 2
+          },
+          "killed": {
+            "npc_dota_hero_wisp": 1
+          },
+          "deaths": 0,
+          "buybacks": 0,
+          "damage": 2275,
+          "healing": 587,
+          "gold_delta": 595,
+          "xp_delta": 395,
+          "xp_start": 19771,
+          "xp_end": 20164
+        },
+        {
+          "deaths_pos": {},
+          "ability_uses": {
+            "earthshaker_enchant_totem": 4,
+            "earthshaker_fissure": 2
+          },
+          "item_uses": {
+            "ancient_janggo": 1,
+            "blink": 2,
+            "force_staff": 2,
+            "cyclone": 1,
+            "arcane_boots": 1
+          },
+          "killed": {
+            "npc_dota_hero_brewmaster": 1
+          },
+          "deaths": 0,
+          "buybacks": 0,
+          "damage": 1081,
+          "healing": 0,
+          "gold_delta": 924,
+          "xp_delta": 1127,
+          "xp_start": 17323,
+          "xp_end": 18449
+        },
+        {
+          "deaths_pos": {},
+          "ability_uses": {
+            "batrider_sticky_napalm": 6,
+            "batrider_flamebreak": 2,
+            "batrider_flaming_lasso": 1,
+            "batrider_firefly": 1
+          },
+          "item_uses": {
+            "blink": 1,
+            "force_staff": 1
+          },
+          "killed": {},
+          "deaths": 0,
+          "buybacks": 0,
+          "damage": 340,
+          "healing": 0,
+          "gold_delta": 603,
+          "xp_delta": 2222,
+          "xp_start": 19963,
+          "xp_end": 22185
+        },
+        {
+          "deaths_pos": {},
+          "ability_uses": {
+            "medusa_mystic_snake": 1,
+            "medusa_split_shot": 1
+          },
+          "item_uses": {
+            "mask_of_madness": 1,
+            "manta": 1,
+            "diffusal_blade_2": 1
+          },
+          "killed": {
+            "npc_dota_hero_abaddon": 1,
+            "npc_dota_hero_ogre_magi": 1
+          },
+          "deaths": 0,
+          "buybacks": 0,
+          "damage": 4749,
+          "healing": 936,
+          "gold_delta": 961,
+          "xp_delta": 0,
+          "xp_start": 26959,
+          "xp_end": 26959
+        },
+        {
+          "deaths_pos": {
+            "184": {
+              "160": 1
+            }
+          },
+          "ability_uses": {
+            "brewmaster_drunken_haze": 1,
+            "brewmaster_thunder_clap": 1
+          },
+          "item_uses": {
+            "smoke_of_deceit": 1,
+            "blink": 1,
+            "hood_of_defiance": 1,
+            "magic_wand": 1
+          },
+          "killed": {},
+          "deaths": 1,
+          "buybacks": 0,
+          "damage": 289,
+          "healing": 255,
+          "gold_delta": -188,
+          "xp_delta": 0,
+          "xp_start": 14437,
+          "xp_end": 14437
+        },
+        {
+          "deaths_pos": {
+            "186": {
+              "176": 1
+            }
+          },
+          "ability_uses": {
+            "abaddon_borrowed_time": 1,
+            "abaddon_aphotic_shield": 3,
+            "abaddon_death_coil": 1
+          },
+          "item_uses": {
+            "phase_boots": 2,
+            "solar_crest": 1,
+            "magic_wand": 1
+          },
+          "killed": {},
+          "deaths": 1,
+          "buybacks": 1,
+          "damage": 748,
+          "healing": 616,
+          "gold_delta": -316,
+          "xp_delta": 0,
+          "xp_start": 13184,
+          "xp_end": 13184
+        },
+        {
+          "deaths_pos": {
+            "184": {
+              "174": 1
+            }
+          },
+          "ability_uses": {},
+          "item_uses": {
+            "shadow_amulet": 2
+          },
+          "killed": {},
+          "deaths": 1,
+          "buybacks": 0,
+          "damage": 43,
+          "healing": 0,
+          "gold_delta": -206,
+          "xp_delta": 0,
+          "xp_start": 10330,
+          "xp_end": 10330
+        },
+        {
+          "deaths_pos": {
+            "180": {
+              "180": 1
+            }
+          },
+          "ability_uses": {
+            "ogre_magi_ignite": 2,
+            "ogre_magi_fireblast": 2,
+            "ogre_magi_bloodlust": 1
+          },
+          "item_uses": {
+            "phase_boots": 2,
+            "cyclone": 1,
+            "hood_of_defiance": 1,
+            "magic_wand": 1
+          },
+          "killed": {},
+          "deaths": 1,
+          "buybacks": 0,
+          "damage": 435,
+          "healing": 135,
+          "gold_delta": -261,
+          "xp_delta": 0,
+          "xp_start": 12188,
+          "xp_end": 12188
+        },
+        {
+          "deaths_pos": {},
+          "ability_uses": {},
+          "item_uses": {},
+          "killed": {},
+          "deaths": 0,
+          "buybacks": 0,
+          "damage": 0,
+          "healing": 0,
+          "gold_delta": 0,
+          "xp_delta": 0,
+          "xp_start": 21309,
+          "xp_end": 21309
+        }
+      ]
+    }
+  ],
+  "tower_status_dire": 390,
+  "tower_status_radiant": 1974,
+  "version": 20,
+  "replay_salt": 2081121450,
+  "series_id": 0,
+  "series_type": 0,
+  "league": {
+    "leagueid": 5401,
+    "ticket": "econ/leagues/ti7_ticket_image",
+    "banner": "econ/leagues/ti7_ticket_image_ingame",
+    "tier": "premium",
+    "name": "The International 2017"
+  },
+  "radiant_team": {
+    "team_id": 824543,
+    "name": "Team Radiant",
+    "tag": "RAD"
+  },
+  "dire_team": {
+    "team_id": 824639,
+    "name": "Team Dire",
+    "tag": "DIRE"
+  },
+  "players": [
+    {
+      "match_id": 3368387319,
+      "player_slot": 0,
+      "ability_upgrades_arr": [
+        5330,
+        5331
+      ],
+      "ability_uses": {
+        "chen_holy_persuasion": 18,
+        "chen_penitence": 30,
+        "chen_test_of_faith_teleport": 7,
+        "chen_test_of_faith": 20,
+        "chen_hand_of_god": 6
+      },
+      "account_id": 82262664,
+      "actions": {
+        "1": 3472,
+        "2": 191
+      },
+      "additional_units": null,
+      "assists": 25,
+      "backpack_0": 0,
+      "backpack_1": 0,
+      "backpack_2": 0,
+      "buyback_log": [],
+      "camps_stacked": 4,
+      "creeps_stacked": 8,
+      "damage": {
+        "npc_dota_neutral_satyr_trickster": 1637,
+        "npc_dota_neutral_satyr_soulstealer": 3200,
+        "npc_dota_neutral_alpha_wolf": 620,
+        "npc_dota_neutral_giant_wolf": 1064,
+        "npc_dota_hero_brewmaster": 1829,
+        "npc_dota_hero_necrolyte": 2793,
+        "npc_dota_neutral_wildkin": 1949,
+        "npc_dota_creep_badguys_melee": 4486,
+        "npc_dota_creep_badguys_ranged": 1171,
+        "npc_dota_neutral_polar_furbolg_ursa_warrior": 929,
+        "npc_dota_neutral_polar_furbolg_champion": 719,
+        "npc_dota_neutral_dark_troll": 4280,
+        "npc_dota_neutral_centaur_outrunner": 2013,
+        "npc_dota_creep_goodguys_ranged": 46,
+        "npc_dota_hero_ogre_magi": 2803,
+        "npc_dota_hero_abaddon": 1224,
+        "npc_dota_hero_wisp": 2616,
+        "npc_dota_neutral_enraged_wildkin": 1052,
+        "npc_dota_brewmaster_earth_1": 380,
+        "npc_dota_brewmaster_fire_1": 231,
+        "npc_dota_neutral_prowler_shaman": 40,
+        "npc_dota_badguys_siege": 429,
+        "npc_dota_neutral_dark_troll_warlord": 2258,
+        "npc_dota_dark_troll_warlord_skeleton_warrior": 572,
+        "npc_dota_badguys_tower1_mid": 31,
+        "npc_dota_neutral_prowler_acolyte": 59,
+        "npc_dota_badguys_tower2_mid": 86,
+        "npc_dota_badguys_tower4": 314,
+        "npc_dota_badguys_healers": 53,
+        "npc_dota_brewmaster_fire_3": 88,
+        "npc_dota_neutral_ogre_mauler": 25
+      },
+      "damage_inflictor": {
+        "null": 3833,
+        "satyr_hellcaller_shockwave": 825,
+        "tornado_tempest": 599,
+        "centaur_khan_war_stomp": 243,
+        "chen_test_of_faith": 4778,
+        "polar_furbolg_ursa_warrior_thunder_clap": 196,
+        "dagon": 791
+      },
+      "damage_inflictor_received": {
+        "null": 2568,
+        "brewmaster_thunder_clap": 724,
+        "abaddon_aphotic_shield": 1187,
+        "ogre_magi_fireblast": 717,
+        "abaddon_death_coil": 346,
+        "wisp_spirits": 1891,
+        "ogre_magi_ignite": 390,
+        "necrolyte_heartstopper_aura": 1283,
+        "radiance": 1268,
+        "urn_of_shadows": 342,
+        "necrolyte_death_pulse": 316
+      },
+      "damage_taken": {
+        "npc_dota_hero_brewmaster": 2062,
+        "npc_dota_neutral_giant_wolf": 64,
+        "npc_dota_neutral_wildkin": 15,
+        "npc_dota_neutral_dark_troll": 38,
+        "npc_dota_neutral_dark_troll_warlord": 64,
+        "npc_dota_hero_necrolyte": 3377,
+        "npc_dota_hero_abaddon": 1776,
+        "npc_dota_hero_ogre_magi": 1490,
+        "npc_dota_hero_wisp": 3394,
+        "npc_dota_creep_badguys_melee": 328,
+        "npc_dota_badguys_tower1_top": 143,
+        "npc_dota_creep_badguys_ranged": 113,
+        "npc_dota_neutral_small_thunder_lizard": 90,
+        "npc_dota_neutral_big_thunder_lizard": 59,
+        "npc_dota_neutral_satyr_soulstealer": 15,
+        "npc_dota_neutral_rock_golem": 15,
+        "npc_dota_neutral_forest_troll_berserker": 42,
+        "npc_dota_neutral_kobold_taskmaster": 7,
+        "dota_fountain": 1056
+      },
+      "deaths": 7,
+      "denies": 1,
+      "dn_t": [
+        0
+      ],
+      "firstblood_claimed": 0,
+      "gold": 1338,
+      "gold_per_min": 253,
+      "gold_reasons": {
+        "0": 1071,
+        "1": -1022,
+        "11": 1660,
+        "12": 2270,
+        "13": 1502
+      },
+      "gold_spent": 7610,
+      "gold_t": [
+        0,
+        163
+      ],
+      "hero_damage": 11265,
+      "hero_healing": 3363,
+      "hero_hits": {
+        "null": 93,
+        "satyr_hellcaller_shockwave": 6,
+        "tornado_tempest": 216,
+        "centaur_khan_war_stomp": 13,
+        "chen_test_of_faith": 18,
+        "polar_furbolg_ursa_warrior_thunder_clap": 2,
+        "dagon": 3
+      },
+      "hero_id": 66,
+      "item_0": 43,
+      "item_1": 244,
+      "item_2": 188,
+      "item_3": 104,
+      "item_4": 180,
+      "item_5": 36,
+      "item_uses": {
+        "tango": 4,
+        "tpscroll": 5,
+        "ward_dispenser": 32,
+        "smoke_of_deceit": 2,
+        "clarity": 1,
+        "arcane_boots": 21,
+        "tome_of_knowledge": 3,
+        "ward_sentry": 3,
+        "magic_wand": 7,
+        "dagon": 3
+      },
+      "kill_streaks": {},
+      "killed": {
+        "npc_dota_neutral_satyr_soulstealer": 5,
+        "npc_dota_neutral_satyr_trickster": 5,
+        "npc_dota_neutral_alpha_wolf": 1,
+        "npc_dota_neutral_giant_wolf": 2,
+        "npc_dota_hero_necrolyte": 1,
+        "npc_dota_neutral_wildkin": 6,
+        "npc_dota_neutral_polar_furbolg_champion": 1,
+        "npc_dota_neutral_polar_furbolg_ursa_warrior": 1,
+        "npc_dota_neutral_dark_troll": 8,
+        "npc_dota_creep_goodguys_ranged": 1,
+        "npc_dota_neutral_centaur_outrunner": 5,
+        "npc_dota_hero_wisp": 2,
+        "npc_dota_creep_badguys_melee": 11,
+        "npc_dota_creep_badguys_ranged": 2,
+        "npc_dota_badguys_siege": 1,
+        "npc_dota_neutral_dark_troll_warlord": 2,
+        "npc_dota_dark_troll_warlord_skeleton_warrior": 2
+      },
+      "killed_by": {
+        "npc_dota_hero_ogre_magi": 2,
+        "npc_dota_hero_wisp": 2,
+        "npc_dota_hero_brewmaster": 1,
+        "npc_dota_hero_abaddon": 1,
+        "dota_fountain": 1
+      },
+      "kills": 3,
+      "kills_log": [
+        {
+          "time": 135,
+          "key": "npc_dota_hero_necrolyte"
+        },
+        {
+          "time": 452,
+          "key": "npc_dota_hero_wisp"
+        },
+        {
+          "time": 797,
+          "key": "npc_dota_hero_wisp"
+        }
+      ],
+      "lane_pos": {
+        "72": {
+          "78": 1
+        },
+        "128": {
+          "126": 1,
+          "130": 3,
+          "146": 2
+        }
+      },
+      "last_hits": 53,
+      "leaver_status": 0,
+      "level": 18,
+      "lh_t": [
+        0,
+        3,
+        53
+      ],
+      "life_state": {
+        "0": 1952,
+        "1": 13,
+        "2": 245
+      },
+      "max_hero_hit": {
+        "type": "max_hero_hit",
+        "time": 1984,
+        "max": true,
+        "inflictor": "chen_test_of_faith",
+        "unit": "npc_dota_hero_chen",
+        "key": "npc_dota_hero_necrolyte",
+        "value": 533,
+        "slot": 0,
+        "player_slot": 0
+      },
+      "multi_kills": {},
+      "obs": {
+        "98": {
+          "154": 1
+        },
+        "180": {
+          "160": 1
+        }
+      },
+      "obs_left_log": [
+        {
+          "time": 299,
+          "type": "obs_left_log",
+          "key": "[110, 164]",
+          "slot": 0,
+          "x": 110,
+          "y": 164,
+          "z": 130,
+          "entityleft": true,
+          "ehandle": 15581264,
+          "player_slot": 0
+        }
+      ],
+      "obs_log": [
+        {
+          "time": -67,
+          "type": "obs_log",
+          "key": "[110, 164]",
+          "slot": 0,
+          "x": 110,
+          "y": 164,
+          "z": 130,
+          "entityleft": false,
+          "ehandle": 15581264,
+          "player_slot": 0
+        }
+      ],
+      "obs_placed": 15,
+      "party_id": null,
+      "party_size": null,
+      "performance_others": null,
+      "permanent_buffs": null,
+      "pings": 98,
+      "pred_vict": false,
+      "purchase": {
+        "ward_dispenser": 18,
+        "smoke_of_deceit": 5,
+        "tango": 1,
+        "clarity": 1,
+        "tpscroll": 5,
+        "flying_courier": 1,
+        "boots": 1,
+        "ward_observer": 13,
+        "ward_sentry": 5,
+        "arcane_boots": 1,
+        "energy_booster": 1,
+        "magic_stick": 1,
+        "tome_of_knowledge": 3,
+        "circlet": 2,
+        "branches": 2,
+        "wind_lace": 1,
+        "magic_wand": 1,
+        "staff_of_wizardry": 1,
+        "mantle": 1,
+        "null_talisman": 1,
+        "recipe_null_talisman": 1,
+        "recipe_dagon": 1,
+        "dagon": 1,
+        "dust": null
+      },
+      "purchase_log": [
+        {
+          "time": -89,
+          "key": "smoke_of_deceit"
+        }
+      ],
+      "randomed": false,
+      "repicked": null,
+      "roshans_killed": 0,
+      "rune_pickups": 6,
+      "runes": {
+        "5": 6
+      },
+      "runes_log": [
+        {
+          "time": 158,
+          "key": 5
+        },
+        {
+          "time": 247,
+          "key": 5
+        },
+        {
+          "time": 384,
+          "key": 5
+        },
+        {
+          "time": 904,
+          "key": 5
+        },
+        {
+          "time": 1322,
+          "key": 5
+        },
+        {
+          "time": 1412,
+          "key": 5
+        }
+      ],
+      "sen": {
+        "98": {
+          "148": 1
+        },
+        "108": {
+          "130": 1
+        },
+        "124": {
+          "138": 1
+        },
+        "126": {
+          "124": 1
+        },
+        "138": {
+          "90": 1
+        }
+      },
+      "sen_left_log": [
+        {
+          "time": 524,
+          "type": "sen_left_log",
+          "key": "[124, 138]",
+          "slot": 0,
+          "x": 124,
+          "y": 138,
+          "z": 130,
+          "entityleft": true,
+          "ehandle": 10437708,
+          "player_slot": 0
+        }
+      ],
+      "sen_log": [
+        {
+          "time": 278,
+          "type": "sen_log",
+          "key": "[124, 138]",
+          "slot": 0,
+          "x": 124,
+          "y": 138,
+          "z": 130,
+          "entityleft": false,
+          "ehandle": 10437708,
+          "player_slot": 0
+        }
+      ],
+      "sen_placed": 5,
+      "stuns": 33.38025,
+      "teamfight_participation": 0.5283019,
+      "times": [
+        2160
+      ],
+      "tower_damage": 431,
+      "towers_killed": 0,
+      "xp_per_min": 421,
+      "xp_reasons": {
+        "0": 2586,
+        "1": 8651,
+        "2": 4029
+      },
+      "xp_t": [
+        0,
+        14082
+      ],
+      "personaname": "ghn",
+      "name": "KuroKy",
+      "last_login": null,
+      "radiant_win": true,
+      "start_time": 1502421614,
+      "duration": 2173,
+      "cluster": 111,
+      "lobby_type": 1,
+      "game_mode": 2,
+      "patch": 25,
+      "region": 1,
+      "isRadiant": true,
+      "win": 1,
+      "lose": 0,
+      "total_gold": 9162,
+      "total_xp": 15247,
+      "kills_per_min": 0.08283479061205706,
+      "kda": 3,
+      "abandons": 0,
+      "neutral_kills": 36,
+      "tower_kills": 0,
+      "courier_kills": 0,
+      "lane_kills": 14,
+      "hero_kills": 3,
+      "observer_kills": 0,
+      "sentry_kills": 0,
+      "roshan_kills": 0,
+      "necronomicon_kills": 0,
+      "ancient_kills": 0,
+      "buyback_count": 0,
+      "observer_uses": 0,
+      "sentry_uses": 3,
+      "lane_efficiency": 0.4259806820421841,
+      "lane_efficiency_pct": 42,
+      "lane": 2,
+      "lane_role": 2,
+      "is_roaming": false,
+      "purchase_time": {
+        "smoke_of_deceit": 5669,
+        "tango": -89,
+        "clarity": -89,
+        "tpscroll": 4212,
+        "flying_courier": 191,
+        "boots": 192,
+        "ward_observer": 14592,
+        "ward_sentry": 4477,
+        "arcane_boots": 541,
+        "energy_booster": 541,
+        "magic_stick": 568,
+        "tome_of_knowledge": 3710,
+        "circlet": 2612,
+        "branches": 1638,
+        "wind_lace": 889,
+        "magic_wand": 907,
+        "staff_of_wizardry": 1429,
+        "mantle": 1793,
+        "null_talisman": 1794,
+        "dagon": 1889
+      },
+      "first_purchase_time": {
+        "smoke_of_deceit": -89,
+        "tango": -89,
+        "clarity": -89,
+        "tpscroll": -84,
+        "flying_courier": 191,
+        "boots": 192,
+        "ward_observer": 192,
+        "ward_sentry": 200,
+        "arcane_boots": 541,
+        "energy_booster": 541,
+        "magic_stick": 568,
+        "tome_of_knowledge": 663,
+        "circlet": 819,
+        "branches": 819,
+        "wind_lace": 889,
+        "magic_wand": 907,
+        "staff_of_wizardry": 1429,
+        "mantle": 1793,
+        "null_talisman": 1794,
+        "dagon": 1889
+      },
+      "item_win": {
+        "smoke_of_deceit": 1,
+        "tango": 1,
+        "clarity": 1,
+        "tpscroll": 1,
+        "flying_courier": 1,
+        "boots": 1,
+        "ward_observer": 1,
+        "ward_sentry": 1,
+        "arcane_boots": 1,
+        "energy_booster": 1,
+        "magic_stick": 1,
+        "tome_of_knowledge": 1,
+        "circlet": 1,
+        "branches": 1,
+        "wind_lace": 1,
+        "magic_wand": 1,
+        "staff_of_wizardry": 1,
+        "mantle": 1,
+        "null_talisman": 1,
+        "dagon": 1
+      },
+      "item_usage": {
+        "smoke_of_deceit": 1,
+        "tango": 1,
+        "clarity": 1,
+        "tpscroll": 1,
+        "flying_courier": 1,
+        "boots": 1,
+        "ward_observer": 1,
+        "ward_sentry": 1,
+        "arcane_boots": 1,
+        "energy_booster": 1,
+        "magic_stick": 1,
+        "tome_of_knowledge": 1,
+        "circlet": 1,
+        "branches": 1,
+        "wind_lace": 1,
+        "magic_wand": 1,
+        "staff_of_wizardry": 1,
+        "mantle": 1,
+        "null_talisman": 1,
+        "dagon": 1
+      },
+      "purchase_ward_observer": 13,
+      "purchase_ward_sentry": 5,
+      "purchase_tpscroll": 5,
+      "actions_per_min": 146,
+      "life_state_dead": 258,
+      "solo_competitive_rank": null,
+      "cosmetics": [
+        {
+          "item_id": 11553,
+          "name": "Atrophic Skitterwing",
+          "prefab": "courier",
+          "creation_date": "2016-05-18T00:00:00.000Z",
+          "image_inventory": "econ/items/courier/atrophic_skitterwing/atrophic_skitterwing",
+          "image_path": "icons/econ/items/courier/atrophic_skitterwing/atrophic_skitterwing.e9448c69acae1b3d65aafa022868480bcb592d5d.png",
+          "item_description": null,
+          "item_name": "#DOTA_Item_Atrophic_Skitterwing",
+          "item_rarity": "mythical",
+          "item_type_name": null,
+          "used_by_heroes": null
+        }
+      ],
+      "benchmarks": {
+        "gold_per_min": {
+          "raw": 253,
+          "pct": 0.2692307692307692
+        },
+        "xp_per_min": {
+          "raw": 421,
+          "pct": 0.6153846153846154
+        },
+        "kills_per_min": {
+          "raw": 0.08283479061205706,
+          "pct": 0.6153846153846154
+        },
+        "last_hits_per_min": {
+          "raw": 1.4634146341463414,
+          "pct": 0.46153846153846156
+        },
+        "hero_damage_per_min": {
+          "raw": 311.0446387482743,
+          "pct": 0.8076923076923077
+        },
+        "hero_healing_per_min": {
+          "raw": 92.85780027611597,
+          "pct": 0.5769230769230769
+        },
+        "tower_damage": {
+          "raw": 431,
+          "pct": 0.3076923076923077
+        }
+      }
+    },
+    {
+      "match_id": 3368387319,
+      "player_slot": 132,
+      "ability_upgrades_arr": [
+        5158,
+        5159,
+        5158,
+        5160,
+        5158,
+        5161,
+        5158,
+        5159,
+        5159,
+        5940,
+        5160,
+        5161,
+        5159,
+        5160,
+        5922,
+        5160,
+        5161,
+        5937
+      ],
+      "ability_uses": {
+        "necrolyte_death_pulse": 97,
+        "necrolyte_sadist": 21,
+        "necrolyte_reapers_scythe": 11
+      },
+      "account_id": 19672354,
+      "actions": {
+        "1": 4483,
+        "2": 100,
+        "3": 25,
+        "4": 1004,
+        "5": 31,
+        "6": 46,
+        "7": 4,
+        "8": 240,
+        "9": 1,
+        "10": 141,
+        "11": 15,
+        "15": 18,
+        "16": 48,
+        "17": 6,
+        "19": 36,
+        "23": 1,
+        "24": 2,
+        "27": 6,
+        "33": 141
+      },
+      "additional_units": null,
+      "assists": 6,
+      "backpack_0": 0,
+      "backpack_1": 0,
+      "backpack_2": 0,
+      "buyback_log": [
+        {
+          "time": 1988,
+          "slot": 9,
+          "type": "buyback_log",
+          "player_slot": 132
+        }
+      ],
+      "camps_stacked": 0,
+      "creeps_stacked": 0,
+      "damage": {
+        "npc_dota_creep_goodguys_melee": 62807,
+        "npc_dota_creep_badguys_melee": 793,
+        "npc_dota_hero_tinker": 6067,
+        "npc_dota_creep_goodguys_ranged": 14961,
+        "npc_dota_creep_badguys_ranged": 538,
+        "npc_dota_hero_earthshaker": 7385,
+        "npc_dota_neutral_satyr_hellcaller": 3816,
+        "npc_dota_neutral_dark_troll_warlord": 2563,
+        "npc_dota_hero_chen": 3377,
+        "npc_dota_goodguys_siege": 1972,
+        "npc_dota_neutral_enraged_wildkin": 962,
+        "npc_dota_observer_wards": 229,
+        "illusion_npc_dota_hero_tinker": 1093,
+        "npc_dota_hero_batrider": 10336,
+        "npc_dota_neutral_centaur_khan": 6457,
+        "npc_dota_neutral_centaur_outrunner": 1456,
+        "npc_dota_neutral_satyr_soulstealer": 1487,
+        "npc_dota_neutral_satyr_trickster": 1099,
+        "npc_dota_goodguys_tower1_bot": 409,
+        "npc_dota_hero_medusa": 7677,
+        "npc_dota_neutral_kobold_taskmaster": 225,
+        "npc_dota_neutral_dark_troll": 52,
+        "npc_dota_neutral_giant_wolf": 65,
+        "npc_dota_neutral_alpha_wolf": 22,
+        "npc_dota_neutral_harpy_scout": 887,
+        "npc_dota_neutral_harpy_storm": 437,
+        "npc_dota_neutral_ogre_mauler": 2403,
+        "npc_dota_neutral_ogre_magi": 984,
+        "npc_dota_neutral_forest_troll_berserker": 475,
+        "npc_dota_goodguys_tower1_top": 550,
+        "npc_dota_goodguys_tower1_mid": 613,
+        "npc_dota_neutral_polar_furbolg_ursa_warrior": 1191,
+        "npc_dota_courier": 138,
+        "npc_dota_neutral_wildkin": 680,
+        "npc_dota_neutral_polar_furbolg_champion": 745,
+        "illusion_npc_dota_hero_medusa": 8390,
+        "npc_dota_neutral_prowler_acolyte": 422,
+        "npc_dota_neutral_prowler_shaman": 211,
+        "npc_dota_neutral_gnoll_assassin": 1172,
+        "npc_dota_neutral_mud_golem": 970,
+        "npc_dota_creep_goodguys_ranged_upgraded": 1522,
+        "npc_dota_creep_goodguys_melee_upgraded": 4236,
+        "npc_dota_neutral_rock_golem": 63,
+        "npc_dota_roshan": 915
+      },
+      "damage_inflictor": {
+        "necrolyte_death_pulse": 6131,
+        "null": 4012,
+        "necrolyte_heartstopper_aura": 12227,
+        "necrolyte_reapers_scythe": 3531,
+        "radiance": 8941
+      },
+      "damage_inflictor_received": {
+        "null": 10519,
+        "tinker_heat_seeking_missile": 6663,
+        "earthshaker_fissure": 2998,
+        "tinker_laser": 4426,
+        "earthshaker_aftershock": 942,
+        "batrider_firefly": 1741,
+        "batrider_sticky_napalm": 2170,
+        "batrider_flamebreak": 663,
+        "earthshaker_echo_slam": 775,
+        "tinker_march_of_the_machines": 4300,
+        "medusa_mystic_snake": 1546,
+        "orb_of_venom": 27,
+        "cyclone": 23,
+        "dagon_2": 334,
+        "chen_test_of_faith": 1127,
+        "dagon": 553,
+        "dagon_3": 921
+      },
+      "damage_taken": {
+        "npc_dota_hero_tinker": 17896,
+        "npc_dota_creep_goodguys_melee": 3013,
+        "npc_dota_creep_goodguys_ranged": 1107,
+        "npc_dota_hero_earthshaker": 6150,
+        "npc_dota_hero_chen": 2793,
+        "npc_dota_hero_batrider": 4612,
+        "npc_dota_goodguys_siege": 98,
+        "npc_dota_neutral_satyr_trickster": 4,
+        "npc_dota_neutral_centaur_khan": 152,
+        "npc_dota_hero_medusa": 8968,
+        "npc_dota_goodguys_tower2_bot": 273,
+        "npc_dota_goodguys_tower1_mid": 1871,
+        "npc_dota_neutral_centaur_outrunner": 40,
+        "npc_dota_neutral_satyr_hellcaller": 37,
+        "npc_dota_neutral_forest_troll_berserker": 11,
+        "npc_dota_neutral_kobold_taskmaster": 8,
+        "npc_dota_goodguys_tower1_top": 163,
+        "npc_dota_neutral_polar_furbolg_champion": 27,
+        "npc_dota_neutral_ogre_magi": 26,
+        "npc_dota_neutral_ogre_mauler": 74,
+        "npc_dota_neutral_harpy_scout": 30,
+        "npc_dota_neutral_harpy_storm": 22,
+        "npc_dota_creep_goodguys_ranged_upgraded": 120,
+        "npc_dota_neutral_mud_golem": 46,
+        "npc_dota_creep_goodguys_melee_upgraded": 264
+      },
+      "deaths": 10,
+      "denies": 8,
+      "dn_t": [
+        0,
+        0,
+        0,
+        2,
+        2,
+        4,
+        5,
+        5,
+        5,
+        5,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        7,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "firstblood_claimed": 0,
+      "gold": 903,
+      "gold_per_min": 472,
+      "gold_reasons": {
+        "0": 1092,
+        "1": -2426,
+        "2": -52,
+        "6": 645,
+        "11": 300,
+        "12": 4566,
+        "13": 8490
+      },
+      "gold_spent": 14515,
+      "gold_t": [
+        0,
+        335,
+        650,
+        859,
+        1066,
+        1299,
+        1679,
+        2082,
+        2362,
+        2771,
+        2991,
+        3428,
+        4667,
+        4989,
+        5795,
+        6373,
+        6769,
+        7208,
+        7705,
+        7796,
+        8436,
+        9453,
+        9760,
+        10070,
+        11025,
+        11395,
+        11888,
+        12755,
+        13800,
+        13891,
+        14430,
+        14521,
+        14894,
+        15472,
+        16631,
+        17004,
+        17095
+      ],
+      "hero_damage": 34842,
+      "hero_healing": 4983,
+      "hero_hits": {
+        "necrolyte_death_pulse": 52,
+        "null": 51,
+        "necrolyte_heartstopper_aura": 2930,
+        "necrolyte_reapers_scythe": 11,
+        "radiance": 243
+      },
+      "hero_id": 36,
+      "item_0": 90,
+      "item_1": 214,
+      "item_2": 1,
+      "item_3": 36,
+      "item_4": 137,
+      "item_5": 46,
+      "item_uses": {
+        "tango": 4,
+        "magic_stick": 1,
+        "tpscroll": 11,
+        "magic_wand": 15,
+        "flask": 2,
+        "clarity": 1,
+        "ward_dispenser": 2,
+        "ward_sentry": 1,
+        "hood_of_defiance": 1,
+        "pipe": 5,
+        "blink": 11,
+        "ward_observer": 3
+      },
+      "kill_streaks": {
+        "3": 1
+      },
+      "killed": {
+        "npc_dota_creep_goodguys_melee": 134,
+        "npc_dota_creep_goodguys_ranged": 39,
+        "npc_dota_creep_badguys_ranged": 4,
+        "npc_dota_creep_badguys_melee": 4,
+        "npc_dota_neutral_dark_troll_warlord": 3,
+        "npc_dota_neutral_enraged_wildkin": 2,
+        "npc_dota_observer_wards": 1,
+        "npc_dota_goodguys_siege": 3,
+        "npc_dota_hero_batrider": 2,
+        "npc_dota_neutral_centaur_outrunner": 5,
+        "npc_dota_hero_tinker": 2,
+        "npc_dota_neutral_satyr_trickster": 2,
+        "npc_dota_neutral_centaur_khan": 3,
+        "npc_dota_neutral_satyr_hellcaller": 3,
+        "npc_dota_neutral_satyr_soulstealer": 2,
+        "npc_dota_hero_medusa": 2,
+        "npc_dota_hero_earthshaker": 3,
+        "npc_dota_neutral_kobold_taskmaster": 1,
+        "npc_dota_neutral_forest_troll_berserker": 2,
+        "npc_dota_neutral_polar_furbolg_ursa_warrior": 1,
+        "npc_dota_neutral_wildkin": 1,
+        "npc_dota_neutral_polar_furbolg_champion": 2,
+        "npc_dota_neutral_ogre_magi": 1,
+        "npc_dota_neutral_ogre_mauler": 2,
+        "npc_dota_neutral_gnoll_assassin": 3,
+        "npc_dota_neutral_harpy_scout": 2,
+        "npc_dota_neutral_mud_golem": 1,
+        "npc_dota_creep_goodguys_melee_upgraded": 5,
+        "npc_dota_creep_goodguys_ranged_upgraded": 1
+      },
+      "killed_by": {
+        "npc_dota_hero_chen": 1,
+        "npc_dota_hero_earthshaker": 5,
+        "npc_dota_hero_batrider": 1,
+        "npc_dota_hero_medusa": 3
+      },
+      "kills": 9,
+      "kills_log": [
+        {
+          "time": 528,
+          "key": "npc_dota_hero_batrider"
+        },
+        {
+          "time": 670,
+          "key": "npc_dota_hero_tinker"
+        },
+        {
+          "time": 797,
+          "key": "npc_dota_hero_medusa"
+        },
+        {
+          "time": 846,
+          "key": "npc_dota_hero_earthshaker"
+        },
+        {
+          "time": 1230,
+          "key": "npc_dota_hero_medusa"
+        },
+        {
+          "time": 1436,
+          "key": "npc_dota_hero_earthshaker"
+        },
+        {
+          "time": 1611,
+          "key": "npc_dota_hero_tinker"
+        },
+        {
+          "time": 1983,
+          "key": "npc_dota_hero_earthshaker"
+        },
+        {
+          "time": 2043,
+          "key": "npc_dota_hero_batrider"
+        }
+      ],
+      "lane_pos": {
+        "80": {
+          "152": 1
+        },
+        "82": {
+          "150": 2,
+          "152": 1,
+          "154": 1,
+          "166": 1,
+          "168": 1,
+          "170": 1
+        },
+        "84": {
+          "148": 1,
+          "156": 1,
+          "164": 1,
+          "170": 1
+        },
+        "86": {
+          "148": 1,
+          "158": 1,
+          "160": 2,
+          "162": 1,
+          "164": 2,
+          "170": 26
+        },
+        "88": {
+          "148": 1,
+          "158": 1,
+          "164": 3
+        },
+        "90": {
+          "146": 1
+        },
+        "94": {
+          "146": 1
+        },
+        "96": {
+          "142": 2,
+          "144": 1,
+          "146": 1
+        },
+        "98": {
+          "142": 1
+        },
+        "100": {
+          "142": 1
+        },
+        "102": {
+          "142": 1
+        },
+        "104": {
+          "138": 1,
+          "140": 1
+        },
+        "106": {
+          "136": 1,
+          "160": 26,
+          "162": 1
+        },
+        "108": {
+          "134": 1,
+          "166": 3
+        },
+        "110": {
+          "132": 1,
+          "134": 1,
+          "166": 1
+        },
+        "112": {
+          "130": 1,
+          "166": 1
+        },
+        "114": {
+          "126": 1,
+          "128": 1,
+          "166": 1
+        },
+        "116": {
+          "122": 1,
+          "124": 1
+        },
+        "118": {
+          "116": 2,
+          "118": 1,
+          "120": 4,
+          "122": 10,
+          "124": 1,
+          "126": 1,
+          "128": 1,
+          "130": 2,
+          "166": 1
+        },
+        "120": {
+          "118": 1,
+          "120": 15,
+          "122": 25,
+          "124": 16,
+          "126": 6,
+          "128": 3,
+          "168": 1
+        },
+        "122": {
+          "120": 11,
+          "122": 27,
+          "124": 18,
+          "126": 16,
+          "128": 18,
+          "170": 2,
+          "172": 1
+        },
+        "124": {
+          "122": 4,
+          "124": 30,
+          "126": 37,
+          "128": 7,
+          "130": 2,
+          "134": 1,
+          "136": 2
+        },
+        "126": {
+          "122": 1,
+          "124": 7,
+          "126": 21,
+          "128": 16,
+          "130": 11,
+          "132": 5,
+          "134": 1
+        },
+        "128": {
+          "122": 1,
+          "126": 15,
+          "128": 15,
+          "130": 4,
+          "132": 4
+        },
+        "130": {
+          "122": 1,
+          "126": 8,
+          "128": 8,
+          "130": 6,
+          "132": 2,
+          "134": 1
+        },
+        "132": {
+          "120": 11,
+          "124": 1,
+          "126": 3,
+          "128": 2,
+          "130": 7,
+          "132": 5
+        },
+        "134": {
+          "124": 1,
+          "126": 1,
+          "128": 2,
+          "132": 3
+        },
+        "136": {
+          "98": 3,
+          "122": 1,
+          "128": 2,
+          "134": 1
+        },
+        "138": {
+          "94": 1,
+          "96": 5,
+          "122": 1,
+          "136": 1
+        },
+        "140": {
+          "96": 3,
+          "98": 1,
+          "120": 1,
+          "138": 1
+        },
+        "142": {
+          "96": 1,
+          "100": 1,
+          "102": 1,
+          "104": 1,
+          "118": 1,
+          "128": 1,
+          "140": 1
+        },
+        "144": {
+          "96": 1,
+          "106": 1,
+          "108": 1,
+          "110": 1,
+          "112": 1,
+          "116": 1,
+          "118": 1,
+          "122": 11,
+          "124": 2,
+          "126": 2,
+          "142": 1
+        },
+        "146": {
+          "96": 1,
+          "118": 1,
+          "120": 1,
+          "122": 1,
+          "144": 1
+        },
+        "148": {
+          "96": 1,
+          "114": 1,
+          "116": 1,
+          "122": 1,
+          "146": 1
+        },
+        "150": {
+          "96": 1,
+          "110": 1,
+          "112": 1,
+          "122": 1,
+          "124": 1,
+          "126": 2,
+          "148": 1
+        },
+        "152": {
+          "98": 1,
+          "106": 1,
+          "108": 1,
+          "126": 2,
+          "128": 3,
+          "150": 1
+        },
+        "154": {
+          "98": 1,
+          "100": 1,
+          "102": 1,
+          "104": 1,
+          "128": 1,
+          "130": 2,
+          "132": 1,
+          "134": 1,
+          "138": 1,
+          "152": 1
+        },
+        "156": {
+          "140": 1,
+          "142": 1,
+          "144": 1,
+          "154": 1,
+          "156": 1
+        },
+        "158": {
+          "146": 1,
+          "150": 1,
+          "158": 1
+        },
+        "160": {
+          "152": 1,
+          "154": 1,
+          "160": 1
+        },
+        "162": {
+          "156": 1,
+          "158": 1,
+          "162": 1
+        },
+        "164": {
+          "164": 1
+        },
+        "166": {
+          "160": 1,
+          "166": 1
+        },
+        "168": {
+          "160": 1,
+          "168": 1
+        },
+        "170": {
+          "162": 1,
+          "170": 1
+        },
+        "172": {
+          "164": 1,
+          "170": 1
+        },
+        "174": {
+          "164": 1,
+          "168": 1,
+          "170": 1,
+          "172": 1
+        },
+        "176": {
+          "172": 3
+        },
+        "178": {
+          "172": 8,
+          "174": 2,
+          "176": 8
+        },
+        "180": {
+          "174": 2,
+          "178": 12
+        },
+        "182": {
+          "174": 1,
+          "176": 2,
+          "178": 1
+        },
+        "184": {
+          "174": 3
+        }
+      },
+      "last_hits": 219,
+      "leaver_status": 0,
+      "level": 22,
+      "lh_t": [
+        0,
+        4,
+        10,
+        13,
+        16,
+        20,
+        27,
+        33,
+        37,
+        37,
+        40,
+        47,
+        62,
+        65,
+        73,
+        78,
+        85,
+        88,
+        98,
+        98,
+        112,
+        126,
+        132,
+        136,
+        139,
+        146,
+        155,
+        167,
+        187,
+        187,
+        191,
+        191,
+        196,
+        203,
+        213,
+        219,
+        219
+      ],
+      "life_state": {
+        "0": 1801,
+        "1": 18,
+        "2": 391
+      },
+      "max_hero_hit": {
+        "type": "max_hero_hit",
+        "time": 1983,
+        "max": true,
+        "inflictor": "necrolyte_reapers_scythe",
+        "unit": "npc_dota_hero_necrolyte",
+        "key": "npc_dota_hero_earthshaker",
+        "value": 641,
+        "slot": 9,
+        "player_slot": 132
+      },
+      "multi_kills": {},
+      "obs": {
+        "134": {
+          "122": 1
+        },
+        "150": {
+          "140": 1
+        },
+        "154": {
+          "134": 1
+        },
+        "166": {
+          "134": 1
+        }
+      },
+      "obs_left_log": [
+        {
+          "time": 735,
+          "type": "obs_left_log",
+          "key": "[134, 122]",
+          "slot": 9,
+          "x": 134,
+          "y": 122,
+          "z": 130,
+          "entityleft": true,
+          "ehandle": 13287669,
+          "player_slot": 132
+        },
+        {
+          "time": 2133,
+          "type": "obs_left_log",
+          "key": "[154, 134]",
+          "slot": 9,
+          "x": 154,
+          "y": 134,
+          "z": 130,
+          "entityleft": true,
+          "ehandle": 8963210,
+          "player_slot": 132
+        },
+        {
+          "time": 2137,
+          "type": "obs_left_log",
+          "key": "[166, 134]",
+          "slot": 9,
+          "x": 166,
+          "y": 134,
+          "z": 132,
+          "entityleft": true,
+          "ehandle": 8717809,
+          "player_slot": 132
+        },
+        {
+          "time": 2144,
+          "type": "obs_left_log",
+          "key": "[150, 140]",
+          "slot": 9,
+          "x": 150,
+          "y": 140,
+          "z": 130,
+          "entityleft": true,
+          "ehandle": 6440225,
+          "player_slot": 132
+        }
+      ],
+      "obs_log": [
+        {
+          "time": 369,
+          "type": "obs_log",
+          "key": "[134, 122]",
+          "slot": 9,
+          "x": 134,
+          "y": 122,
+          "z": 130,
+          "entityleft": false,
+          "ehandle": 13287669,
+          "player_slot": 132
+        },
+        {
+          "time": 1768,
+          "type": "obs_log",
+          "key": "[154, 134]",
+          "slot": 9,
+          "x": 154,
+          "y": 134,
+          "z": 130,
+          "entityleft": false,
+          "ehandle": 8963210,
+          "player_slot": 132
+        },
+        {
+          "time": 1771,
+          "type": "obs_log",
+          "key": "[166, 134]",
+          "slot": 9,
+          "x": 166,
+          "y": 134,
+          "z": 132,
+          "entityleft": false,
+          "ehandle": 8717809,
+          "player_slot": 132
+        },
+        {
+          "time": 1778,
+          "type": "obs_log",
+          "key": "[150, 140]",
+          "slot": 9,
+          "x": 150,
+          "y": 140,
+          "z": 130,
+          "entityleft": false,
+          "ehandle": 6440225,
+          "player_slot": 132
+        }
+      ],
+      "obs_placed": 4,
+      "party_id": null,
+      "party_size": null,
+      "performance_others": null,
+      "permanent_buffs": null,
+      "pings": 108,
+      "pred_vict": false,
+      "purchase": {
+        "branches": 7,
+        "null_talisman": 2,
+        "tango": 1,
+        "magic_stick": 1,
+        "flask": 2,
+        "tpscroll": 12,
+        "circlet": 2,
+        "magic_wand": 1,
+        "clarity": 1,
+        "mantle": 1,
+        "recipe_null_talisman": 1,
+        "ward_observer": 4,
+        "ward_dispenser": 1,
+        "ward_sentry": 1,
+        "boots": 1,
+        "wind_lace": 1,
+        "relic": 1,
+        "recipe_radiance": 1,
+        "radiance": 1,
+        "ring_of_health": 1,
+        "cloak": 1,
+        "hood_of_defiance": 1,
+        "ring_of_regen": 3,
+        "tranquil_boots": 1,
+        "recipe_headdress": 1,
+        "recipe_pipe": 1,
+        "headdress": 1,
+        "pipe": 1,
+        "blink": 1,
+        "dust": null
+      },
+      "purchase_log": [
+        {
+          "time": -89,
+          "key": "branches"
+        },
+        {
+          "time": -89,
+          "key": "branches"
+        },
+        {
+          "time": -89,
+          "key": "null_talisman"
+        },
+        {
+          "time": -89,
+          "key": "branches"
+        },
+        {
+          "time": -78,
+          "key": "tango"
+        },
+        {
+          "time": 74,
+          "key": "magic_stick"
+        },
+        {
+          "time": 75,
+          "key": "flask"
+        },
+        {
+          "time": 76,
+          "key": "branches"
+        },
+        {
+          "time": 136,
+          "key": "tpscroll"
+        },
+        {
+          "time": 149,
+          "key": "circlet"
+        },
+        {
+          "time": 149,
+          "key": "magic_wand"
+        },
+        {
+          "time": 149,
+          "key": "branches"
+        },
+        {
+          "time": 206,
+          "key": "flask"
+        },
+        {
+          "time": 206,
+          "key": "clarity"
+        },
+        {
+          "time": 263,
+          "key": "circlet"
+        },
+        {
+          "time": 264,
+          "key": "mantle"
+        },
+        {
+          "time": 310,
+          "key": "null_talisman"
+        },
+        {
+          "time": 342,
+          "key": "ward_observer"
+        },
+        {
+          "time": 346,
+          "key": "tpscroll"
+        },
+        {
+          "time": 367,
+          "key": "ward_sentry"
+        },
+        {
+          "time": 427,
+          "key": "boots"
+        },
+        {
+          "time": 428,
+          "key": "wind_lace"
+        },
+        {
+          "time": 511,
+          "key": "tpscroll"
+        },
+        {
+          "time": 536,
+          "key": "tpscroll"
+        },
+        {
+          "time": 556,
+          "key": "tpscroll"
+        },
+        {
+          "time": 895,
+          "key": "relic"
+        },
+        {
+          "time": 1088,
+          "key": "radiance"
+        },
+        {
+          "time": 1133,
+          "key": "tpscroll"
+        },
+        {
+          "time": 1235,
+          "key": "ring_of_health"
+        },
+        {
+          "time": 1236,
+          "key": "cloak"
+        },
+        {
+          "time": 1367,
+          "key": "hood_of_defiance"
+        },
+        {
+          "time": 1367,
+          "key": "ring_of_regen"
+        },
+        {
+          "time": 1367,
+          "key": "branches"
+        },
+        {
+          "time": 1380,
+          "key": "tpscroll"
+        },
+        {
+          "time": 1416,
+          "key": "tranquil_boots"
+        },
+        {
+          "time": 1416,
+          "key": "ring_of_regen"
+        },
+        {
+          "time": 1417,
+          "key": "branches"
+        },
+        {
+          "time": 1453,
+          "key": "ring_of_regen"
+        },
+        {
+          "time": 1479,
+          "key": "tpscroll"
+        },
+        {
+          "time": 1532,
+          "key": "headdress"
+        },
+        {
+          "time": 1532,
+          "key": "pipe"
+        },
+        {
+          "time": 1668,
+          "key": "blink"
+        },
+        {
+          "time": 1668,
+          "key": "tpscroll"
+        },
+        {
+          "time": 1750,
+          "key": "tpscroll"
+        },
+        {
+          "time": 1756,
+          "key": "ward_observer"
+        },
+        {
+          "time": 1761,
+          "key": "ward_observer"
+        },
+        {
+          "time": 1762,
+          "key": "ward_observer"
+        },
+        {
+          "time": 1762,
+          "key": "tpscroll"
+        },
+        {
+          "time": 1989,
+          "key": "tpscroll"
+        }
+      ],
+      "randomed": false,
+      "repicked": null,
+      "roshans_killed": 0,
+      "rune_pickups": 6,
+      "runes": {
+        "0": 1,
+        "1": 1,
+        "5": 4
+      },
+      "runes_log": [
+        {
+          "time": 1,
+          "key": 5
+        },
+        {
+          "time": 645,
+          "key": 5
+        },
+        {
+          "time": 964,
+          "key": 5
+        },
+        {
+          "time": 1082,
+          "key": 1
+        },
+        {
+          "time": 1209,
+          "key": 0
+        },
+        {
+          "time": 1932,
+          "key": 5
+        }
+      ],
+      "sen": {
+        "124": {
+          "134": 1
+        }
+      },
+      "sen_left_log": [
+        {
+          "time": 399,
+          "type": "sen_left_log",
+          "key": "[124, 134]",
+          "slot": 9,
+          "x": 124,
+          "y": 134,
+          "z": 130,
+          "entityleft": true,
+          "ehandle": 16369010,
+          "player_slot": 132
+        }
+      ],
+      "sen_log": [
+        {
+          "time": 374,
+          "type": "sen_log",
+          "key": "[124, 134]",
+          "slot": 9,
+          "x": 124,
+          "y": 134,
+          "z": 130,
+          "entityleft": false,
+          "ehandle": 16369010,
+          "player_slot": 132
+        }
+      ],
+      "sen_placed": 1,
+      "stuns": 16.019972,
+      "teamfight_participation": 0.65217394,
+      "times": [
+        0,
+        60,
+        120,
+        180,
+        240,
+        300,
+        360,
+        420,
+        480,
+        540,
+        600,
+        660,
+        720,
+        780,
+        840,
+        900,
+        960,
+        1020,
+        1080,
+        1140,
+        1200,
+        1260,
+        1320,
+        1380,
+        1440,
+        1500,
+        1560,
+        1620,
+        1680,
+        1740,
+        1800,
+        1860,
+        1920,
+        1980,
+        2040,
+        2100,
+        2160
+      ],
+      "tower_damage": 1572,
+      "towers_killed": 0,
+      "xp_per_min": 588,
+      "xp_reasons": {
+        "0": 473,
+        "1": 9970,
+        "2": 10870
+      },
+      "xp_t": [
+        0,
+        163,
+        473,
+        881,
+        1175,
+        1572,
+        1970,
+        2476,
+        2704,
+        2905,
+        3220,
+        3709,
+        5357,
+        5477,
+        6234,
+        6497,
+        7017,
+        7850,
+        8329,
+        8329,
+        8964,
+        10080,
+        10218,
+        10575,
+        11651,
+        11961,
+        12667,
+        13412,
+        14442,
+        14482,
+        16089,
+        16089,
+        16167,
+        16754,
+        20115,
+        21309,
+        21309
+      ],
+      "personaname": "New Mouse No Flame Plz",
+      "name": "n0tail",
+      "last_login": null,
+      "radiant_win": true,
+      "start_time": 1502421614,
+      "duration": 2173,
+      "cluster": 111,
+      "lobby_type": 1,
+      "game_mode": 2,
+      "patch": 25,
+      "region": 1,
+      "isRadiant": false,
+      "win": 0,
+      "lose": 1,
+      "total_gold": 17094,
+      "total_xp": 21295,
+      "kills_per_min": 0.2485043718361712,
+      "kda": 1,
+      "abandons": 0,
+      "neutral_kills": 36,
+      "tower_kills": 0,
+      "courier_kills": 0,
+      "lane_kills": 187,
+      "hero_kills": 9,
+      "observer_kills": 1,
+      "sentry_kills": 0,
+      "roshan_kills": 0,
+      "necronomicon_kills": 0,
+      "ancient_kills": 0,
+      "buyback_count": 1,
+      "observer_uses": 3,
+      "sentry_uses": 1,
+      "lane_efficiency": 0.589591957421644,
+      "lane_efficiency_pct": 58,
+      "lane": 2,
+      "lane_role": 2,
+      "is_roaming": false,
+      "purchase_time": {
+        "branches": 2742,
+        "null_talisman": 221,
+        "tango": -78,
+        "magic_stick": 74,
+        "flask": 281,
+        "tpscroll": 13246,
+        "circlet": 412,
+        "magic_wand": 149,
+        "clarity": 206,
+        "mantle": 264,
+        "ward_observer": 5621,
+        "ward_sentry": 367,
+        "boots": 427,
+        "wind_lace": 428,
+        "relic": 895,
+        "radiance": 1088,
+        "ring_of_health": 1235,
+        "cloak": 1236,
+        "hood_of_defiance": 1367,
+        "ring_of_regen": 4236,
+        "tranquil_boots": 1416,
+        "headdress": 1532,
+        "pipe": 1532,
+        "blink": 1668
+      },
+      "first_purchase_time": {
+        "branches": -89,
+        "null_talisman": -89,
+        "tango": -78,
+        "magic_stick": 74,
+        "flask": 75,
+        "tpscroll": 136,
+        "circlet": 149,
+        "magic_wand": 149,
+        "clarity": 206,
+        "mantle": 264,
+        "ward_observer": 342,
+        "ward_sentry": 367,
+        "boots": 427,
+        "wind_lace": 428,
+        "relic": 895,
+        "radiance": 1088,
+        "ring_of_health": 1235,
+        "cloak": 1236,
+        "hood_of_defiance": 1367,
+        "ring_of_regen": 1367,
+        "tranquil_boots": 1416,
+        "headdress": 1532,
+        "pipe": 1532,
+        "blink": 1668
+      },
+      "item_win": {
+        "branches": 0,
+        "null_talisman": 0,
+        "tango": 0,
+        "magic_stick": 0,
+        "flask": 0,
+        "tpscroll": 0,
+        "circlet": 0,
+        "magic_wand": 0,
+        "clarity": 0,
+        "mantle": 0,
+        "ward_observer": 0,
+        "ward_sentry": 0,
+        "boots": 0,
+        "wind_lace": 0,
+        "relic": 0,
+        "radiance": 0,
+        "ring_of_health": 0,
+        "cloak": 0,
+        "hood_of_defiance": 0,
+        "ring_of_regen": 0,
+        "tranquil_boots": 0,
+        "headdress": 0,
+        "pipe": 0,
+        "blink": 0
+      },
+      "item_usage": {
+        "branches": 1,
+        "null_talisman": 1,
+        "tango": 1,
+        "magic_stick": 1,
+        "flask": 1,
+        "tpscroll": 1,
+        "circlet": 1,
+        "magic_wand": 1,
+        "clarity": 1,
+        "mantle": 1,
+        "ward_observer": 1,
+        "ward_sentry": 1,
+        "boots": 1,
+        "wind_lace": 1,
+        "relic": 1,
+        "radiance": 1,
+        "ring_of_health": 1,
+        "cloak": 1,
+        "hood_of_defiance": 1,
+        "ring_of_regen": 1,
+        "tranquil_boots": 1,
+        "headdress": 1,
+        "pipe": 1,
+        "blink": 1
+      },
+      "purchase_ward_observer": 4,
+      "purchase_ward_sentry": 1,
+      "purchase_tpscroll": 12,
+      "actions_per_min": 175,
+      "life_state_dead": 409,
+      "solo_competitive_rank": null,
+      "cosmetics": [
+        {
+          "item_id": 7124,
+          "name": "Wings of Ka",
+          "prefab": "wearable",
+          "creation_date": "2014-11-10T00:00:00.000Z",
+          "image_inventory": "econ/items/necrolyte/necronub_wings/necronub_wings",
+          "image_path": "icons/econ/items/necrolyte/necronub_wings/necronub_wings.84a0cb5a844845c88b9366892708cb529cb57e52.png",
+          "item_description": "#DOTA_Item_Desc_Wings_of_Ka",
+          "item_name": "#DOTA_Item_Wings_of_Ka",
+          "item_rarity": "mythical",
+          "item_type_name": "#DOTA_WearableType_Wings",
+          "used_by_heroes": "npc_dota_hero_necrolyte"
+        },
+        {
+          "item_id": 8043,
+          "name": "Sleeves of the Master Necromancer",
+          "prefab": "wearable",
+          "creation_date": "2016-08-25T00:00:00.000Z",
+          "image_inventory": "econ/items/necrolyte/vampire_counts_head/vampire_counts_head",
+          "image_path": "icons/econ/items/necrolyte/vampire_counts_head/vampire_counts_head.b5f5e5ebad002405fd913d3810594eb9aa0569e9.png",
+          "item_description": null,
+          "item_name": "#DOTA_Item_Sleeves_of_the_Master_Necromancer",
+          "item_rarity": "rare",
+          "item_type_name": "#DOTA_WearableType_Head_and_Sleeves",
+          "used_by_heroes": "npc_dota_hero_necrolyte"
+        },
+        {
+          "item_id": 8928,
+          "name": "Mask of Decay",
+          "prefab": "wearable",
+          "creation_date": "2015-06-01T00:00:00.000Z",
+          "image_inventory": "econ/items/necrolyte/apostle_of_decay_mask/apostle_of_decay_mask",
+          "image_path": "icons/econ/items/necrolyte/apostle_of_decay_mask/apostle_of_decay_mask.4dd1a96c47dbebc2a175231ad54fb02bc1f9ef47.png",
+          "item_description": "#DOTA_Item_Desc_Mask_of_Decay",
+          "item_name": "#DOTA_Item_Mask_of_Decay",
+          "item_rarity": "uncommon",
+          "item_type_name": "#DOTA_WearableType_Mask",
+          "used_by_heroes": "npc_dota_hero_necrolyte"
+        },
+        {
+          "item_id": 9089,
+          "name": "Sullen Harvest",
+          "prefab": "wearable",
+          "creation_date": "2017-02-08T00:00:00.000Z",
+          "image_inventory": "econ/items/necrolyte/immortal_scythe/immortal_scythe",
+          "image_path": "icons/econ/items/necrolyte/immortal_scythe/immortal_scythe.0b475820c6ff2904fbcc2eeb0747f96f803990c1.png",
+          "item_description": "#DOTA_Item_Desc_Sullen_Harvest",
+          "item_name": "#DOTA_Item_Sullen_Harvest",
+          "item_rarity": "immortal",
+          "item_type_name": "#DOTA_WearableType_weapon",
+          "used_by_heroes": "npc_dota_hero_necrolyte"
+        },
+        {
+          "item_id": 17138,
+          "name": "In-Game Effects Ti6 Dire",
+          "prefab": "tool",
+          "creation_date": "2016-07-28T00:00:00.000Z",
+          "image_inventory": "econ/testitem_slot_empty",
+          "image_path": "icons/econ/testitem_slot_empty.2c88bf2ea965d6f9a8bc74cb1e53c4ad12d09edc.png",
+          "item_description": null,
+          "item_name": "#DOTA_Item_InGame_Effects_Ti6_Dire",
+          "item_rarity": "arcana",
+          "item_type_name": null,
+          "used_by_heroes": null
+        }
+      ],
+      "benchmarks": {
+        "gold_per_min": {
+          "raw": 472,
+          "pct": 0.69
+        },
+        "xp_per_min": {
+          "raw": 588,
+          "pct": 0.636
+        },
+        "kills_per_min": {
+          "raw": 0.24850437183617122,
+          "pct": 0.546
+        },
+        "last_hits_per_min": {
+          "raw": 6.046939714680166,
+          "pct": 0.91
+        },
+        "hero_damage_per_min": {
+          "raw": 962.0432581684306,
+          "pct": 0.91
+        },
+        "hero_healing_per_min": {
+          "raw": 137.58858720662678,
+          "pct": 0.83
+        },
+        "tower_damage": {
+          "raw": 1572,
+          "pct": 0.648
+        }
+      }
+    }
+  ],
+  "patch": 25,
+  "region": 1,
+  "all_word_counts": {
+    "es": 1,
+    "wp": 1
+  },
+  "my_word_counts": {},
+  "throw": 0,
+  "loss": 19049,
+  "replay_url": "http://replay111.valve.net/570/3368387319_2081121450.dem.bz2"
+}

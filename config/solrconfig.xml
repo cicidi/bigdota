@@ -1,0 +1,10 @@
+<lib dir="/app/solr/solr-7.0.0/server/lib/" regex="solr-dataimporthandler-.*\.jar"/>
+<lib dir="/app/solr/solr-7.0.0/server/lib/" regex="cassandra-jdbc-.*\.jar"/>
+<lib dir="/app/solr/solr-7.0.0/server/lib/" regex="cassandra-all-.*\.jar"/>
+<lib dir="/app/solr/solr-7.0.0/server/lib/" regex="cassandra-thrift-.*\.jar"/>
+<lib dir="/app/solr/solr-7.0.0/server/lib/" regex="libthrift-.*\.jar"/>
+<requestHandler name="/dataimport" class="org.apache.solr.handler.dataimport.DataImportHandler">
+<lst name="defaults">
+    <str name="config">db-data-config.xml</str>
+</lst>
+</requestHandler>
