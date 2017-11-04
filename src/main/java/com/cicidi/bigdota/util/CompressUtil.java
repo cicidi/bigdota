@@ -1,4 +1,4 @@
-package com.bigdota.util;
+package com.cicidi.bigdota.util;
 
 import java.io.*;
 import java.util.zip.GZIPInputStream;
@@ -7,7 +7,7 @@ import java.util.zip.GZIPOutputStream;
 /**
  * Created by cicidi on 9/17/2017.
  */
-public class StringUtils {
+public class CompressUtil {
     public static byte[] compress(String data) throws IOException {
         ByteArrayOutputStream bos = new ByteArrayOutputStream(data.length());
         GZIPOutputStream gzip = new GZIPOutputStream(bos);

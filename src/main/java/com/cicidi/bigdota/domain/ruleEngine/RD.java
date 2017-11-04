@@ -1,4 +1,4 @@
-package com.bigdota.domain.ruleEngine;
+package com.cicidi.bigdota.domain.ruleEngine;
 
 /**
  * Created by cicidi on 9/17/2017.
