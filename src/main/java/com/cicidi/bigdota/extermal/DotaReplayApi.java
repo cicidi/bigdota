@@ -1,6 +1,7 @@
 package com.cicidi.bigdota.extermal;
 
 import com.cicidi.bigdota.domain.DotaPlayer;
+import com.cicidi.bigdota.util.EnvConfig;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.jersey.api.client.Client;
@@ -24,15 +25,18 @@ public class DotaReplayApi {
     private static final Logger logger = LoggerFactory.getLogger(DotaReplayApi.class);
 
     private static final ObjectMapper objectMapper = new ObjectMapper();
+
     @Autowired
     private Client client;
+    private String openDotaUrl = EnvConfig.OPENDOTA_API;
+    private String matchEndpoint = EnvConfig.OPENDOTA_MATCHES;
 
-    @Retryable(
-            value = {RuntimeException.class},
-            maxAttempts = 3,
-            backoff = @Backoff(delay = 30000))
+//    @Retryable(
+//            value = {RuntimeException.class},
+//            maxAttempts = 3,
+//            backoff = @Backoff(delay = 1000))
     public String getReplay(long matchId) {
-        String path = "https://api.opendota.com/api/matches/" + matchId;
+        String path = openDotaUrl + matchEndpoint + "/" + matchId;
         logger.debug(path);
         WebResource webResource = client
                 .resource(path);
@@ -56,10 +60,10 @@ public class DotaReplayApi {
 
     }
 
-    @Retryable(
-            value = {RuntimeException.class},
-            maxAttempts = 3,
-            backoff = @Backoff(delay = 30000))
+//    @Retryable(
+//            value = {RuntimeException.class},
+//            maxAttempts = 3,
+//            backoff = @Backoff(delay = 30000))
 
     public List getMatchIdByAccountId(long id) {
 

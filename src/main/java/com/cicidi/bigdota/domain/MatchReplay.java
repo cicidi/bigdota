@@ -1,13 +1,22 @@
 package com.cicidi.bigdota.domain;
 
+
+import org.springframework.data.cassandra.mapping.Column;
+import org.springframework.data.cassandra.mapping.PrimaryKeyColumn;
+import org.springframework.data.cassandra.mapping.Table;
+
 import java.io.Serializable;
 
 /**
  * Created by cicidi on 9/15/2017.
  */
+@Table
 public class MatchReplay implements Serializable {
+
+    @PrimaryKeyColumn(name = "match_id")
     private long matchId;
     private String data;
+    @Column
     private long currentTimeStamp;
 
     public MatchReplay(long matchId, String data, long currentTimeStamp) {

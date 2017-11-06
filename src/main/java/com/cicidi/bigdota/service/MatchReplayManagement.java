@@ -1,6 +1,7 @@
 package com.cicidi.bigdota.service;
 
-import com.cicidi.bigdota.cassandra.CassandraConnector;
+import com.cicidi.bigdota.cassandra.CassandraConnection;
+import com.cicidi.bigdota.cassandra.repo.MatchReplayRepository;
 import com.cicidi.bigdota.domain.DotaPlayer;
 import com.cicidi.bigdota.extermal.DotaReplayApi;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,20 +21,24 @@ public class MatchReplayManagement {
     private DotaReplayApi dotaReplayApi;
 
     @Autowired
-    private CassandraConnector cassandraConnector;
+    private CassandraConnection cassandraConnection;
+
+    @Autowired
+    private MatchReplayRepository matchReplayRepository;
 
     public void loadAllMatchMultithread() {
-        ExecutorService executor = Executors.newFixedThreadPool(5);
+        ExecutorService executor = Executors.newFixedThreadPool(2);
         List<DotaPlayer> playerList = dotaReplayApi.getAllPlayers();
         int i = 0;
         for (DotaPlayer dp : playerList) {
             List<LinkedHashMap> matchReplays = dotaReplayApi.getMatchIdByAccountId(dp.getAccount_id());
-            if (i < 24) {  // skip first n players
+            if (i > 15) {  // skip first n players
                 i++;
-                continue;
+                break;
             }
-            for (LinkedHashMap map : matchReplays) {
 
+            for (LinkedHashMap map : matchReplays) {
+                if (i > 15) break;
                 Object m_Id = map.get("match_id");
                 long matchId;
                 if (m_Id instanceof Long == false) {
@@ -41,8 +46,9 @@ public class MatchReplayManagement {
                 } else {
                     matchId = (Long) map.get("match_id");
                 }
-                Runnable worker = new WorkerThread(matchId, cassandraConnector, dotaReplayApi);
+                Runnable worker = new WorkerThread(matchId, cassandraConnection, dotaReplayApi, matchReplayRepository);
                 executor.execute(worker);
+                i++;
             }
         }
     }

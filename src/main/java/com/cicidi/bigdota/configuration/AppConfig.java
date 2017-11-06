@@ -1,6 +1,6 @@
 package com.cicidi.bigdota.configuration;
 
-import com.cicidi.bigdota.cassandra.CassandraConnector;
+import com.cicidi.bigdota.cassandra.CassandraConnection;
 import com.cicidi.bigdota.extermal.DotaReplayApi;
 import com.cicidi.bigdota.service.MatchReplayManagement;
 import com.cicidi.bigdota.spark.SparkCassandraConnector;
@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.jersey.api.client.Client;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.retry.annotation.EnableRetry;
 
 @Configuration
@@ -16,8 +17,8 @@ import org.springframework.retry.annotation.EnableRetry;
 public class AppConfig {
 
     @Bean
-    public CassandraConnector cassandraConnector() {
-        return new CassandraConnector();
+    public CassandraConnection cassandraConnector() {
+        return new CassandraConnection();
     }
 
     @Bean
@@ -49,5 +50,10 @@ public class AppConfig {
     @Bean
     public Client client() {
         return Client.create();
+    }
+
+    @Bean
+    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+        return new PropertySourcesPlaceholderConfigurer();
     }
 }

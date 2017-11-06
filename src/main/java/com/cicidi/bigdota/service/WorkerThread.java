@@ -1,6 +1,7 @@
 package com.cicidi.bigdota.service;
 
-import com.cicidi.bigdota.cassandra.CassandraConnector;
+import com.cicidi.bigdota.cassandra.CassandraConnection;
+import com.cicidi.bigdota.cassandra.repo.MatchReplayRepository;
 import com.cicidi.bigdota.domain.MatchReplay;
 import com.cicidi.bigdota.extermal.DotaReplayApi;
 import org.slf4j.Logger;
@@ -13,27 +14,32 @@ public class WorkerThread implements Runnable {
 
     private long matchId;
 
-    private CassandraConnector cassandraConnector;
+    private CassandraConnection cassandraConnection;
+
+    private MatchReplayRepository matchReplayRepository;
 
     private DotaReplayApi dotaReplayApi;
+
     private final static Logger logger = LoggerFactory.getLogger(WorkerThread.class);
 
-    public WorkerThread(long matchId, CassandraConnector cassandraConnector, DotaReplayApi dotaReplayApi) {
+    public WorkerThread(long matchId, CassandraConnection cassandraConnection, DotaReplayApi dotaReplayApi, MatchReplayRepository matchReplayRepository) {
         this.matchId = matchId;
-        this.cassandraConnector = cassandraConnector;
+        this.cassandraConnection = cassandraConnection;
         this.dotaReplayApi = dotaReplayApi;
     }
 
     @Override
     public void run() {
-        if (!cassandraConnector.isExist(matchId)) {
-            String data = dotaReplayApi.getReplay(matchId);
-            if (data != null) {
-                MatchReplay matchReplay = new MatchReplay(matchId, data, System.currentTimeMillis());
-                cassandraConnector.saveReplay(matchReplay);
-                logger.debug(Thread.currentThread().getName() + " End.");
-                logger.debug("Thread :" + Thread.currentThread().getName() + " : dotaReplayApiId" + dotaReplayApi.toString());
-            }
+//        if (!cassandraConnection.isExist(matchId)) {
+//        if (matchReplayRepository.exists(matchId)) {
+        String data = dotaReplayApi.getReplay(matchId);
+        if (data != null) {
+            MatchReplay matchReplay = new MatchReplay(matchId, data, System.currentTimeMillis());
+//                cassandraConnection.saveReplay(matchReplay);
+            matchReplayRepository.save(matchReplay);
+            logger.debug(Thread.currentThread().getName() + " End.");
+            logger.debug("Thread :" + Thread.currentThread().getName() + " : dotaReplayApiId" + dotaReplayApi.toString());
+//            }
         }
     }
 }

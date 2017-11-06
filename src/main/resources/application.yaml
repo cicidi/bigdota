@@ -1,3 +1,0 @@
-opendota:
-    baseUrl: https://api.opendota.com/api/matches/
-    matches: /matches
