@@ -8,66 +8,75 @@
     <artifactId>bigdota</artifactId>
     <version>1.0-SNAPSHOT</version>
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.8.RELEASE</version>
-    </parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.0.0.M5</version>
+</parent>
     <properties>
-        <spark.cassandra.connector>1.6.9</spark.cassandra.connector>
-        <spark.core>2.2.0</spark.core>
         <cassandra.driver.core>3.3.0</cassandra.driver.core>
+        <!--<cassandra.driver.core>2.1.10.2</cassandra.driver.core>-->
+        <jersy.client.version>1.19.4</jersy.client.version>
         <json.path>2.3.0</json.path>
-        <log4j>1.2.17</log4j>
+        <log4j.version>1.2.17</log4j.version>
+        <spark.cassandra.connector.version>2.0.5</spark.cassandra.connector.version>
+        <spark.core.version>2.2.0</spark.core.version>
         <spring.data.version>1.11.7.RELEASE</spring.data.version>
+        <spring.data.cassandra.version>2.0.1.RELEASE</spring.data.cassandra.version>
+        <spring.data.commons>2.0.1.RELEASE</spring.data.commons>
+        <spring.retry.version>1.2.1.RELEASE</spring.retry.version>
     </properties>
+    <repositories>
+        <repository>
+            <id>maven-restlet</id>
+            <name>Public online Restlet repository</name>
+            <url>http://repo.spring.io/milestone</url>
+        </repository>
+    </repositories>
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>19.0</version>
+            </dependency>
             <dependency>
                 <groupId>com.datastax.cassandra</groupId>
                 <artifactId>cassandra-driver-core</artifactId>
                 <version>${cassandra.driver.core}</version>
             </dependency>
-            <dependency>
-                <groupId>com.google.guava</groupId>
-                <artifactId>guava</artifactId>
-                <version>16.0</version>
-            </dependency>
-
         </dependencies>
     </dependencyManagement>
     <dependencies>
         <dependency>
             <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-client</artifactId>
-            <version>1.19.4</version>
+            <version>${jersy.client.version}</version>
         </dependency>
+        <!--spark-cassandra-connector_2.10 also include com.datastaxt.driver.*.class.  And that class is different official one-->
+        <!--So has to running following cmd to remove those class otherwise get "Caused by: java.lang.NoSuchMethodError:-->
+        <!--com.datastax.driver.core.TypeCodec.getJavaType()Lcom/google/common/reflect/TypeToken;"-->
+        <!--zip -d /Users/cicidi/.m2/repository/com/datastax/spark/spark-cassandra-connector_2.10/2.0.5/spark-cassandra-connector_2.10-2.0.5.jar /com/datastax/driver/*-->
         <dependency>
             <groupId>com.datastax.spark</groupId>
             <artifactId>spark-cassandra-connector_2.10</artifactId>
-            <version>${spark.cassandra.connector}</version>
+            <version>${spark.cassandra.connector.version}</version>
             <exclusions>
                 <exclusion>
-                    <groupId>com.google.guava</groupId>
-                    <artifactId>guava</artifactId>
+                    <groupId>com.datastax.cassandra</groupId>
+                    <artifactId>cassandra-driver-core</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
         <dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-core_2.10</artifactId>
-            <version>${spark.core}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.google.guava</groupId>
-                    <artifactId>guava</artifactId>
-                </exclusion>
-            </exclusions>
+            <version>${spark.core.version}</version>
 
         </dependency>
         <dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-sql_2.10</artifactId>
-            <version>${spark.core}</version>
+            <version>${spark.core.version}</version>
         </dependency>
         <dependency>
             <groupId>com.datastax.cassandra</groupId>
@@ -77,17 +86,12 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-cassandra</artifactId>
-            <version>1.5.8.RELEASE</version>
+            <version>${spring.data.cassandra.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-commons</artifactId>
-            <version>1.13.6.RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-            <version>4.3.10.RELEASE</version>
+            <version>${spring.data.commons}</version>
         </dependency>
 
         <dependency>
@@ -115,18 +119,22 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <dependency>
-            <groupId>org.apache.solr</groupId>
-            <artifactId>solr-dataimporthandler</artifactId>
-            <version>7.0.0</version>
-            <scope>test</scope>
-        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>org.apache.solr</groupId>-->
+        <!--<artifactId>solr-dataimporthandler</artifactId>-->
+        <!--<version>7.0.0</version>-->
+        <!--<scope>test</scope>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>com.googlecode.json-simple</groupId>
             <artifactId>json-simple</artifactId>
             <version>1.1.1</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework.retry</groupId>
+            <artifactId>spring-retry</artifactId>
+            <version>${spring.retry.version}</version>
+        </dependency>
         <!--<dependency>-->
         <!--<groupId>org.apache-extras.cassandra-jdbc</groupId>-->
         <!--<artifactId>cassandra-jdbc</artifactId>-->
@@ -166,27 +174,50 @@
         <!--<type>pom</type>-->
         <!--</dependency>-->
         <!-- https://mvnrepository.com/artifact/org.apache.solr/solr-core -->
-        <dependency>
-            <groupId>org.apache.solr</groupId>
-            <artifactId>solr-core</artifactId>
-            <version>7.0.0</version>
-        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>org.apache.solr</groupId>-->
+        <!--<artifactId>solr-core</artifactId>-->
+        <!--<version>7.0.0</version>-->
+        <!--</dependency>-->
 
         <!-- https://mvnrepository.com/artifact/org.apache.solr/solr-common -->
+        <!--<dependency>-->
+        <!--<groupId>org.apache.solr</groupId>-->
+        <!--<artifactId>solr-common</artifactId>-->
+        <!--<version>1.3.0</version>-->
+        <!--</dependency>-->
+
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
         <dependency>
-            <groupId>org.apache.solr</groupId>
-            <artifactId>solr-common</artifactId>
-            <version>1.3.0</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.6</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
         <dependency>
-            <groupId>org.springframework.retry</groupId>
-            <artifactId>spring-retry</artifactId>
-            <version>1.1.5.RELEASE</version>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.9.2</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/junit/junit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>1.5.8.RELEASE</version>
+                <configuration>
+                    <mainClass>com.cicidi.bigdota.service.Dota2WinApplication</mainClass>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -195,6 +226,88 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+            <!--<plugin>-->
+            <!--<groupId>org.apache.maven.plugins</groupId>-->
+            <!--<artifactId>maven-shade-plugin</artifactId>-->
+            <!--<version>3.1.0</version>-->
+            <!--<dependencies>-->
+            <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-maven-plugin</artifactId>-->
+            <!--<version>1.5.8.RELEASE</version>-->
+            <!--</dependency>-->
+            <!--</dependencies>-->
+            <!--<executions>-->
+            <!--<execution>-->
+            <!--<phase>package</phase>-->
+            <!--<goals>-->
+            <!--<goal>shade</goal>-->
+            <!--</goals>-->
+            <!--<configuration>-->
+            <!--<filters>-->
+            <!--<filter>-->
+            <!--<artifact>com.datastax.spark:spark-cassandra-connector_2.10</artifact>-->
+            <!--<excludes>-->
+            <!--<exclude>com/datastax/driver/**</exclude>-->
+            <!--</excludes>-->
+            <!--</filter>-->
+            <!--<filter>-->
+            <!--<artifact>*:*</artifact>-->
+            <!--<excludes>-->
+            <!--<exclude>META-INF/*.SF</exclude>-->
+            <!--<exclude>META-INF/*.DSA</exclude>-->
+            <!--<exclude>META-INF/*.RSA</exclude>-->
+            <!--</excludes>-->
+            <!--</filter>-->
+            <!--</filters>-->
+            <!--</configuration>-->
+            <!--</execution>-->
+            <!--</executions>-->
+            <!--</plugin>-->
+
+            <!--<plugin>-->
+            <!--<groupId>org.apache.maven.plugins</groupId>-->
+            <!--<artifactId>maven-shade-plugin</artifactId>-->
+            <!--<version>3.1.0</version>-->
+            <!--<dependencies>-->
+            <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-maven-plugin</artifactId>-->
+            <!--<version>1.5.8.RELEASE</version>-->
+            <!--</dependency>-->
+            <!--</dependencies>-->
+            <!--<executions>-->
+            <!--<execution>-->
+            <!--<phase>package</phase>-->
+            <!--<goals>-->
+            <!--<goal>shade</goal>-->
+            <!--</goals>-->
+            <!--<configuration>-->
+            <!--<filters>-->
+            <!--<filter>-->
+            <!--<artifact>junit:junit</artifact>-->
+            <!--<includes>-->
+            <!--<include>junit/framework/**</include>-->
+            <!--<include>org/junit/**</include>-->
+            <!--</includes>-->
+            <!--<excludes>-->
+            <!--<exclude>org/junit/experimental/**</exclude>-->
+            <!--<exclude>org/junit/runners/**</exclude>-->
+            <!--</excludes>-->
+            <!--</filter>-->
+            <!--<filter>-->
+            <!--<artifact>*:*</artifact>-->
+            <!--<excludes>-->
+            <!--<exclude>META-INF/*.SF</exclude>-->
+            <!--<exclude>META-INF/*.DSA</exclude>-->
+            <!--<exclude>META-INF/*.RSA</exclude>-->
+            <!--</excludes>-->
+            <!--</filter>-->
+            <!--</filters>-->
+            <!--</configuration>-->
+            <!--</execution>-->
+            <!--</executions>-->
+            <!--</plugin>-->
         </plugins>
     </build>
 </project>

@@ -38,7 +38,7 @@ public class MatchReplayManagement {
             }
 
             for (LinkedHashMap map : matchReplays) {
-                if (i > 15) break;
+                if (i > 40) break;
                 Object m_Id = map.get("match_id");
                 long matchId;
                 if (m_Id instanceof Long == false) {

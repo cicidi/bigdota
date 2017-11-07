@@ -26,20 +26,20 @@ public class WorkerThread implements Runnable {
         this.matchId = matchId;
         this.cassandraConnection = cassandraConnection;
         this.dotaReplayApi = dotaReplayApi;
+        this.matchReplayRepository = matchReplayRepository;
     }
 
     @Override
     public void run() {
-//        if (!cassandraConnection.isExist(matchId)) {
-//        if (matchReplayRepository.exists(matchId)) {
-        String data = dotaReplayApi.getReplay(matchId);
-        if (data != null) {
-            MatchReplay matchReplay = new MatchReplay(matchId, data, System.currentTimeMillis());
+        if (!matchReplayRepository.existsById(matchId)) {
+            String data = dotaReplayApi.getReplay(matchId);
+            if (data != null) {
+                MatchReplay matchReplay = new MatchReplay(matchId, data, System.currentTimeMillis());
 //                cassandraConnection.saveReplay(matchReplay);
-            matchReplayRepository.save(matchReplay);
-            logger.debug(Thread.currentThread().getName() + " End.");
-            logger.debug("Thread :" + Thread.currentThread().getName() + " : dotaReplayApiId" + dotaReplayApi.toString());
-//            }
+                matchReplayRepository.save(matchReplay);
+                logger.debug(Thread.currentThread().getName() + " End.");
+                logger.debug("Thread :" + Thread.currentThread().getName() + " : dotaReplayApiId" + dotaReplayApi.toString());
+            }
         }
     }
 }
