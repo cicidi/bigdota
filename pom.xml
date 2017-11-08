@@ -215,7 +215,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>1.5.8.RELEASE</version>
                 <configuration>
-                    <mainClass>com.cicidi.bigdota.service.Dota2WinApplication</mainClass>
+                    <mainClass>com.cicidi.bigdota.Dota2WinApplication</mainClass>
                 </configuration>
             </plugin>
             <plugin>

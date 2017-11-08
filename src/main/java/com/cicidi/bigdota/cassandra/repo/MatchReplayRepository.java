@@ -1,6 +1,6 @@
 package com.cicidi.bigdota.cassandra.repo;
 
-import com.cicidi.bigdota.domain.MatchReplay;
+import com.cicidi.bigdota.domain.dota.MatchReplay;
 import org.springframework.data.cassandra.repository.CassandraRepository;
 import org.springframework.stereotype.Repository;
 

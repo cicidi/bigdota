@@ -2,7 +2,7 @@ package com.cicidi.bigdota.configuration;
 
 import com.cicidi.bigdota.cassandra.CassandraConnection;
 import com.cicidi.bigdota.extermal.DotaReplayApi;
-import com.cicidi.bigdota.service.MatchReplayManagement;
+import com.cicidi.bigdota.service.dota.MatchReplayManagement;
 import com.cicidi.bigdota.spark.SparkCassandraConnector;
 import com.cicidi.bigdota.spark.SparkJob;
 import com.fasterxml.jackson.databind.ObjectMapper;

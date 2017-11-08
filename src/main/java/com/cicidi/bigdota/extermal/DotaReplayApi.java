@@ -1,6 +1,6 @@
 package com.cicidi.bigdota.extermal;
 
-import com.cicidi.bigdota.domain.DotaPlayer;
+import com.cicidi.bigdota.domain.dota.DotaPlayer;
 import com.cicidi.bigdota.util.EnvConfig;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -10,8 +10,6 @@ import com.sun.jersey.api.client.WebResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.retry.annotation.Backoff;
-import org.springframework.retry.annotation.Retryable;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;

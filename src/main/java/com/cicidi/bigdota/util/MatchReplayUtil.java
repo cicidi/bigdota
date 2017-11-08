@@ -1,9 +1,10 @@
 package com.cicidi.bigdota.util;
 
-import com.cicidi.bigdota.domain.MatchReplay;
-import com.cicidi.bigdota.domain.MatchReplayView;
+import com.cicidi.bigdota.domain.dota.MatchReplay;
+import com.cicidi.bigdota.domain.dota.MatchReplayView;
 import com.jayway.jsonpath.JsonPath;
 import com.jayway.jsonpath.PathNotFoundException;
+import jnr.ffi.annotations.In;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
@@ -69,17 +70,34 @@ public class MatchReplayUtil {
         return false;
     }
 
-    public static int[] getHeros(MatchReplay matchReplay, int i) {
-        return getHeros(matchReplay.getData(), i);
-    }
 
-    public static int[] getHeros(String matchData, int i) {
-        List<LinkedHashMap> list;
+    public static Integer getGame_Mode(String matchData) {
         try {
-            list = JsonPath.read(matchData, MatchJsonPath.heros);
+            return JsonPath.read(matchData, MatchJsonPath.game_mode);
         } catch (PathNotFoundException pathNotFoundException) {
             return null;
         }
+    }
+
+    //
+    public static int[] getHeros(String rawData, int i) {
+        return getHeros(getPick_Ban(rawData), i);
+    }
+
+    public static List<LinkedHashMap> getPick_Ban(String matchData) {
+        try {
+            return JsonPath.read(matchData, MatchJsonPath.picks_bans);
+        } catch (PathNotFoundException pathNotFoundException) {
+            return null;
+        }
+    }
+
+    public static int[] getHeros(List<LinkedHashMap> list, int i) {
+//        try {
+//            list = JsonPath.read(matchData, MatchJsonPath.picks_bans);
+//        } catch (PathNotFoundException pathNotFoundException) {
+//            return null;
+//        }
         if (list == null) {
             return null;
         }

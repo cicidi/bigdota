@@ -1,7 +1,6 @@
 package com.cicidi.bigdota.cassandra;
 
-import com.cicidi.bigdota.domain.MatchReplay;
-import com.cicidi.bigdota.extermal.DotaReplayApi;
+import com.cicidi.bigdota.domain.dota.MatchReplay;
 import com.cicidi.bigdota.util.Constants;
 import com.cicidi.bigdota.util.EnvConfig;
 import com.datastax.driver.core.*;
@@ -14,8 +13,6 @@ import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.api.java.function.Function;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
 
 import static com.datastax.spark.connector.japi.CassandraJavaUtil.javaFunctions;
 
@@ -85,7 +82,7 @@ public class CassandraConnection {
             BoundStatement boundStatement = new BoundStatement(prepared);
             boundStatement.setLong("match_id", matchReplay.getMatchId());
 //        boundStatement.setBytes("data", matchReplay.getData());
-            boundStatement.setString("data", matchReplay.getData());
+//            boundStatement.setString("data", matchReplay.getData());
             boundStatement.setTime("current_time_stamp", matchReplay.getCurrentTimeStamp());
             session.executeAsync(boundStatement);
 

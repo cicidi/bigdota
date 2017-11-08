@@ -1,15 +1,13 @@
 package com.cicidi.bigdota.spark;
 
-import com.cicidi.bigdota.domain.MatchReplayView;
-import com.cicidi.bigdota.domain.ViewEnum;
+import com.cicidi.bigdota.domain.dota.MatchReplayView;
+import com.cicidi.bigdota.domain.dota.ViewEnum;
 import com.cicidi.bigdota.util.Constants;
-import com.datastax.spark.connector.japi.CassandraRow;
 import org.apache.hadoop.util.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.spark.SparkConf;
 import org.apache.spark.SparkContext;
 import org.apache.spark.api.java.JavaRDD;
-import org.apache.spark.api.java.function.Function;
 
 import java.io.Serializable;
 
