@@ -1,0 +1,58 @@
+package com.cicidi.bigdota.util;
+
+import com.cicidi.bigdota.ruleEngine.DotaAnalyticsfield;
+import com.cicidi.bigdota.ruleEngine.GameModeEnum;
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.Version;
+import org.codehaus.jackson.map.AnnotationIntrospector;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.codehaus.jackson.map.introspect.JacksonAnnotationIntrospector;
+import org.codehaus.jackson.map.module.SimpleModule;
+import org.codehaus.jackson.xc.JaxbAnnotationIntrospector;
+
+
+import static org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES;
+
+import java.io.IOException;
+
+public class JSONUtil {
+
+    static final ObjectMapper OBJECT_MAPPER = initializeObjectMapper();
+
+    static final ObjectMapper OBJECT_MAPPER_WITH_WRAP_ROOT_VALUE = initializeObjectMapper_WITH_WRAP_ROOT_VALUE();
+
+    public static final ObjectMapper getObjectMapper() {
+        return OBJECT_MAPPER;
+    }
+
+    public static ObjectMapper initializeObjectMapper() {
+        final ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.setAnnotationIntrospector(AnnotationIntrospector
+                .pair(new JaxbAnnotationIntrospector(), new JacksonAnnotationIntrospector()));
+//        objectMapper.registerModule(new GuavaModule());
+        objectMapper.configure(FAIL_ON_UNKNOWN_PROPERTIES, false);
+        SimpleModule module = new SimpleModule("GameModeEnumDeserializer",
+                new Version(0, 1, 0, (String) null));
+        module.addDeserializer(GameModeEnum.class, new GameModeEnumDeserializer());
+        module.addDeserializer(DotaAnalyticsfield.class, new DotaAnalyticsfieldDeserializer());
+        objectMapper.registerModule(module);
+        return objectMapper.setSerializationInclusion(JsonSerialize.Inclusion.NON_NULL);
+    }
+
+    public static ObjectMapper initializeObjectMapper_WITH_WRAP_ROOT_VALUE() {
+        return initializeObjectMapper().configure(SerializationConfig.Feature.WRAP_ROOT_VALUE, true);
+    }
+
+    public static String convertToString(Object obj)
+            throws JsonGenerationException, JsonMappingException, IOException {
+        return OBJECT_MAPPER.writeValueAsString(obj);
+    }
+
+    public static String convertToString_WITH_WRAP_ROOT_VALUE(Object obj)
+            throws JsonGenerationException, JsonMappingException, IOException {
+        return OBJECT_MAPPER_WITH_WRAP_ROOT_VALUE.writeValueAsString(obj);
+    }
+}

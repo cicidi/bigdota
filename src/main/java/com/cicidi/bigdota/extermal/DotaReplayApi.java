@@ -1,7 +1,11 @@
 package com.cicidi.bigdota.extermal;
 
+import com.cicidi.bigdota.cassandra.repo.MatchReplayRepository;
+import com.cicidi.bigdota.converter.dota.DotaConverter;
 import com.cicidi.bigdota.domain.dota.DotaPlayer;
+import com.cicidi.bigdota.domain.dota.MatchReplay;
 import com.cicidi.bigdota.util.EnvConfig;
+import com.cicidi.bigdota.util.JSONUtil;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.jersey.api.client.Client;
@@ -10,17 +14,23 @@ import com.sun.jersey.api.client.WebResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Retryable;
 
+import javax.ws.rs.client.InvocationCallback;
+import javax.ws.rs.client.WebTarget;
 import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.Future;
 
 /**
  * Created by cicidi on 9/5/2017.
  */
 public class DotaReplayApi {
 
-    private static final Logger logger = LoggerFactory.getLogger(DotaReplayApi.class);
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -29,11 +39,11 @@ public class DotaReplayApi {
     private String openDotaUrl = EnvConfig.OPENDOTA_API;
     private String matchEndpoint = EnvConfig.OPENDOTA_MATCHES;
 
-    //    @Retryable(
-//            value = {RuntimeException.class},
-//            maxAttempts = 3,
-//            backoff = @Backoff(delay = 1000))
-    public String getReplay(long matchId) {
+    @Retryable(
+            value = {RuntimeException.class},
+            maxAttempts = 3,
+            backoff = @Backoff(delay = 15000))
+    public String getReplay(String matchId) {
         String path = openDotaUrl + matchEndpoint + "/" + matchId;
         logger.debug(path);
         WebResource webResource = client
@@ -41,11 +51,6 @@ public class DotaReplayApi {
 
         ClientResponse response = webResource.accept("application/json")
                 .get(ClientResponse.class);
-
-//        if (response.getStatus() != 200) {
-//            logger.info("sleep for 10 sec then continue");
-//            response = webResource.accept("application/json")
-//                    .get(ClientResponse.class);
         if (response.getStatus() != 200) {
             logger.debug("Retry matchId: " + matchId);
             throw new RuntimeException("Failed : HTTP error code : "
@@ -55,35 +60,23 @@ public class DotaReplayApi {
         logger.debug(webResource.getURI().getPath());
         logger.debug("matchId: " + matchId);
         return response.getEntity(String.class);
-
     }
 
-//    @Retryable(
-//            value = {RuntimeException.class},
-//            maxAttempts = 3,
-//            backoff = @Backoff(delay = 30000))
-
-    public List getMatchIdByAccountId(long id) {
-
+    @Retryable(
+            value = {RuntimeException.class},
+            maxAttempts = 3,
+            backoff = @Backoff(delay = 15000))
+    public List<LinkedHashMap> getMatchIdByAccountId(String id) {
         try {
-
-
             WebResource webResource = client
                     .resource("https://api.opendota.com/api/players/" + id + "/matches");
-
             ClientResponse response = webResource.accept("application/json")
                     .get(ClientResponse.class);
-
-//            if (response.getStatus() != 200) {
-//                logger.info("sleep for 10 sec then continue");
-//                Thread.sleep(10000);
-//                response = webResource.accept("application/json")
-//                        .get(ClientResponse.class);
             if (response.getStatus() != 200) {
+                logger.error("player failed: " + id);
                 throw new RuntimeException("Failed : HTTP error code : "
                         + response.getStatus());
             }
-//            }
             List<LinkedHashMap> matchList = objectMapper.readValue(response.getEntity(String.class), new TypeReference<List<LinkedHashMap>>() {
             });
             return matchList;
@@ -92,14 +85,11 @@ public class DotaReplayApi {
             return null;
 
         }
-
     }
 
     public List<DotaPlayer> getAllPlayers() {
-
         WebResource webResource = client
                 .resource("https://api.opendota.com/api/proPlayers");
-
         ClientResponse response = webResource.accept("application/json")
                 .get(ClientResponse.class);
         List<DotaPlayer> matchList = null;
@@ -111,7 +101,5 @@ public class DotaReplayApi {
         }
         return matchList;
     }
-
-
 }
 

@@ -1,48 +1,82 @@
 package com.cicidi.bigdota.domain.dota;
 
+import org.springframework.data.cassandra.core.mapping.Column;
+import org.springframework.data.cassandra.core.mapping.PrimaryKey;
+import org.springframework.data.cassandra.core.mapping.Table;
+
 /**
  * Created by cicidi on 10/16/2017.
  */
+@Table(value = "dota_player")
 public final class DotaPlayer {
-    private long account_id;
-    private long steamid;
+    @PrimaryKey
+    private String account_id;
+    @Column
+    private String steamid;
+    @Column
     private String avatar;
+    @Column
     private String avatarmedium;
+    @Column
     private String avatarfull;
+    @Column
     private String profileurl;
+    @Column
     private String personaname;
+    @Column
     private String last_login;
+    @Column
     private String full_history_time;
+    @Column
     private String cheese;
+    @Column
     private String fh_unavailable;
+    @Column
     private String loccountrycode;
+    @Column
     private String last_match_time;
+    @Column
     private String name;
+    @Column
     private String country_code;
+    @Column
     private int fantasy_role;
-    private long team_id;
+    @Column
+    private String team_id;
+    @Column
     private String team_name;
+    @Column
     private String team_tag;
+    @Column
     private boolean is_locked;
+    @Column
     private boolean is_pro;
+    @Column
     private long locked_until;
+    @Column(value = "match_list")
+    private String matchList;
 
     public DotaPlayer() {
     }
 
-    public long getAccount_id() {
+    public DotaPlayer(String accountId, String str) {
+        this.account_id = accountId;
+        this.matchList = str;
+    }
+
+    public String getAccount_id() {
         return account_id;
     }
 
-    public void setAccount_id(long account_id) {
+    public void setAccount_id(String account_id) {
         this.account_id = account_id;
     }
 
-    public long getSteamid() {
+    public String getSteamid() {
         return steamid;
     }
 
-    public void setSteamid(long steamid) {
+    public void setSteamid(String steamid) {
         this.steamid = steamid;
     }
 
@@ -158,11 +192,11 @@ public final class DotaPlayer {
         this.fantasy_role = fantasy_role;
     }
 
-    public long getTeam_id() {
+    public String getTeam_id() {
         return team_id;
     }
 
-    public void setTeam_id(long team_id) {
+    public void setTeam_id(String team_id) {
         this.team_id = team_id;
     }
 
@@ -204,5 +238,21 @@ public final class DotaPlayer {
 
     public void setLocked_until(long locked_until) {
         this.locked_until = locked_until;
+    }
+
+    public boolean isIs_locked() {
+        return is_locked;
+    }
+
+    public boolean isIs_pro() {
+        return is_pro;
+    }
+
+    public String getMatchList() {
+        return matchList;
+    }
+
+    public void setMatchList(String matchList) {
+        this.matchList = matchList;
     }
 }

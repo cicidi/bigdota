@@ -21,6 +21,8 @@ to hook up the cluster , i am following this video https://www.youtube.com/watch
 #less ~/dse/logs/cassandra/output.log
 #~/dse/bin/start_server
 #~/dse/bin/stop_server
+#~/dse/bin/nodetool status
+
 
 #dse03  (mac)
 #config
@@ -30,6 +32,7 @@ to hook up the cluster , i am following this video https://www.youtube.com/watch
 #/Volumes/WD/app/dse/bin/stop_server
 #less /Volumes/WD/app/dse/logs/cassandra/server_output.log
 #/Volumes/WD/app/dse/resources/cassandra/bin/nodetool status
+#/Volumes/WD/app/dse/bin/dse client-tool spark master-address
 
 
 #when add new dse cassandra

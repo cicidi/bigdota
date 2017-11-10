@@ -11,7 +11,8 @@ public abstract class AbstractConvertStrategy<IN, OUT, PREDECESSOR_OUTPUT, FIELD
 
     public Map start(IN m, PREDECESSOR_OUTPUT predecessorOutput, Map map) {
         OUT out = process(m, predecessorOutput);
-        map.put(this.fieldName, out);
+        if (out != null)
+            map.put(this.fieldName, out);
         for (AbstractConvertStrategy successor : successors) {
             if (successor != null)
                 successor.start(m, out, map);

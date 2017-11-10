@@ -1,10 +1,11 @@
 package com.cicidi.bigdota.util;
 
-import com.cicidi.bigdota.domain.dota.MatchReplay;
-import com.cicidi.bigdota.domain.dota.MatchReplayView;
+import com.cicidi.bigdota.ruleEngine.DotaAnalyticsfield;
+import com.cicidi.bigdota.ruleEngine.MatchReplayView;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.jayway.jsonpath.JsonPath;
 import com.jayway.jsonpath.PathNotFoundException;
-import jnr.ffi.annotations.In;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
@@ -17,6 +18,7 @@ import java.util.*;
 public class MatchReplayUtil {
     public static int matchCount = 0;
     public static int failed = 0;
+//    public static final ObjectMapper objectMapper = new ObjectMapper();
 
     public static String blogToString(ByteBuffer byteBuffer) {
         byte[] array = byteBuffer.array();
@@ -37,18 +39,20 @@ public class MatchReplayUtil {
 
     public static Iterator<String> combine(MatchReplayView matchReplayView) {
         List<String> result = new LinkedList<>();
+        List<String> list_0 = new LinkedList<>();
         List<String> list_1 = new LinkedList<>();
-        List<String> list_2 = new LinkedList<>();
-        combine("", 0, (int[]) matchReplayView.getData().get(Constants.TEAM_0_HEROS), list_1);
-        combine("", 0, (int[]) matchReplayView.getData().get(Constants.TEAM_1_HEROS), list_2);
-        Boolean team_0_win = (Boolean) matchReplayView.getData().get(Constants.TEAM_0_WIN);
+        Boolean team_0_win = (Boolean) matchReplayView.getData().get(DotaAnalyticsfield.TEAM_0_WIN.name());
+        combine("", 0, matchReplayView.getTeam_hero(0), list_0);
+        combine("", 0, matchReplayView.getTeam_hero(1), list_1);
+//        combine("", 0, (int[]) matchReplayView.getData().get(Constants.TEAM_1_HEROS), list_2);
+
         if (team_0_win == null) {
             return result.iterator();
         }
-        for (String a : list_1) {
-            for (String b : list_2) {
+        for (String a : list_0) {
+            for (String b : list_1) {
 //                String c = a < b ? a * (Math.pow(10, lengthB)) + "-" + b : b * (Math.pow(10, lengthA)) + "-" + +a;
-                String[] arr = new String[2];
+//                String[] arr = new String[2];
                 if (!comboSizeFilter(a, b))
                     continue;
                 if (team_0_win) {
@@ -65,7 +69,7 @@ public class MatchReplayUtil {
     public static boolean comboSizeFilter(String a, String b) {
         int count_a = StringUtils.countMatches(a, "+");
         int count_b = StringUtils.countMatches(b, "+");
-        if (count_a > 2 || count_b > 2)
+        if (count_a > 0 || count_b > 0)
             return true;
         return false;
     }
@@ -79,9 +83,48 @@ public class MatchReplayUtil {
         }
     }
 
-    //
-    public static int[] getHeros(String rawData, int i) {
-        return getHeros(getPick_Ban(rawData), i);
+    public static Map<DotaAnalyticsfield, Object> getHeros_normalModel(String rawData) {
+        int[] team0_heros = new int[5];
+        int[] team1_heros = new int[5];
+        LinkedHashMap json = null;
+        try {
+            json = JSONUtil.getObjectMapper().readValue(rawData, LinkedHashMap.class);
+        } catch (JsonParseException e) {
+            System.out.println(rawData);
+            e.printStackTrace();
+        } catch (JsonMappingException e) {
+            System.out.println(rawData);
+            e.printStackTrace();
+        } catch (IOException e) {
+            System.out.println(rawData);
+            e.printStackTrace();
+        }
+        for (int i = 0, team_0 = 0, team_1 = 0; i < 10; i++) {
+            List<LinkedHashMap> players = (List<LinkedHashMap>) json.get("players");
+            if ((int) players.get(i).get("player_slot") < 5) {
+                team0_heros[team_0] = (int) players.get(i).get("hero_id");
+                team_0++;
+            } else {
+                team1_heros[team_1] = (int) players.get(i).get("hero_id");
+                team_1++;
+            }
+        }
+        Arrays.sort(team0_heros);
+        Arrays.sort(team1_heros);
+        Map<DotaAnalyticsfield, Object> result = new HashMap<>();
+        result.put(DotaAnalyticsfield.TEAM_0_HERO_PICK, team0_heros);
+        result.put(DotaAnalyticsfield.TEAM_1_HERO_PICK, team1_heros);
+//        result.put(DotaAnalyticsfield.TEAM_0_WIN, false);
+        return result;
+    }
+
+    public static Map<DotaAnalyticsfield, Object> getHeros(String rawData) {
+        List<LinkedHashMap> pickBan = getPick_Ban(rawData);
+        if (pickBan == null) return null;
+        System.out.println(MatchReplayUtil.getGame_Mode(rawData));
+        Map map = getHeros(pickBan);
+        map.put(DotaAnalyticsfield.TEAM_0_WIN, getMatchResult(rawData));
+        return map;
     }
 
     public static List<LinkedHashMap> getPick_Ban(String matchData) {
@@ -92,40 +135,44 @@ public class MatchReplayUtil {
         }
     }
 
-    public static int[] getHeros(List<LinkedHashMap> list, int i) {
-//        try {
-//            list = JsonPath.read(matchData, MatchJsonPath.picks_bans);
-//        } catch (PathNotFoundException pathNotFoundException) {
-//            return null;
-//        }
+    public static Map<DotaAnalyticsfield, Object> getHeros(List<LinkedHashMap> list) {
         if (list == null) {
             return null;
         }
-        int[] result = new int[5];
-        int index = 0;
+        int[] team0_heros = new int[5];
+        int[] team1_heros = new int[5];
+        int team_0 = 0;
+        int team_1 = 0;
         for (LinkedHashMap pick_ban : list) {
             if (pick_ban != null) {
                 int team = (Integer) pick_ban.get("team");
                 boolean isPick = pick_ban.get("is_pick") != null ? (boolean) pick_ban.get("is_pick") : false;
-                if (team == i && isPick) {
-                    result[index] = (int) pick_ban.get("hero_id");
-                    index++;
+                if (team == 0 && isPick) {
+                    team0_heros[team_0] = (int) pick_ban.get("hero_id");
+                    team_0++;
+                }
+                if (team != 0 && isPick) {
+                    team1_heros[team_1] = (int) pick_ban.get("hero_id");
+                    team_1++;
                 }
             } else {
                 return null;
             }
-
         }
-        Arrays.sort(result);
+        Arrays.sort(team0_heros);
+        Arrays.sort(team1_heros);
+        Map<DotaAnalyticsfield, Object> result = new HashMap<>();
+        result.put(DotaAnalyticsfield.TEAM_0_HERO_PICK, team0_heros);
+        result.put(DotaAnalyticsfield.TEAM_1_HERO_PICK, team1_heros);
         return result;
     }
 
-    public static void combine(String current, int start, int[] arr, List<String> list) {
-        if (arr == null)
+    public static void combine(String current, int start, List team_hero, List<String> list) {
+        if (team_hero == null)
             return;
-        for (int i = start; i < arr.length; i++) {
-            String c = current + "+" + arr[i];
-            combine(c, i + 1, arr, list);
+        for (int i = start; i < team_hero.size(); i++) {
+            String c = current + "+" + team_hero.get(i);
+            combine(c, i + 1, team_hero, list);
             list.add(c);
         }
 
@@ -133,9 +180,8 @@ public class MatchReplayUtil {
     }
 
     public static Boolean getMatchResult(String matchJson) {
-        String query = "$.radiant_win";
         try {
-            Boolean result = JsonPath.read(matchJson, query);
+            Boolean result = JsonPath.read(matchJson, MatchJsonPath.match_result_path);
             matchCount++;
             return result;
         } catch (PathNotFoundException pathNotFoundException) {

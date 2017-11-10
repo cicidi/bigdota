@@ -15,34 +15,34 @@ import java.util.Map;
 public class MatchReplay implements Serializable {
 
     @PrimaryKey(value = "match_id")
-    private long matchId;
+    private String matchId;
     @Column
-    private Map data;
-    @Column
+    private String data;
+    @Column(value = "raw_data")
     private String rawData;
     @Column(value = "current_time_stamp")
     private long currentTimeStamp;
 
-    public MatchReplay(long matchId, Map data, String rawData, long currentTimeStamp) {
+    public MatchReplay(String matchId, String data, String rawData, long currentTimeStamp) {
         this.matchId = matchId;
         this.data = data;
         this.rawData = rawData;
         this.currentTimeStamp = currentTimeStamp;
     }
 
-    public long getMatchId() {
+    public String getMatchId() {
         return matchId;
     }
 
-    public void setMatchId(long matchId) {
+    public void setMatchId(String matchId) {
         this.matchId = matchId;
     }
 
-    public Map getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(Map data) {
+    public void setData(String data) {
         this.data = data;
     }
 

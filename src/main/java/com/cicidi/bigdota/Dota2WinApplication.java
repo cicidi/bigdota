@@ -3,7 +3,7 @@ package com.cicidi.bigdota;
 import com.cicidi.bigdota.cassandra.CassandraConnection;
 import com.cicidi.bigdota.configuration.AppConfig;
 import com.cicidi.bigdota.configuration.CassandraConfig;
-import com.cicidi.bigdota.domain.dota.MatchReplayView;
+import com.cicidi.bigdota.ruleEngine.MatchReplayView;
 import com.cicidi.bigdota.service.dota.MatchReplayManagement;
 import com.cicidi.bigdota.spark.SparkCassandraConnector;
 import com.cicidi.bigdota.spark.SparkJob;
@@ -39,7 +39,7 @@ public class Dota2WinApplication {
         MatchReplayManagement matchReplayManagement = context.getBean(MatchReplayManagement.class);
         SparkJob sparkJob = (SparkJob) context.getBean("sparkJob");
         cassandraConnection.connect();
-        matchReplayManagement.loadAllMatchMultithread();
+//        matchReplayManagement.loadAllMatchMultithread();
         JavaRDD<MatchReplayView> matchReplayJavaRDD = sparkCassandraConnector.read();
         sparkJob.reduceJob(matchReplayJavaRDD);
         cassandraConnection.close();

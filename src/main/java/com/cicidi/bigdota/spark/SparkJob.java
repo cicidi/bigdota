@@ -1,6 +1,6 @@
 package com.cicidi.bigdota.spark;
 
-import com.cicidi.bigdota.domain.dota.MatchReplayView;
+import com.cicidi.bigdota.ruleEngine.MatchReplayView;
 import com.cicidi.bigdota.util.MatchReplayUtil;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;

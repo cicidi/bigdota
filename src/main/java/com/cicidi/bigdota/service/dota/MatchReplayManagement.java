@@ -1,15 +1,17 @@
 package com.cicidi.bigdota.service.dota;
 
 import com.cicidi.bigdota.cassandra.CassandraConnection;
+import com.cicidi.bigdota.cassandra.repo.DotaPlayerRepository;
 import com.cicidi.bigdota.cassandra.repo.MatchReplayRepository;
 import com.cicidi.bigdota.domain.dota.DotaPlayer;
+import com.cicidi.bigdota.domain.dota.MatchReplay;
 import com.cicidi.bigdota.extermal.DotaReplayApi;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.*;
+import java.util.concurrent.*;
 
 /**
  * Created by cicidi on 10/16/2017.
@@ -26,30 +28,61 @@ public class MatchReplayManagement {
     @Autowired
     private MatchReplayRepository matchReplayRepository;
 
-    public void loadAllMatchMultithread() {
-        ExecutorService executor = Executors.newFixedThreadPool(2);
-        List<DotaPlayer> playerList = dotaReplayApi.getAllPlayers();
-        int i = 0;
-        for (DotaPlayer dp : playerList) {
-            List<LinkedHashMap> matchReplays = dotaReplayApi.getMatchIdByAccountId(dp.getAccount_id());
-//            if (i > 15) {  // skip first n players
-//                i++;
-//                break;
-//            }
+    @Autowired
+    private DotaPlayerRepository dotaPlayerRepository;
 
-            for (LinkedHashMap map : matchReplays) {
-                if (i > 45) break;
-                Object m_Id = map.get("match_id");
-                long matchId;
-                if (m_Id instanceof Long == false) {
-                    matchId = new Long((Integer) m_Id);
-                } else {
-                    matchId = (Long) map.get("match_id");
-                }
-                Runnable worker = new WorkerThread(matchId, cassandraConnection, dotaReplayApi, matchReplayRepository);
-                executor.execute(worker);
-                i++;
+    private final static Logger logger = LoggerFactory.getLogger(MatchReplayManagement.class);
+
+
+    Queue<String> matchList = new LinkedList<>();
+
+    public void loadAllMatchMultithread() {
+        ExecutorService executor = Executors.newFixedThreadPool(5);
+        List<DotaPlayer> playerList = dotaReplayApi.getAllPlayers();
+
+        List<Future<MatchReplay>> list = new ArrayList<Future<MatchReplay>>();
+        List<Future<List<String>>> matchFutureList = new ArrayList<Future<List<String>>>();
+        int i = 0;
+
+        for (DotaPlayer dp : playerList) {
+            Optional<DotaPlayer> dotaPlayer = dotaPlayerRepository.findById(dp.getAccount_id());
+            if (dotaPlayer != null && dotaPlayer.isPresent() && dotaPlayer.get().getMatchList() != null && dotaPlayer.get().getMatchList().length() > 0)
+                matchList.addAll(Arrays.asList(dotaPlayer.get().getMatchList().split(",")));
+            else {
+                Callable<List<String>> playerThread = new PlayerThread(dp, dotaReplayApi, dotaPlayerRepository);
+                Future<List<String>> future = executor.submit(playerThread);
+                matchFutureList.add(future);//            if (i > 50) {  // skip first n players
             }
         }
+        for (Future<List<String>> fut : matchFutureList) {
+            try {
+                if (null == fut || null == fut.get()) continue;
+                List<String> m_list = fut.get();
+                matchList.addAll(m_list);
+                System.out.println("add match Id to quue" + ":" + m_list.toArray());
+            } catch (InterruptedException | ExecutionException e) {
+                e.printStackTrace();
+            }
+        }
+        while (matchList.size() > 0) {
+            String matchId = matchList.poll();
+            Callable<MatchReplay> worker = new MatchThread(matchId, dotaReplayApi, matchReplayRepository);
+            Future<MatchReplay> future = executor.submit(worker);
+            list.add(future);
+            i++;
+        }
+
+        for (Future<MatchReplay> fut : list) {
+            try {
+                System.out.println("saved match" + ":" + fut.get().getMatchId());
+            } catch (InterruptedException | ExecutionException e) {
+                e.printStackTrace();
+            }
+        }
+        executor.shutdown();
+
+    }
+
+    public void convert() {
     }
 }

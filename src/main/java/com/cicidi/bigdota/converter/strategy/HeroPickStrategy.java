@@ -1,15 +1,16 @@
 package com.cicidi.bigdota.converter.strategy;
 
 import com.cicidi.bigdota.converter.AbstractConvertStrategy;
-import com.cicidi.bigdota.domain.dota.DotaMatchField;
-import com.cicidi.bigdota.domain.dota.GameModeEnum;
-import com.cicidi.bigdota.domain.dota.MatchReplay;
+import com.cicidi.bigdota.ruleEngine.DotaAnalyticsfield;
+import com.cicidi.bigdota.ruleEngine.GameModeEnum;
 import com.cicidi.bigdota.util.MatchReplayUtil;
 
-public class HeroPickStrategy extends AbstractConvertStrategy<String, int[], GameModeEnum, DotaMatchField> {
+import java.util.Map;
+
+public class HeroPickStrategy extends AbstractConvertStrategy<String, Map<DotaAnalyticsfield, Object>, GameModeEnum, DotaAnalyticsfield> {
 
 
-    public HeroPickStrategy(DotaMatchField fieldName, AbstractConvertStrategy abstractConvertStrategy) {
+    public HeroPickStrategy(DotaAnalyticsfield fieldName, AbstractConvertStrategy abstractConvertStrategy) {
         super(fieldName, abstractConvertStrategy);
     }
 
@@ -19,13 +20,14 @@ public class HeroPickStrategy extends AbstractConvertStrategy<String, int[], Gam
     }
 
     @Override
-    protected int[] process(String rawData, GameModeEnum gameModeEnum) {
-        if (gameModeEnum.equals(GameModeEnum.MODE_22)) {
-            if (this.fieldName.equals(DotaMatchField.TEAM_0_HERO_PICK))
-                return MatchReplayUtil.getHeros(rawData, 0);
-            if (this.fieldName.equals(DotaMatchField.TEAM_1_HERO_PICK))
-                return MatchReplayUtil.getHeros(rawData, 1);
+    protected Map<DotaAnalyticsfield, Object> process(String rawData, GameModeEnum gameModeEnum) {
+        switch (gameModeEnum) {
+            case MODE_20:
+                return MatchReplayUtil.getHeros(rawData);
+            case MODE_22:
+                return MatchReplayUtil.getHeros_normalModel(rawData);
+            default:
+                return MatchReplayUtil.getHeros_normalModel(rawData);
         }
-        return null;
     }
 }

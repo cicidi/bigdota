@@ -34,5 +34,6 @@ public class CassandraConfig extends AbstractCassandraConfiguration {
             throws ClassNotFoundException {
         return new BasicCassandraMappingContext();
     }
+    
 
 }

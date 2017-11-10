@@ -22,7 +22,7 @@ import static com.datastax.spark.connector.japi.CassandraJavaUtil.javaFunctions;
  */
 public class CassandraConnection {
 
-    private static final Logger logger = Logger.getLogger(CassandraConnection.class);
+    private final Logger logger = Logger.getLogger(getClass());
 
     private String cassandraIps = EnvConfig.CASSANDRA_IP;
 
@@ -80,7 +80,7 @@ public class CassandraConnection {
             PreparedStatement prepared = session.prepare(
                     "INSERT INTO " + Constants.BIG_DOTA + ".replay (match_id, data,current_time_stamp) values (?, ?, ?)");
             BoundStatement boundStatement = new BoundStatement(prepared);
-            boundStatement.setLong("match_id", matchReplay.getMatchId());
+            boundStatement.setString("match_id", matchReplay.getMatchId());
 //        boundStatement.setBytes("data", matchReplay.getData());
 //            boundStatement.setString("data", matchReplay.getData());
             boundStatement.setTime("current_time_stamp", matchReplay.getCurrentTimeStamp());
@@ -91,9 +91,9 @@ public class CassandraConnection {
         }
     }
 
-    public boolean isExist(long matchId) {
+    public boolean isExist(String matchId) {
         try {
-            boundStatement.setLong("match_id", matchId);
+            boundStatement.setString("match_id", matchId);
             ResultSet resultSet = session.execute(boundStatement);
             long count = -1;
             if (resultSet != null) {

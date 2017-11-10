@@ -1,7 +1,6 @@
 package com.cicidi.bigdota.spark;
 
-import com.cicidi.bigdota.domain.dota.MatchReplayView;
-import com.cicidi.bigdota.domain.dota.ViewEnum;
+import com.cicidi.bigdota.ruleEngine.MatchReplayView;
 import com.cicidi.bigdota.util.Constants;
 import org.apache.hadoop.util.StringUtils;
 import org.apache.log4j.Logger;
@@ -21,12 +20,12 @@ public class SparkCassandraConnector implements Serializable {
     private static final Logger logger = Logger.getLogger(SparkCassandraConnector.class);
 
     public JavaRDD<MatchReplayView> read() {
-        SparkConf conf = new SparkConf().setAppName("bigdota").setMaster("local").set("spark.cassandra.connection.host", "127.0.0.1").set("spark.driver.maxResultSize", "14g");
+        SparkConf conf = new SparkConf().setAppName("bigdota").setMaster("local").set("spark.cassandra.connection.host", "10.0.0.49").set("spark.driver.maxResultSize", "14g");
         SparkContext sc = new SparkContext(conf);
 
         JavaRDD<MatchReplayView> cassandraRowsRDD = javaFunctions(sc).cassandraTable(Constants.BIG_DOTA, "replay").limit((long) 11)
                 .map(cassandraRow -> {
-                    return new MatchReplayView(cassandraRow.getLong("match_id"), cassandraRow.getString("data"), cassandraRow.getLong("current_time_stamp"), ViewEnum.HERO);
+                    return new MatchReplayView(cassandraRow.getString("match_id"), cassandraRow.getString("data"));
                 });
         logger.debug("Data as CassandraRows: \n" + StringUtils.join("\n", cassandraRowsRDD.collect()));
         return cassandraRowsRDD;

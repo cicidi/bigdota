@@ -1,16 +1,14 @@
 package com.cicidi.bigdota.converter.strategy;
 
 import com.cicidi.bigdota.converter.AbstractConvertStrategy;
-import com.cicidi.bigdota.domain.dota.DotaMatchField;
-import com.cicidi.bigdota.domain.dota.GameModeEnum;
-import com.cicidi.bigdota.domain.dota.MatchReplay;
+import com.cicidi.bigdota.ruleEngine.DotaAnalyticsfield;
+import com.cicidi.bigdota.ruleEngine.GameModeEnum;
 import com.cicidi.bigdota.util.MatchReplayUtil;
-import scala.Int;
 
-public class GameModeStrategy extends AbstractConvertStrategy<String, GameModeEnum, Object, DotaMatchField> {
+public class GameModeStrategy extends AbstractConvertStrategy<String, GameModeEnum, Object, DotaAnalyticsfield> {
 
 
-    public GameModeStrategy(DotaMatchField fieldName, AbstractConvertStrategy... abstractConvertStrategy) {
+    public GameModeStrategy(DotaAnalyticsfield fieldName, AbstractConvertStrategy... abstractConvertStrategy) {
         super(fieldName, abstractConvertStrategy);
     }
 
@@ -30,4 +28,9 @@ public class GameModeStrategy extends AbstractConvertStrategy<String, GameModeEn
         return null;
     }
 
+//    public static void main(String[] args) {
+//        for (int i = 0; i < 50; i++) {
+//            System.out.println(" MODE_" + i + "(" + i + "),");
+//        }
+//    }
 }
