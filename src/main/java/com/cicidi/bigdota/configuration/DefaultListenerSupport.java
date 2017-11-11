@@ -1,7 +1,6 @@
 package com.cicidi.bigdota.configuration;
 
 import com.cicidi.bigdota.cassandra.repo.FailedRepository;
-import com.cicidi.bigdota.cassandra.repo.MatchReplayRepository;
 import com.cicidi.bigdota.domain.dota.Download_failed;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,9 +12,6 @@ import org.springframework.retry.listener.RetryListenerSupport;
 
 public class DefaultListenerSupport extends RetryListenerSupport {
     private final static Logger logger = LoggerFactory.getLogger(DefaultListenerSupport.class);
-
-    MatchReplayRepository matchReplayRepository;
-
 
     @Override
     public <T, E extends Throwable> void close(RetryContext context,

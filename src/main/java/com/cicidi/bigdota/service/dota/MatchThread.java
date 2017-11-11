@@ -1,6 +1,5 @@
 package com.cicidi.bigdota.service.dota;
 
-import com.cicidi.bigdota.cassandra.CassandraConnection;
 import com.cicidi.bigdota.cassandra.repo.MatchReplayRepository;
 import com.cicidi.bigdota.converter.dota.DotaConverter;
 import com.cicidi.bigdota.domain.dota.MatchReplay;
@@ -19,8 +18,6 @@ import java.util.concurrent.Callable;
 public class MatchThread implements Callable<MatchReplay> {
 
     private String matchId;
-
-    private CassandraConnection cassandraConnection;
 
     private MatchReplayRepository matchReplayRepository;
 

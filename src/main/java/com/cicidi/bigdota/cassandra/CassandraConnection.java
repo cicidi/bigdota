@@ -75,36 +75,4 @@ public class CassandraConnection {
         cluster.close();
     }
 
-    public void saveReplay(MatchReplay matchReplay) {
-        try {
-            PreparedStatement prepared = session.prepare(
-                    "INSERT INTO " + Constants.BIG_DOTA + ".replay (match_id, data,current_time_stamp) values (?, ?, ?)");
-            BoundStatement boundStatement = new BoundStatement(prepared);
-            boundStatement.setString("match_id", matchReplay.getMatchId());
-//        boundStatement.setBytes("data", matchReplay.getData());
-//            boundStatement.setString("data", matchReplay.getData());
-            boundStatement.setTime("current_time_stamp", matchReplay.getCurrentTimeStamp());
-            session.executeAsync(boundStatement);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public boolean isExist(String matchId) {
-        try {
-            boundStatement.setString("match_id", matchId);
-            ResultSet resultSet = session.execute(boundStatement);
-            long count = -1;
-            if (resultSet != null) {
-                count = resultSet.one().getLong(0);
-            }
-
-            return count > 0;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-
-    }
 }

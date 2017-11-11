@@ -34,15 +34,12 @@ public class Dota2WinApplication {
         long start = System.currentTimeMillis();
         System.setProperty("hadoop.home.dir", "D:\\project\\hadoop");
         ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class, CassandraConfig.class);
-        CassandraConnection cassandraConnection = context.getBean(CassandraConnection.class);
         SparkCassandraConnector sparkCassandraConnector = context.getBean(SparkCassandraConnector.class);
         MatchReplayManagement matchReplayManagement = context.getBean(MatchReplayManagement.class);
         SparkJob sparkJob = (SparkJob) context.getBean("sparkJob");
-        cassandraConnection.connect();
-//        matchReplayManagement.loadAllMatchMultithread();
+        matchReplayManagement.loadAllMatchMultithread();
         JavaRDD<MatchReplayView> matchReplayJavaRDD = sparkCassandraConnector.read();
         sparkJob.reduceJob(matchReplayJavaRDD);
-        cassandraConnection.close();
         long end = System.currentTimeMillis();
         logger.debug("total time :" + (end - start));
         System.out.println("total success matchReplay: " + MatchReplayUtil.matchCount);

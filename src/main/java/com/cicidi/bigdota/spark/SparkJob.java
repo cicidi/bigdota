@@ -2,6 +2,7 @@ package com.cicidi.bigdota.spark;
 
 import com.cicidi.bigdota.ruleEngine.MatchReplayView;
 import com.cicidi.bigdota.util.MatchReplayUtil;
+import org.apache.commons.io.FileUtils;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.function.FlatMapFunction;
@@ -9,6 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import scala.Tuple2;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -20,16 +23,19 @@ import java.util.List;
 public class SparkJob {
     private final static Logger logger = LoggerFactory.getLogger(SparkJob.class);
 
-    public void reduceJob(JavaRDD javaRDD) {
+    public void reduceJob(JavaRDD javaRDD) throws IOException {
         JavaRDD<String> combo = javaRDD.flatMap(new Split());
         JavaPairRDD<String, Integer> pairs = combo.mapToPair(s -> new Tuple2<String, Integer>(s, 1));
         JavaPairRDD<String, Integer> counts = pairs.reduceByKey((a, b) -> a + b);
-        List list = counts.takeOrdered(10000, MyTupleComparator.INSTANCE);
+        List list = counts.takeOrdered(10, MyTupleComparator.INSTANCE);
         int i = 0;
         for (Object object : list) {
             if (i++ < 5)
-                logger.debug(object.toString());
+                logger.debug("top 10: " + object.toString());
         }
+        String path = "/tmp/dota";
+        FileUtils.deleteDirectory(new File(path));
+        counts.saveAsTextFile(path);
         logger.debug("done");
     }
 

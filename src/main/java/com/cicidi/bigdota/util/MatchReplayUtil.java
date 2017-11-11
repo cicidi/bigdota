@@ -62,6 +62,7 @@ public class MatchReplayUtil {
                 }
             }
         }
+        matchCount++;
         return result.iterator();
     }
 
@@ -69,7 +70,7 @@ public class MatchReplayUtil {
     public static boolean comboSizeFilter(String a, String b) {
         int count_a = StringUtils.countMatches(a, "+");
         int count_b = StringUtils.countMatches(b, "+");
-        if (count_a > 0 || count_b > 0)
+        if (count_a > 2 || count_b > 2)
             return true;
         return false;
     }
@@ -182,7 +183,7 @@ public class MatchReplayUtil {
     public static Boolean getMatchResult(String matchJson) {
         try {
             Boolean result = JsonPath.read(matchJson, MatchJsonPath.match_result_path);
-            matchCount++;
+//            matchCount++;
             return result;
         } catch (PathNotFoundException pathNotFoundException) {
             failed++;

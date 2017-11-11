@@ -48,3 +48,15 @@ to hook up the cluster , i am following this video https://www.youtube.com/watch
 #vim /Volumes/WD/app/dse/resources/cassandra/conf/cassandra-env.sh    CassandraDaemon.java:705 - Cannot start node if
 #snitch's data center (SearchGraphAnalytics) differs from previous data center (Cassandra).
 #Please fix the snitch configuration, decommission and rebootstrap this node or use the flag -Dcassandra.ignore_dc=true.
+
+#other cmd
+
+#ifstat check network
+#nodetool removenode d0844a21-3698-4883-ab66-9e2fd5150edd
+
+#exceptions
+Exception (java.lang.RuntimeException) encountered during startup: Unable to gossip with any seeds
+This is caused when seed: parameter and listen_host are different in cassandra.yaml configuration file under conf directory
+
+
+

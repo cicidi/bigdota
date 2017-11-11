@@ -1,14 +1,11 @@
 package com.cicidi.bigdota.configuration;
 
-import com.cicidi.bigdota.cassandra.CassandraConnection;
-import com.cicidi.bigdota.cassandra.repo.MatchReplayRepository;
 import com.cicidi.bigdota.extermal.DotaReplayApi;
 import com.cicidi.bigdota.service.dota.MatchReplayManagement;
 import com.cicidi.bigdota.spark.SparkCassandraConnector;
 import com.cicidi.bigdota.spark.SparkJob;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.jersey.api.client.Client;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
@@ -17,7 +14,6 @@ import org.springframework.retry.backoff.FixedBackOffPolicy;
 import org.springframework.retry.policy.SimpleRetryPolicy;
 import org.springframework.retry.support.RetryTemplate;
 
-import javax.inject.Inject;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 
@@ -25,11 +21,6 @@ import javax.ws.rs.client.WebTarget;
 @EnableRetry
 public class AppConfig {
 
-
-    @Bean
-    public CassandraConnection cassandraConnector() {
-        return new CassandraConnection();
-    }
 
     @Bean
     public DotaReplayApi steamClient() {

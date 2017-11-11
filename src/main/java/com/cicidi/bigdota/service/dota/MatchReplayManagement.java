@@ -1,6 +1,5 @@
 package com.cicidi.bigdota.service.dota;
 
-import com.cicidi.bigdota.cassandra.CassandraConnection;
 import com.cicidi.bigdota.cassandra.repo.DotaPlayerRepository;
 import com.cicidi.bigdota.cassandra.repo.MatchReplayRepository;
 import com.cicidi.bigdota.domain.dota.DotaPlayer;
@@ -23,9 +22,6 @@ public class MatchReplayManagement {
     private DotaReplayApi dotaReplayApi;
 
     @Autowired
-    private CassandraConnection cassandraConnection;
-
-    @Autowired
     private MatchReplayRepository matchReplayRepository;
 
     @Autowired
@@ -37,7 +33,7 @@ public class MatchReplayManagement {
     Queue<String> matchList = new LinkedList<>();
 
     public void loadAllMatchMultithread() {
-        ExecutorService executor = Executors.newFixedThreadPool(5);
+        ExecutorService executor = Executors.newFixedThreadPool(20);
         List<DotaPlayer> playerList = dotaReplayApi.getAllPlayers();
 
         List<Future<MatchReplay>> list = new ArrayList<Future<MatchReplay>>();
