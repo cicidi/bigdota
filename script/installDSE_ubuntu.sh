@@ -58,5 +58,5 @@ to hook up the cluster , i am following this video https://www.youtube.com/watch
 Exception (java.lang.RuntimeException) encountered during startup: Unable to gossip with any seeds
 This is caused when seed: parameter and listen_host are different in cassandra.yaml configuration file under conf directory
 
-
-
+resize ubuntu vm
+#VBoxManage modifyhd “C:\Users\Chris\VirtualBox VMs\Windows 7\Windows 7.vdi” --resize 81920
