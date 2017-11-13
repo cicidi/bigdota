@@ -38,7 +38,7 @@ public class CassandraConnection {
 
         SparkConf conf = new SparkConf().setAppName("bigdota").setMaster("local").set("spark.cassandra.connection.host", "10.0.0.49,10.0.0.38,10.0.0.32");
         JavaSparkContext sc = new JavaSparkContext(conf);
-        JavaRDD<String> cassandraRowsRDD = javaFunctions(sc).cassandraTable(Constants.BIG_DOTA, "replay")
+        JavaRDD<String> cassandraRowsRDD = javaFunctions(sc).cassandraTable(Constants.BIG_DOTA, Constants.REPLAY_TABLE)
                 .map(new Function<CassandraRow, String>() {
                     @Override
                     public String call(CassandraRow cassandraRow) throws Exception {

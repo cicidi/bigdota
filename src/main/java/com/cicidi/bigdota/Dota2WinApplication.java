@@ -3,6 +3,7 @@ package com.cicidi.bigdota;
 import com.cicidi.bigdota.cassandra.CassandraConnection;
 import com.cicidi.bigdota.configuration.AppConfig;
 import com.cicidi.bigdota.configuration.CassandraConfig;
+import com.cicidi.bigdota.domain.dota.MatchReplay;
 import com.cicidi.bigdota.ruleEngine.MatchReplayView;
 import com.cicidi.bigdota.service.dota.MatchReplayManagement;
 import com.cicidi.bigdota.spark.SparkCassandraConnector;
@@ -31,19 +32,37 @@ public class Dota2WinApplication {
     private static final Logger logger = Logger.getLogger(Dota2WinApplication.class);
 
     public static void main(String[] args) throws IOException {
-        long start = System.currentTimeMillis();
-        System.setProperty("hadoop.home.dir", "D:\\project\\hadoop");
+//        System.setProperty("hadoop.home.dir", "D:\\project\\hadoop");
+
         ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class, CassandraConfig.class);
         SparkCassandraConnector sparkCassandraConnector = context.getBean(SparkCassandraConnector.class);
-        MatchReplayManagement matchReplayManagement = context.getBean(MatchReplayManagement.class);
         SparkJob sparkJob = (SparkJob) context.getBean("sparkJob");
+        MatchReplayManagement matchReplayManagement = context.getBean(MatchReplayManagement.class);
+
+        long start = System.currentTimeMillis();
+        reloadDB(sparkJob, sparkCassandraConnector);
+        downloadMatch(matchReplayManagement);
+        mapReduceJob(sparkJob, sparkCassandraConnector);
+        long end = System.currentTimeMillis();
+
+        logger.info("total time :" + (end - start));
+        logger.info("total success matchReplay: " + MatchReplayUtil.matchCount);
+        logger.info("failded replay" + MatchReplayUtil.failed);
+    }
+
+    public static void reloadDB(SparkJob sparkJob, SparkCassandraConnector sparkCassandraConnector) {
+        JavaRDD<MatchReplay> matchRawDataJavaRDD = sparkCassandraConnector.readRaw();
+        sparkJob.reloadMatch(matchRawDataJavaRDD);
+    }
+
+    public static void downloadMatch(MatchReplayManagement matchReplayManagement) {
         matchReplayManagement.loadAllMatchMultithread();
+
+    }
+
+    public static void mapReduceJob(SparkJob sparkJob, SparkCassandraConnector sparkCassandraConnector) throws IOException {
         JavaRDD<MatchReplayView> matchReplayJavaRDD = sparkCassandraConnector.read();
         sparkJob.reduceJob(matchReplayJavaRDD);
-        long end = System.currentTimeMillis();
-        logger.debug("total time :" + (end - start));
-        System.out.println("total success matchReplay: " + MatchReplayUtil.matchCount);
-        System.out.println("failded replay" + MatchReplayUtil.failed);
     }
 
 

@@ -79,6 +79,4 @@ public class MatchReplayManagement {
 
     }
 
-    public void convert() {
-    }
 }

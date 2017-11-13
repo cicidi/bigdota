@@ -27,7 +27,7 @@ public class HeroPickStrategy extends AbstractConvertStrategy<String, Map<DotaAn
             case MODE_22:
                 return MatchReplayUtil.getHeros_normalModel(rawData);
             default:
-                return MatchReplayUtil.getHeros_normalModel(rawData);
+                return MatchReplayUtil.getHeros(rawData);
         }
     }
 }

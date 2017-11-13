@@ -1,6 +1,7 @@
 package com.cicidi.bigdota.util;
 
 import com.cicidi.bigdota.ruleEngine.DotaAnalyticsfield;
+import com.cicidi.bigdota.ruleEngine.GameModeEnum;
 import com.cicidi.bigdota.ruleEngine.MatchReplayView;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -9,6 +10,7 @@ import com.jayway.jsonpath.PathNotFoundException;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
+import java.io.StringReader;
 import java.nio.ByteBuffer;
 import java.util.*;
 
@@ -18,7 +20,15 @@ import java.util.*;
 public class MatchReplayUtil {
     public static int matchCount = 0;
     public static int failed = 0;
-//    public static final ObjectMapper objectMapper = new ObjectMapper();
+//    public static final ObjectMa
+// pper objectMapper = new ObjectMapper();
+
+    public static Map<String, Boolean> map = new TreeMap<>();
+
+
+    public static void addGameMode(String mode, Boolean canPick) {
+        map.put(mode, canPick);
+    }
 
     public static String blogToString(ByteBuffer byteBuffer) {
         byte[] array = byteBuffer.array();
@@ -42,8 +52,13 @@ public class MatchReplayUtil {
         List<String> list_0 = new LinkedList<>();
         List<String> list_1 = new LinkedList<>();
         Boolean team_0_win = (Boolean) matchReplayView.getData().get(DotaAnalyticsfield.TEAM_0_WIN.name());
-        combine("", 0, matchReplayView.getTeam_hero(0), list_0);
-        combine("", 0, matchReplayView.getTeam_hero(1), list_1);
+        ArrayList team1_pick = matchReplayView.getTeam_hero(0);
+        if (team1_pick.contains(0)) {
+            System.out.println("error");
+        }
+        ArrayList team2_pick = matchReplayView.getTeam_hero(1);
+        combine("", 0, team1_pick, list_0);
+        combine("", 0, team2_pick, list_1);
 //        combine("", 0, (int[]) matchReplayView.getData().get(Constants.TEAM_1_HEROS), list_2);
 
         if (team_0_win == null) {
@@ -70,7 +85,7 @@ public class MatchReplayUtil {
     public static boolean comboSizeFilter(String a, String b) {
         int count_a = StringUtils.countMatches(a, "+");
         int count_b = StringUtils.countMatches(b, "+");
-        if (count_a > 2 || count_b > 2)
+        if (count_a > 2 && count_b > 2)
             return true;
         return false;
     }

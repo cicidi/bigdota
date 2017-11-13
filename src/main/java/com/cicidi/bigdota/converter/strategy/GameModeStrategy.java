@@ -20,12 +20,10 @@ public class GameModeStrategy extends AbstractConvertStrategy<String, GameModeEn
     @Override
     protected GameModeEnum process(String rawData, Object o) {
         Integer result = MatchReplayUtil.getGame_Mode(rawData);
-        if (result != null)
-            return GameModeEnum.getEnum(result);
-        if (MatchReplayUtil.getPick_Ban(rawData) != null) {
-            return GameModeEnum.MODE_23;
-        }
-        return null;
+        GameModeEnum gameModeEnum = GameModeEnum.getEnum(result);
+        Boolean canPick = MatchReplayUtil.getPick_Ban(rawData) != null;
+        MatchReplayUtil.addGameMode(gameModeEnum.name(), canPick);
+        return gameModeEnum;
     }
 
 //    public static void main(String[] args) {
