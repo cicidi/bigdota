@@ -1,5 +1,9 @@
 package com.cicidi.bigdota.converter;
 
+import com.cicidi.bigdota.util.JSONUtil;
+import org.codehaus.jackson.map.ObjectMapper;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -9,11 +13,13 @@ public abstract class AbstractConverter<IN> {
 
     protected List<AbstractConvertStrategy> convertStrategyList;
 
-    protected Map map = new ConcurrentHashMap();
+    protected Map output = new ConcurrentHashMap();
 
     protected abstract void init();
 
     protected abstract void validate();
+
+    protected ObjectMapper objectMapper = JSONUtil.getObjectMapper();
 
     public AbstractConverter(IN input) {
         this.input = input;
@@ -23,9 +29,9 @@ public abstract class AbstractConverter<IN> {
 
     public Map process() {
         for (AbstractConvertStrategy convertStrategy : convertStrategyList) {
-            convertStrategy.start(this.input, null, map);
+            convertStrategy.start(this.input, null, output);
         }
-        return this.map;
+        return this.output;
     }
 
     public void addStrategy(AbstractConvertStrategy convertStrategy) {
@@ -34,6 +40,20 @@ public abstract class AbstractConverter<IN> {
             convertStrategyList = new ArrayList<>();
         }
         this.convertStrategyList.add(convertStrategy);
+    }
+
+    public String getFilteredData() {
+        process();
+        try {
+            String str = objectMapper.writeValueAsString(this.output);
+
+            if (this.output.size() > 0) {
+                return str;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }

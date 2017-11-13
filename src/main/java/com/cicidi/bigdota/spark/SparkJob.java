@@ -6,7 +6,7 @@ import com.cicidi.bigdota.domain.dota.MatchReplay;
 import com.cicidi.bigdota.ruleEngine.MatchReplayView;
 import com.cicidi.bigdota.util.JSONUtil;
 import com.cicidi.bigdota.util.MatchReplayUtil;
-import com.cicidi.bigdota.validator.MatchDataValidator;
+import com.cicidi.bigdota.validator.Validator;
 import org.apache.commons.io.FileUtils;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
@@ -32,7 +32,7 @@ public class SparkJob {
     @Autowired
     MatchReplayRepository matchReplayRepository;
     @Autowired
-    MatchDataValidator matchDataValidator;
+    Validator matchDataValidator;
 
     public void reduceJob(JavaRDD javaRDD) throws IOException {
         JavaRDD<String> combo = javaRDD.flatMap(new Split());
@@ -54,8 +54,10 @@ public class SparkJob {
     public void reloadMatch(JavaRDD<MatchReplay> matchRawDataJavaRDD) {
         long current = System.currentTimeMillis();
         try {
-            List<MatchReplay> list = matchRawDataJavaRDD.collect();
-            for (MatchReplay matchReplay : list) {
+//            List<MatchReplay> list = matchRawDataJavaRDD.collect();
+            Iterator<MatchReplay> iterator = matchRawDataJavaRDD.toLocalIterator();
+            while (iterator.hasNext()) {
+                MatchReplay matchReplay = iterator.next();
                 if (!matchDataValidator.validate(matchReplay)) {
                     DotaConverter dotaConverter = new DotaConverter(matchReplay.getRawData());
                     Map data = dotaConverter.process();
@@ -65,6 +67,9 @@ public class SparkJob {
                     matchReplayRepository.save(matchReplay);
                 }
             }
+//            for (MatchReplay matchReplay : list) {
+//
+//            }
         } catch (IOException e) {
             e.printStackTrace();
         }

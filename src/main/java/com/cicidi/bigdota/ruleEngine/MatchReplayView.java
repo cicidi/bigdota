@@ -48,12 +48,22 @@ public class MatchReplayView implements Serializable {
     }
 
     public ArrayList getTeam_hero(int team) {
-        Map heroPick = (Map) this.data.get(DotaAnalyticsfield.HERO_PICK.name());
-        ArrayList team_pick;
-        if (team == 0)
-            team_pick = (ArrayList) heroPick.get(DotaAnalyticsfield.TEAM_0_HERO_PICK.name());
-        else {
-            team_pick = (ArrayList) heroPick.get(DotaAnalyticsfield.TEAM_1_HERO_PICK.name());
+        ArrayList team_pick = null;
+        try {
+            if (data == null)
+                return null;
+            Map heroPick = (Map) this.data.get(DotaAnalyticsfield.HERO_PICK.name());
+            if (heroPick == null)
+                return null;
+
+            if (team == 0)
+                team_pick = (ArrayList) heroPick.get(DotaAnalyticsfield.TEAM_0_HERO_PICK.name());
+            else {
+                team_pick = (ArrayList) heroPick.get(DotaAnalyticsfield.TEAM_1_HERO_PICK.name());
+            }
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            return null;
         }
         return team_pick;
     }

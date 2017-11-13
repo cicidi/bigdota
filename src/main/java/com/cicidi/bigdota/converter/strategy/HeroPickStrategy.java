@@ -21,13 +21,19 @@ public class HeroPickStrategy extends AbstractConvertStrategy<String, Map<DotaAn
 
     @Override
     protected Map<DotaAnalyticsfield, Object> process(String rawData, GameModeEnum gameModeEnum) {
-        switch (gameModeEnum) {
-            case MODE_20:
-                return MatchReplayUtil.getHeros(rawData);
-            case MODE_22:
-                return MatchReplayUtil.getHeros_normalModel(rawData);
-            default:
-                return MatchReplayUtil.getHeros(rawData);
+//        switch (gameModeEnum) {
+//            case MODE_20:
+//                return MatchReplayUtil.getHeros(rawData);
+//            case MODE_22:
+//                return MatchReplayUtil.getHeros_normalModel(rawData);
+//            default:
+//                return MatchReplayUtil.getHeros_normalModel(rawData);
+//        }
+
+        Map<DotaAnalyticsfield, Object> map = MatchReplayUtil.getHeros(rawData);
+        if (map == null || map.get(DotaAnalyticsfield.HERO_PICK) == null) {
+            map = MatchReplayUtil.getHeros_normalModel(rawData);
         }
+        return map;
     }
 }

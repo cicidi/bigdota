@@ -19,7 +19,8 @@
         <json.path>2.3.0</json.path>
         <log4j.version>1.2.17</log4j.version>
         <spark.cassandra.connector.version>2.0.0-M1</spark.cassandra.connector.version>
-        <spark.core.version>2.2.0</spark.core.version>
+        <!--<spark.core.version>2.2.0</spark.core.version>-->
+        <spark.core.version>2.1.0</spark.core.version>
         <spring.data.version>1.11.7.RELEASE</spring.data.version>
         <spring.data.cassandra.version>2.0.1.RELEASE</spring.data.cassandra.version>
         <spring.data.commons>2.0.1.RELEASE</spring.data.commons>
@@ -33,18 +34,25 @@
         </repository>
     </repositories>
     <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>com.google.guava</groupId>
-                <artifactId>guava</artifactId>
-                <version>19.0</version>
-            </dependency>
-            <dependency>
-                <groupId>com.datastax.cassandra</groupId>
-                <artifactId>cassandra-driver-core</artifactId>
-                <version>${cassandra.driver.core}</version>
-            </dependency>
-        </dependencies>
+        <!--<dependencies>-->
+            <!--<dependency>-->
+                <!--<groupId>com.google.guava</groupId>-->
+                <!--<artifactId>guava</artifactId>-->
+                <!--<version>19.0</version>-->
+            <!--</dependency>-->
+            <!--<dependency>-->
+                <!--<groupId>com.datastax.cassandra</groupId>-->
+                <!--<artifactId>cassandra-driver-core</artifactId>-->
+                <!--<version>${cassandra.driver.core}</version>-->
+            <!--</dependency>-->
+
+            <!--<dependency>-->
+                <!--<groupId>org.apache.spark</groupId>-->
+                <!--<artifactId>spark-core_2.10</artifactId>-->
+                <!--<version>2.0.0</version>-->
+            <!--</dependency>-->
+
+        <!--</dependencies>-->
     </dependencyManagement>
     <dependencies>
         <dependency>

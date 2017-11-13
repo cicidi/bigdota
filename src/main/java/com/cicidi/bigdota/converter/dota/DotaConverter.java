@@ -4,7 +4,12 @@ import com.cicidi.bigdota.converter.AbstractConverter;
 import com.cicidi.bigdota.converter.strategy.GameModeStrategy;
 import com.cicidi.bigdota.converter.strategy.HeroPickStrategy;
 import com.cicidi.bigdota.converter.strategy.Team0WinStrategy;
+import com.cicidi.bigdota.domain.dota.MatchReplay;
 import com.cicidi.bigdota.ruleEngine.DotaAnalyticsfield;
+import com.cicidi.bigdota.util.JSONUtil;
+
+import java.io.IOException;
+import java.util.Map;
 
 public class DotaConverter extends AbstractConverter<String> {
 
@@ -28,4 +33,5 @@ public class DotaConverter extends AbstractConverter<String> {
     protected void validate() {
 
     }
+
 }

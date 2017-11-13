@@ -4,19 +4,17 @@ import com.cicidi.bigdota.ruleEngine.DotaAnalyticsfield;
 import com.cicidi.bigdota.ruleEngine.GameModeEnum;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.Version;
-import org.codehaus.jackson.map.AnnotationIntrospector;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.SerializationConfig;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
-import org.codehaus.jackson.map.introspect.JacksonAnnotationIntrospector;
 import org.codehaus.jackson.map.module.SimpleModule;
-import org.codehaus.jackson.xc.JaxbAnnotationIntrospector;
 
+import java.io.IOException;
 
 import static org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES;
 
-import java.io.IOException;
+//import org.codehaus.jackson.xc.JaxbAnnotationIntrospector;
 
 public class JSONUtil {
 
@@ -30,8 +28,8 @@ public class JSONUtil {
 
     public static ObjectMapper initializeObjectMapper() {
         final ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.setAnnotationIntrospector(AnnotationIntrospector
-                .pair(new JaxbAnnotationIntrospector(), new JacksonAnnotationIntrospector()));
+//        objectMapper.setAnnotationIntrospector(AnnotationIntrospector
+//                .pair(new JaxbAnnotationIntrospector(), new JacksonAnnotationIntrospector()));
 //        objectMapper.registerModule(new GuavaModule());
         objectMapper.configure(FAIL_ON_UNKNOWN_PROPERTIES, false);
         SimpleModule module = new SimpleModule("GameModeEnumDeserializer",

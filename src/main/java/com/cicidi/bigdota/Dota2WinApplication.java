@@ -40,19 +40,22 @@ public class Dota2WinApplication {
         MatchReplayManagement matchReplayManagement = context.getBean(MatchReplayManagement.class);
 
         long start = System.currentTimeMillis();
-        reloadDB(sparkJob, sparkCassandraConnector);
-        downloadMatch(matchReplayManagement);
+        reloadDB(sparkJob, sparkCassandraConnector, matchReplayManagement);
+//        downloadMatch(matchReplayManagement);
         mapReduceJob(sparkJob, sparkCassandraConnector);
         long end = System.currentTimeMillis();
 
         logger.info("total time :" + (end - start));
         logger.info("total success matchReplay: " + MatchReplayUtil.matchCount);
+        logger.info("mode map " + MatchReplayUtil.map);
         logger.info("failded replay" + MatchReplayUtil.failed);
     }
 
-    public static void reloadDB(SparkJob sparkJob, SparkCassandraConnector sparkCassandraConnector) {
-        JavaRDD<MatchReplay> matchRawDataJavaRDD = sparkCassandraConnector.readRaw();
-        sparkJob.reloadMatch(matchRawDataJavaRDD);
+    public static void reloadDB(SparkJob sparkJob, SparkCassandraConnector sparkCassandraConnector, MatchReplayManagement matchReplayManagement) throws IOException {
+        JavaRDD<MatchReplay> matchReplayJavaRDD = sparkCassandraConnector.readRaw();
+        sparkCassandraConnector.reloadDB(matchReplayJavaRDD);
+//        sparkJob.reloadMatch(matchRawDataJavaRDD);
+//        matchReplayManagement.reloadMatch();
     }
 
     public static void downloadMatch(MatchReplayManagement matchReplayManagement) {

@@ -53,10 +53,12 @@ public class MatchReplayUtil {
         List<String> list_1 = new LinkedList<>();
         Boolean team_0_win = (Boolean) matchReplayView.getData().get(DotaAnalyticsfield.TEAM_0_WIN.name());
         ArrayList team1_pick = matchReplayView.getTeam_hero(0);
+        ArrayList team2_pick = matchReplayView.getTeam_hero(1);
+        if (team1_pick == null | team2_pick == null)
+            return result.iterator();
         if (team1_pick.contains(0)) {
             System.out.println("error");
         }
-        ArrayList team2_pick = matchReplayView.getTeam_hero(1);
         combine("", 0, team1_pick, list_0);
         combine("", 0, team2_pick, list_1);
 //        combine("", 0, (int[]) matchReplayView.getData().get(Constants.TEAM_1_HEROS), list_2);
@@ -137,9 +139,9 @@ public class MatchReplayUtil {
     public static Map<DotaAnalyticsfield, Object> getHeros(String rawData) {
         List<LinkedHashMap> pickBan = getPick_Ban(rawData);
         if (pickBan == null) return null;
-        System.out.println(MatchReplayUtil.getGame_Mode(rawData));
+//        System.out.println(MatchReplayUtil.getGame_Mode(rawData));
         Map map = getHeros(pickBan);
-        map.put(DotaAnalyticsfield.TEAM_0_WIN, getMatchResult(rawData));
+//        map.put(DotaAnalyticsfield.TEAM_0_WIN, getMatchResult(rawData));
         return map;
     }
 

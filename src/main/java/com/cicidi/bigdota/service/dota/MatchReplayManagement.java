@@ -2,13 +2,18 @@ package com.cicidi.bigdota.service.dota;
 
 import com.cicidi.bigdota.cassandra.repo.DotaPlayerRepository;
 import com.cicidi.bigdota.cassandra.repo.MatchReplayRepository;
+import com.cicidi.bigdota.converter.dota.DotaConverter;
 import com.cicidi.bigdota.domain.dota.DotaPlayer;
 import com.cicidi.bigdota.domain.dota.MatchReplay;
 import com.cicidi.bigdota.extermal.DotaReplayApi;
+import com.cicidi.bigdota.util.JSONUtil;
+import com.cicidi.bigdota.validator.MatchDataValidator;
+import com.cicidi.bigdota.validator.Validator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.*;
 
@@ -31,6 +36,9 @@ public class MatchReplayManagement {
 
 
     Queue<String> matchList = new LinkedList<>();
+
+    @Autowired
+    private Validator matchDataValidator;
 
     public void loadAllMatchMultithread() {
         ExecutorService executor = Executors.newFixedThreadPool(20);
@@ -79,4 +87,18 @@ public class MatchReplayManagement {
 
     }
 
+    public void reloadMatch() throws IOException {
+        long current = System.currentTimeMillis();
+        List<MatchReplay> list = matchReplayRepository.findAll();
+        for (MatchReplay matchReplay : list) {
+            if (!matchDataValidator.validate(matchReplay)) {
+                DotaConverter dotaConverter = new DotaConverter(matchReplay.getRawData());
+                Map data = dotaConverter.process();
+                String converted = JSONUtil.getObjectMapper().writeValueAsString(data);
+                matchReplay.setData(converted);
+                matchReplay.setCurrentTimeStamp(current);
+                matchReplayRepository.save(matchReplay);
+            }
+        }
+    }
 }

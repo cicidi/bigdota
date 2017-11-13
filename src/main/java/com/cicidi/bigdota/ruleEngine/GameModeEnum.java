@@ -56,7 +56,9 @@ public enum GameModeEnum {
     MODE_46(46),
     MODE_47(47),
     MODE_48(48),
-    MODE_49(49);
+    MODE_49(49),
+    MODE_404(404);
+
 
     private int value;
 
