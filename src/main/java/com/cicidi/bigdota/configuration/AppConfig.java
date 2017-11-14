@@ -30,7 +30,7 @@ public class AppConfig {
 
 
     @Bean
-    public DotaReplayApi steamClient() {
+    public DotaReplayApi dotaReplayApi() {
         return new DotaReplayApi();
     }
 
@@ -41,6 +41,7 @@ public class AppConfig {
 
     @Bean
     public SparkConf sparkConf() {
+//        SparkConf sparkConf = new SparkConf().setAppName("bigdota").setMaster("spark://10.0.0.49:7077").set("spark.cassandra.connection.host", EnvConfig.CASSANDRA_IP).set("spark.driver.maxResultSize", "14g");
         SparkConf sparkConf = new SparkConf().setAppName("bigdota").setMaster("local").set("spark.cassandra.connection.host", EnvConfig.CASSANDRA_IP).set("spark.driver.maxResultSize", "14g");
         return sparkConf;
     }
@@ -61,21 +62,21 @@ public class AppConfig {
     }
 
 
-    @Bean
-    public ObjectMapper objectMapper() {
-        return new ObjectMapper();
-    }
+//    @Bean
+//    public ObjectMapper objectMapper() {
+//        return new ObjectMapper();
+//    }
 
     @Bean
     public Client client() {
         return Client.create();
     }
 
-    @Bean
-    public WebTarget getWebTarget() {
-        return ClientBuilder.newClient()
-                .target("https://api.opendota.com/api/matches");
-    }
+//    @Bean
+//    public WebTarget getWebTarget() {
+//        return ClientBuilder.newClient()
+//                .target("https://api.opendota.com/api/matches");
+//    }
 
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {

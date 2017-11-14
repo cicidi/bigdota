@@ -1,7 +1,6 @@
 package com.cicidi.bigdota.validator;
 
 import com.cicidi.bigdota.domain.dota.MatchReplay;
-import org.springframework.stereotype.Component;
 
 public class MatchDataValidator implements Validator<MatchReplay> {
     @Override

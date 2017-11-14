@@ -86,19 +86,4 @@ public class MatchReplayManagement {
         executor.shutdown();
 
     }
-
-    public void reloadMatch() throws IOException {
-        long current = System.currentTimeMillis();
-        List<MatchReplay> list = matchReplayRepository.findAll();
-        for (MatchReplay matchReplay : list) {
-            if (!matchDataValidator.validate(matchReplay)) {
-                DotaConverter dotaConverter = new DotaConverter(matchReplay.getRawData());
-                Map data = dotaConverter.process();
-                String converted = JSONUtil.getObjectMapper().writeValueAsString(data);
-                matchReplay.setData(converted);
-                matchReplay.setCurrentTimeStamp(current);
-                matchReplayRepository.save(matchReplay);
-            }
-        }
-    }
 }

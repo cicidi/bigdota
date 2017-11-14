@@ -28,15 +28,7 @@ public class JSONUtil {
 
     public static ObjectMapper initializeObjectMapper() {
         final ObjectMapper objectMapper = new ObjectMapper();
-//        objectMapper.setAnnotationIntrospector(AnnotationIntrospector
-//                .pair(new JaxbAnnotationIntrospector(), new JacksonAnnotationIntrospector()));
-//        objectMapper.registerModule(new GuavaModule());
         objectMapper.configure(FAIL_ON_UNKNOWN_PROPERTIES, false);
-        SimpleModule module = new SimpleModule("GameModeEnumDeserializer",
-                new Version(0, 1, 0, (String) null));
-        module.addDeserializer(GameModeEnum.class, new GameModeEnumDeserializer());
-        module.addDeserializer(DotaAnalyticsfield.class, new DotaAnalyticsfieldDeserializer());
-        objectMapper.registerModule(module);
         return objectMapper.setSerializationInclusion(JsonSerialize.Inclusion.NON_NULL);
     }
 

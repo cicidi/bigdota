@@ -1,6 +1,5 @@
 package com.cicidi.bigdota;
 
-import com.cicidi.bigdota.cassandra.CassandraConnection;
 import com.cicidi.bigdota.configuration.AppConfig;
 import com.cicidi.bigdota.configuration.CassandraConfig;
 import com.cicidi.bigdota.domain.dota.MatchReplay;
@@ -32,21 +31,20 @@ public class Dota2WinApplication {
     private static final Logger logger = Logger.getLogger(Dota2WinApplication.class);
 
     public static void main(String[] args) throws IOException {
-//        System.setProperty("hadoop.home.dir", "D:\\project\\hadoop");
-
         ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class, CassandraConfig.class);
         SparkCassandraConnector sparkCassandraConnector = context.getBean(SparkCassandraConnector.class);
         SparkJob sparkJob = (SparkJob) context.getBean("sparkJob");
         MatchReplayManagement matchReplayManagement = context.getBean(MatchReplayManagement.class);
 
         long start = System.currentTimeMillis();
-        reloadDB(sparkJob, sparkCassandraConnector, matchReplayManagement);
-//        downloadMatch(matchReplayManagement);
+//        reloadDB(sparkJob, sparkCassandraConnector, matchReplayManagement);
+        downloadMatch(matchReplayManagement);
         mapReduceJob(sparkJob, sparkCassandraConnector);
         long end = System.currentTimeMillis();
 
         logger.info("total time :" + (end - start));
         logger.info("total success matchReplay: " + MatchReplayUtil.matchCount);
+        logger.info("total combination: " + MatchReplayUtil.totalCombination);
         logger.info("mode map " + MatchReplayUtil.map);
         logger.info("failded replay" + MatchReplayUtil.failed);
     }
@@ -54,8 +52,6 @@ public class Dota2WinApplication {
     public static void reloadDB(SparkJob sparkJob, SparkCassandraConnector sparkCassandraConnector, MatchReplayManagement matchReplayManagement) throws IOException {
         JavaRDD<MatchReplay> matchReplayJavaRDD = sparkCassandraConnector.readRaw();
         sparkCassandraConnector.reloadDB(matchReplayJavaRDD);
-//        sparkJob.reloadMatch(matchRawDataJavaRDD);
-//        matchReplayManagement.reloadMatch();
     }
 
     public static void downloadMatch(MatchReplayManagement matchReplayManagement) {

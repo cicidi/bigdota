@@ -20,6 +20,7 @@ import static com.datastax.spark.connector.japi.CassandraJavaUtil.javaFunctions;
 /**
  * Created by cicidi on 9/13/2017.
  */
+@Deprecated
 public class CassandraConnection {
 
     private final Logger logger = Logger.getLogger(getClass());

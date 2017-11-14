@@ -25,10 +25,4 @@ public class GameModeStrategy extends AbstractConvertStrategy<String, GameModeEn
         MatchReplayUtil.addGameMode(gameModeEnum.name(), canPick);
         return gameModeEnum;
     }
-
-//    public static void main(String[] args) {
-//        for (int i = 0; i < 50; i++) {
-//            System.out.println(" MODE_" + i + "(" + i + "),");
-//        }
-//    }
 }
