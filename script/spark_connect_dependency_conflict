@@ -1,2 +1,3 @@
  zip -d /Users/cicidi/.m2/repository/com/datastax/spark/spark-cassandra-connector_2.10/2.0.5/spark-cassandra-connector_2.10-2.0.5.jar /com/datastax/driver/*
+ zip -d /Users/cicidi/.m2/repository/com/datastax/spark/spark-cassandra-connector_2.11/2.0.5/spark-cassandra-connector_2.11-2.0.5.jar /com/datastax/driver/*
  zip -d /Users/cicidi/.m2/repository/com/datastax/spark/spark-cassandra-connector_2.10/2.0.5/spark-cassandra-connector_2.10-2.0.5.jar /shade/com/datastax/spark/connector/google/common/util/concurrent/ListenableFuture.class

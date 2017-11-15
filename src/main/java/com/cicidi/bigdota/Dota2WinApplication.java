@@ -38,7 +38,7 @@ public class Dota2WinApplication {
 
         long start = System.currentTimeMillis();
 //        reloadDB(sparkJob, sparkCassandraConnector, matchReplayManagement);
-        downloadMatch(matchReplayManagement);
+//        downloadMatch(matchReplayManagement);
         mapReduceJob(sparkJob, sparkCassandraConnector);
         long end = System.currentTimeMillis();
 
