@@ -69,7 +69,7 @@ public class MatchReplayView implements Serializable {
     }
 
     public Boolean getGameResult() {
-        Boolean result = (Boolean) this.data.get(DotaAnalyticsfield.TEAM_0_WIN);
+        Boolean result = (Boolean) this.data.get(DotaAnalyticsfield.TEAM_0_WIN.name());
         return result;
     }
 

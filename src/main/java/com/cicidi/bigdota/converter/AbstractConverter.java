@@ -45,9 +45,8 @@ public abstract class AbstractConverter<IN> {
     public String getFilteredData() {
         process();
         try {
-            String str = objectMapper.writeValueAsString(this.output);
-
             if (this.output.size() > 0) {
+                String str = objectMapper.writeValueAsString(this.output);
                 return str;
             }
         } catch (IOException e) {

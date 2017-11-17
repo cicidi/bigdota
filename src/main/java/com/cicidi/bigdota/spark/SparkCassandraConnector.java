@@ -5,11 +5,11 @@ import com.cicidi.bigdota.converter.dota.DotaConverter;
 import com.cicidi.bigdota.domain.dota.MatchReplay;
 import com.cicidi.bigdota.ruleEngine.MatchReplayView;
 import com.cicidi.bigdota.util.Constants;
-import org.apache.hadoop.util.StringUtils;
+import com.datastax.spark.connector.japi.CassandraRow;
 import org.apache.log4j.Logger;
-import org.apache.spark.SparkConf;
 import org.apache.spark.SparkContext;
 import org.apache.spark.api.java.JavaRDD;
+import org.apache.spark.api.java.function.Function;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
@@ -25,10 +25,10 @@ public class SparkCassandraConnector implements Serializable {
     private static final Logger logger = Logger.getLogger(SparkCassandraConnector.class);
 
     @Autowired
-    SparkContext sparkContext;
+    transient SparkContext sparkContext;
 
     @Autowired
-    MatchReplayRepository matchReplayRepository;
+    transient MatchReplayRepository matchReplayRepository;
 
     public SparkCassandraConnector(SparkContext sparkContext) {
         this.sparkContext = sparkContext;
@@ -37,10 +37,8 @@ public class SparkCassandraConnector implements Serializable {
     public JavaRDD<MatchReplayView> read() {
 
         JavaRDD<MatchReplayView> cassandraRowsRDD = javaFunctions(sparkContext).cassandraTable(Constants.BIG_DOTA, Constants.REPLAY_TABLE)
-                .map(cassandraRow -> {
-                    return new MatchReplayView(cassandraRow.getString("match_id"), cassandraRow.getString("data"));
-                });
-        logger.debug("Data as CassandraRows: \n" + StringUtils.join("\n", cassandraRowsRDD.collect()));
+                .map((Function<CassandraRow, MatchReplayView>) cassandraRow -> new MatchReplayView(cassandraRow.getString("match_id"), cassandraRow.getString("data")));
+//        logger.debug("Data as CassandraRows: \n" + StringUtils.join("\n", cassandraRowsRDD.collect()));
         return cassandraRowsRDD;
 
     }

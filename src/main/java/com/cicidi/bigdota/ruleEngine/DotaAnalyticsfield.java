@@ -9,10 +9,6 @@ import org.codehaus.jackson.map.annotate.JsonDeserialize;
 public enum DotaAnalyticsfield {
     TEAM_0_HERO_PICK, TEAM_1_HERO_PICK, TEAM_0_PLAYERS, TEAM_1_PLAYERS, TEAM_0_WIN, HERO_PICK, GAME_MODE;
 
-    DotaAnalyticsfield(String value) {
-
-    }
-
     DotaAnalyticsfield() {
 
     }

@@ -20,9 +20,7 @@ import java.util.*;
 public class MatchReplayUtil {
     public static int matchCount = 0;
     public static int failed = 0;
-//    public static final ObjectMa
-// pper objectMapper = new ObjectMapper();
-
+    public static long totalCombination = 0;
     public static Map<String, Boolean> map = new TreeMap<>();
 
 
@@ -51,25 +49,18 @@ public class MatchReplayUtil {
         List<String> result = new LinkedList<>();
         List<String> list_0 = new LinkedList<>();
         List<String> list_1 = new LinkedList<>();
-        Boolean team_0_win = (Boolean) matchReplayView.getData().get(DotaAnalyticsfield.TEAM_0_WIN.name());
+        Boolean team_0_win = matchReplayView.getGameResult();
         ArrayList team1_pick = matchReplayView.getTeam_hero(0);
         ArrayList team2_pick = matchReplayView.getTeam_hero(1);
         if (team1_pick == null | team2_pick == null)
             return result.iterator();
-        if (team1_pick.contains(0)) {
-            System.out.println("error");
-        }
         combine("", 0, team1_pick, list_0);
         combine("", 0, team2_pick, list_1);
-//        combine("", 0, (int[]) matchReplayView.getData().get(Constants.TEAM_1_HEROS), list_2);
-
         if (team_0_win == null) {
             return result.iterator();
         }
         for (String a : list_0) {
             for (String b : list_1) {
-//                String c = a < b ? a * (Math.pow(10, lengthB)) + "-" + b : b * (Math.pow(10, lengthA)) + "-" + +a;
-//                String[] arr = new String[2];
                 if (!comboSizeFilter(a, b))
                     continue;
                 if (team_0_win) {
@@ -80,6 +71,7 @@ public class MatchReplayUtil {
             }
         }
         matchCount++;
+        totalCombination += result.size();
         return result.iterator();
     }
 
@@ -120,6 +112,10 @@ public class MatchReplayUtil {
         for (int i = 0, team_0 = 0, team_1 = 0; i < 10; i++) {
             List<LinkedHashMap> players = (List<LinkedHashMap>) json.get("players");
             if ((int) players.get(i).get("player_slot") < 5) {
+                if ((int) players.get(i).get("hero_id") == 0) {
+                    System.out.println("error");
+                    return null;
+                }
                 team0_heros[team_0] = (int) players.get(i).get("hero_id");
                 team_0++;
             } else {
@@ -132,16 +128,13 @@ public class MatchReplayUtil {
         Map<DotaAnalyticsfield, Object> result = new HashMap<>();
         result.put(DotaAnalyticsfield.TEAM_0_HERO_PICK, team0_heros);
         result.put(DotaAnalyticsfield.TEAM_1_HERO_PICK, team1_heros);
-//        result.put(DotaAnalyticsfield.TEAM_0_WIN, false);
         return result;
     }
 
     public static Map<DotaAnalyticsfield, Object> getHeros(String rawData) {
         List<LinkedHashMap> pickBan = getPick_Ban(rawData);
         if (pickBan == null) return null;
-//        System.out.println(MatchReplayUtil.getGame_Mode(rawData));
         Map map = getHeros(pickBan);
-//        map.put(DotaAnalyticsfield.TEAM_0_WIN, getMatchResult(rawData));
         return map;
     }
 
@@ -179,9 +172,11 @@ public class MatchReplayUtil {
         }
         Arrays.sort(team0_heros);
         Arrays.sort(team1_heros);
+        Map<DotaAnalyticsfield, Object> hero_pcik = new HashMap<>();
+        hero_pcik.put(DotaAnalyticsfield.TEAM_0_HERO_PICK, team0_heros);
+        hero_pcik.put(DotaAnalyticsfield.TEAM_1_HERO_PICK, team1_heros);
         Map<DotaAnalyticsfield, Object> result = new HashMap<>();
-        result.put(DotaAnalyticsfield.TEAM_0_HERO_PICK, team0_heros);
-        result.put(DotaAnalyticsfield.TEAM_1_HERO_PICK, team1_heros);
+        result.put(DotaAnalyticsfield.HERO_PICK, hero_pcik);
         return result;
     }
 
@@ -193,14 +188,11 @@ public class MatchReplayUtil {
             combine(c, i + 1, team_hero, list);
             list.add(c);
         }
-
-
     }
 
     public static Boolean getMatchResult(String matchJson) {
         try {
             Boolean result = JsonPath.read(matchJson, MatchJsonPath.match_result_path);
-//            matchCount++;
             return result;
         } catch (PathNotFoundException pathNotFoundException) {
             failed++;
