@@ -1,6 +1,5 @@
 package com.cicidi.bigdota.spark;
 
-import com.cicidi.bigdota.cassandra.repo.MatchReplayRepository;
 import com.cicidi.bigdota.ruleEngine.MatchReplayView;
 import com.cicidi.bigdota.util.EnvConfig;
 import com.cicidi.bigdota.util.MatchReplayUtil;
@@ -9,6 +8,8 @@ import org.apache.commons.io.FileUtils;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.function.FlatMapFunction;
+import org.apache.spark.api.java.function.Function2;
+import org.apache.spark.api.java.function.PairFunction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,17 +25,17 @@ import java.util.List;
 /**
  * Created by cicidi on 10/16/2017.
  */
-public class SparkJob {
+public class SparkJob implements Serializable {
     private final static Logger logger = LoggerFactory.getLogger(SparkJob.class);
-    @Autowired
-    MatchReplayRepository matchReplayRepository;
+    //    @Autowired
+//    transient MatchReplayRepository matchReplayRepository;
     @Autowired
     Validator matchDataValidator;
 
     public void reduceJob(JavaRDD javaRDD) throws IOException {
         JavaRDD<String> combo = javaRDD.flatMap(new Split());
-        JavaPairRDD<String, Integer> pairs = combo.mapToPair(s -> new Tuple2<String, Integer>(s, 1));
-        JavaPairRDD<String, Integer> counts = pairs.reduceByKey((a, b) -> a + b);
+        JavaPairRDD<String, Integer> pairs = combo.mapToPair((PairFunction<String, String, Integer>) s -> new Tuple2<>(s, 1));
+        JavaPairRDD<String, Integer> counts = pairs.reduceByKey((Function2<Integer, Integer, Integer>) (a, b) -> a + b);
         List list = counts.takeOrdered(1000, MyTupleComparator.INSTANCE);
         int i = 0;
         for (Object object : list) {
