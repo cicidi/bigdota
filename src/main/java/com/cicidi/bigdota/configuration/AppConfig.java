@@ -39,16 +39,24 @@ public class AppConfig {
 //        SparkConf sparkConf = new SparkConf().setAppName("bigdota").setMaster("local").set("spark.cassandra.connection.host", EnvConfig.CASSANDRA_IP).set("spark.driver.maxResultSize", "14g");
         SparkConf sparkConf = new SparkConf().setAppName("bigdota").setMaster("spark://dse01:7078").set("spark.cassandra.connection.host", EnvConfig.CASSANDRA_IP).set("spark.driver.maxResultSize", "14g");
 //        SparkConf sparkConf = new SparkConf().setAppName("bigdota").setMaster("local").set("spark.cassandra.connection.host", EnvConfig.CASSANDRA_IP).set("spark.driver.maxResultSize", "14g");
+
+        String[] jars = new String[]{
+                "/Users/cicidi/.m2/repository/com/datastax/spark/spark-cassandra-connector_2.11/2.0.5/spark-cassandra-connector_2.11-2.0.5.jar",
+                "/Users/cicidi/.m2/repository/com/datastax/cassandra/cassandra-driver-core/3.3.0/cassandra-driver-core-3.3.0.jar",
+                "/Users/cicidi/.m2/repository/org/apache/spark/spark-core_2.11/2.2.0/spark-core_2.11-2.2.0.jar",
+                "/Volumes/WD/project/bigdota/target/bigdota-1.0-SNAPSHOT.jar"
+        };
+//        sparkConf.setJars(jars);
         return sparkConf;
     }
 
     @Bean
     public SparkContext sparkContext() {
         SparkContext sparkContext = new SparkContext(sparkConf());
-        sparkContext.addJar("/Users/cicidi/.m2/repository/com/datastax/spark/spark-cassandra-connector_2.11/2.0.5/spark-cassandra-connector_2.11-2.0.5.jar");
-        sparkContext.addJar("/Users/cicidi/.m2/repository/com/datastax/cassandra/cassandra-driver-core/3.3.0/cassandra-driver-core-3.3.0.jar");
-        sparkContext.addJar("/Users/cicidi/.m2/repository/org/apache/spark/spark-core_2.11/2.2.0/spark-core_2.11-2.2.0.jar");
-        sparkContext.addJar("/Volumes/WD/project/bigdota/target/bigdota-1.0-SNAPSHOT.jar");
+//        sparkContext.addJar("/Users/cicidi/.m2/repository/com/datastax/spark/spark-cassandra-connector_2.11/2.0.5/spark-cassandra-connector_2.11-2.0.5.jar");
+//        sparkContext.addJar("/Users/cicidi/.m2/repository/com/datastax/cassandra/cassandra-driver-core/3.3.0/cassandra-driver-core-3.3.0.jar");
+//        sparkContext.addJar("/Users/cicidi/.m2/repository/org/apache/spark/spark-core_2.11/2.2.0/spark-core_2.11-2.2.0.jar");
+//        sparkContext.addJar("/Volumes/WD/project/bigdota/target/bigdota-1.0-SNAPSHOT.jar");
         return sparkContext;
     }
 
