@@ -1,5 +1,7 @@
 package com.cicidi.bigdota.validator;
 
-public interface Validator<T> {
+import java.io.Serializable;
+
+public interface Validator<T> extends Serializable {
     boolean validate(T t);
 }
