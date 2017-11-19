@@ -9,7 +9,7 @@
 #ff02::2 ip6-allrouters
 #ff02::3 ip6-allhosts
 
-10.0.0.38 DESKTOP-B84K2JO
+10.0.0.38 windows
 10.0.0.28 ubuntu01
 10.0.0.37 ubuntu02
 10.0.0.34 ubuntu03
@@ -17,6 +17,5 @@
 10.0.0.35 ubuntu05
 10.0.0.36 ubuntu06
 10.0.0.49 dse01
-#user name ubuntu09
 10.0.0.46 dse02
 10.0.0.32 dse03

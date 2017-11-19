@@ -1,0 +1,23 @@
+dse spark home directory
+
+/usr/bin/dse spark
+#spark job UI URL
+#http://localhost:4040/jobs/
+
+
+
+**********************************
+stant alone spark
+**********************************
+
+master  (dse01)
+#ssh dse01@dse01 "/etc/spark-2.2.0-bin-hadoop2.7/sbin/start-master.sh"
+
+ssh root@ubuntu03 "/etc/spark-2.2.0-bin-hadoop2.7/sbin/start-master.sh"
+ssh root@dse01 "/etc/spark-2.2.0-bin-hadoop2.7/sbin/start-slave.sh spark://ubuntu03:7078"
+ssh root@windows "/etc/spark-2.2.0-bin-hadoop2.7/sbin/start-slave.sh spark://ubuntu03:7078"
+ssh root@dse03 "/etc/spark-2.2.0-bin-hadoop2.7/sbin/start-slave.sh spark://ubuntu03:7078"
+
+
+slave (mac)
+/Volumes/WD/app/spark-2.2.0-bin-hadoop2.7/bin/spark-submit --class com.cicidi.bigdota.Dota2WinApplication --master spark://dse01:7078 /Volumes/WD/project/bigdota/target/bigdota-1.0-SNAPSHOT.jar

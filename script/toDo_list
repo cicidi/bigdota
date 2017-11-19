@@ -1,0 +1,7 @@
+create ssh key copy script
+modify hosts ip change script
+add windows machine to spark cluster
+fix "Cassandra failure during read query at consistency LOCAL_ONE (1 responses were required but only 0 replica responded, 1 failed)"
+create script start master and slaves
+
+cron job clean spark job jars
