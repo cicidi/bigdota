@@ -1,6 +1,6 @@
 package com.cicidi.bigdota.ruleEngine;
 
-import com.cicidi.bigdota.util.JSONUtil;
+import com.cicidi.utilities.JSONUtil;
 import org.codehaus.jackson.type.TypeReference;
 import org.json.simple.JSONObject;
 

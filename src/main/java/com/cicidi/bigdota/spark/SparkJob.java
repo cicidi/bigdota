@@ -3,7 +3,7 @@ package com.cicidi.bigdota.spark;
 import com.cicidi.bigdota.ruleEngine.MatchReplayView;
 import com.cicidi.bigdota.util.EnvConfig;
 import com.cicidi.bigdota.util.MatchReplayUtil;
-import com.cicidi.bigdota.validator.Validator;
+import com.cicidi.validation.Validator;
 import org.apache.commons.io.FileUtils;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;

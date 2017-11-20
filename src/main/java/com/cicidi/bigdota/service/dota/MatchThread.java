@@ -4,7 +4,7 @@ import com.cicidi.bigdota.cassandra.repo.MatchReplayRepository;
 import com.cicidi.bigdota.converter.dota.DotaConverter;
 import com.cicidi.bigdota.domain.dota.MatchReplay;
 import com.cicidi.bigdota.extermal.DotaReplayApi;
-import com.cicidi.bigdota.util.JSONUtil;
+import com.cicidi.utilities.JSONUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

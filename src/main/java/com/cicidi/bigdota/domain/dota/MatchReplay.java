@@ -2,18 +2,18 @@ package com.cicidi.bigdota.domain.dota;
 
 
 import com.cicidi.bigdota.util.Constants;
+import com.cicidi.domain.CassandraEntity;
 import org.springframework.data.cassandra.core.mapping.Column;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
 
 import java.io.Serializable;
-import java.util.Map;
 
 /**
  * Created by cicidi on 9/15/2017.
  */
 @Table(value = Constants.REPLAY_TABLE)
-public class MatchReplay implements Serializable {
+public class MatchReplay extends CassandraEntity implements Serializable {
 
     @PrimaryKey(value = "match_id")
     private String matchId;

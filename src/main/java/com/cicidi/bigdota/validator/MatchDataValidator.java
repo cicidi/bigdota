@@ -1,6 +1,7 @@
 package com.cicidi.bigdota.validator;
 
 import com.cicidi.bigdota.domain.dota.MatchReplay;
+import com.cicidi.validation.Validator;
 
 public class MatchDataValidator implements Validator<MatchReplay> {
     @Override

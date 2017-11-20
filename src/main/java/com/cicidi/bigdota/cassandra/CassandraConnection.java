@@ -6,9 +6,7 @@ import com.datastax.driver.core.BoundStatement;
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.PreparedStatement;
 import com.datastax.driver.core.Session;
-import com.sun.jersey.api.client.Client;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 
 
 /**
@@ -25,26 +23,6 @@ public class CassandraConnection {
 
     PreparedStatement prepared;
     BoundStatement boundStatement;
-    @Autowired
-    private Client client;
-
-//    public static void main(String[] args) {
-//        System.setProperty("hadoop.home.dir", "D:\\project\\hadoop");
-//
-//        SparkConf conf = new SparkConf().setAppName("bigdota").setMaster("local").set("spark.cassandra.connection.host", "10.0.0.49,10.0.0.38,10.0.0.32");
-//        JavaSparkContext sc = new JavaSparkContext(conf);
-//        JavaRDD<String> cassandraRowsRDD = javaFunctions(sc).cassandraTable(Constants.BIG_DOTA, Constants.REPLAY_TABLE)
-//                .map(new Function<CassandraRow, String>() {
-//                    @Override
-//                    public String call(CassandraRow cassandraRow) throws Exception {
-//                        return cassandraRow.toString();
-//                    }
-//                });
-//        System.out.println("done");
-//        System.out.println("Data as CassandraRows: \n" + StringUtils.join("\n", cassandraRowsRDD.collect()));
-//        System.out.println(cassandraRowsRDD.collect().size());
-//    }
-
 
     private Cluster cluster;
 
@@ -63,7 +41,6 @@ public class CassandraConnection {
         boundStatement = new BoundStatement(prepared);
         return this;
     }
-
 
     public void close() {
         session.close();

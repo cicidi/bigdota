@@ -15,15 +15,11 @@
     <properties>
         <start-class>com.cicidi.bigdota.Dota2WinApplication</start-class>
         <cassandra.driver.core>3.3.0</cassandra.driver.core>
-        <!--<cassandra.driver.core>2.1.10.2</cassandra.driver.core>-->
         <jersy.client.version>1.19.4</jersy.client.version>
         <json.path>2.3.0</json.path>
         <log4j.version>1.2.17</log4j.version>
-        <!--<spark.cassandra.connector.version>2.0.0-M1</spark.cassandra.connector.version>-->
         <spark.cassandra.connector.version>2.0.5</spark.cassandra.connector.version>
-        <!--<spark.cassandra.connector.version>2.2.0</spark.cassandra.connector.version>-->
         <spark.core.version>2.2.0</spark.core.version>
-        <!--<spark.core.version>2.1.0</spark.core.version>-->
         <spring.data.version>1.11.7.RELEASE</spring.data.version>
         <spring.data.cassandra.version>2.0.1.RELEASE</spring.data.cassandra.version>
         <spring.data.commons>2.0.1.RELEASE</spring.data.commons>
@@ -38,33 +34,25 @@
     </repositories>
     <dependencyManagement>
         <dependencies>
-            <!--<dependency>-->
-            <!--<groupId>com.google.guava</groupId>-->
-            <!--<artifactId>guava</artifactId>-->
-            <!--<version>19.0</version>-->
-            <!--</dependency>-->
-            <!--<dependency>-->
-            <!--<groupId>com.datastax.cassandra</groupId>-->
-            <!--<artifactId>cassandra-driver-core</artifactId>-->
-            <!--<version>${cassandra.driver.core}</version>-->
-            <!--</dependency>-->
-
-            <!--<dependency>-->
-            <!--<groupId>org.apache.spark</groupId>-->
-            <!--<artifactId>spark-core_2.10</artifactId>-->
-            <!--<version>2.0.0</version>-->
-            <!--</dependency>-->
-            <!--https://mvnrepository.com/artifact/io.netty/netty-all -->
             <dependency>
                 <groupId>io.netty</groupId>
                 <artifactId>netty-all</artifactId>
-                <!--<version>4.0.41.Final</version>-->
                 <version>4.0.43.Final</version>
             </dependency>
 
         </dependencies>
     </dependencyManagement>
     <dependencies>
+        <dependency>
+            <groupId>com.cicidi</groupId>
+            <artifactId>domain-model</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.cicidi</groupId>
+            <artifactId>utility</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
         <dependency>
             <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-client</artifactId>
@@ -113,21 +101,10 @@
             <artifactId>spark-sql_2.11</artifactId>
             <version>${spark.core.version}</version>
         </dependency>
-        <!--<dependency>-->
-        <!--<groupId>com.datastax.cassandra</groupId>-->
-        <!--<artifactId>cassandra-driver-core</artifactId>-->
-        <!--<version>${cassandra.driver.core}</version>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-cassandra</artifactId>
             <version>${spring.data.cassandra.version}</version>
-            <!--<exclusions>-->
-            <!--<exclusion>-->
-            <!--<groupId>com.datastax.cassandra</groupId>-->
-            <!--<artifactId>cassandra-driver-core</artifactId>-->
-            <!--</exclusion>-->
-            <!--</exclusions>-->
         </dependency>
         <dependency>
             <groupId>org.springframework.data</groupId>
@@ -176,7 +153,6 @@
             <artifactId>spring-retry</artifactId>
             <version>${spring.retry.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.glassfish.jersey.inject/jersey-hk2 -->
         <dependency>
             <groupId>org.glassfish.jersey.inject</groupId>
             <artifactId>jersey-hk2</artifactId>
@@ -195,71 +171,18 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!--<dependency>-->
-        <!--<groupId>org.apache-extras.cassandra-jdbc</groupId>-->
-        <!--<artifactId>cassandra-jdbc</artifactId>-->
-        <!--<version>1.2.5</version>-->
-        <!--</dependency>-->
 
-        <!-- https://mvnrepository.com/artifact/org.apache.cassandra/cassandra-all -->
-        <!--<dependency>-->
-        <!--<groupId>org.apache.cassandra</groupId>-->
-        <!--<artifactId>cassandra-all</artifactId>-->
-        <!--<version>3.11.0</version>-->
-        <!--<exclusions>-->
-        <!--<exclusion>-->
-        <!--<groupId>org.slf4j</groupId>-->
-        <!--<artifactId>log4j-over-slf4j</artifactId>-->
-        <!--</exclusion>-->
-        <!--</exclusions>-->
-        <!--</dependency>-->
 
-        <!-- https://mvnrepository.com/artifact/org.apache.cassandra/cassandra-thrift -->
-        <!--<dependency>-->
-        <!--<groupId>org.apache.cassandra</groupId>-->
-        <!--<artifactId>cassandra-thrift</artifactId>-->
-        <!--<version>3.11.0</version>-->
-        <!--<exclusions>-->
-        <!--<exclusion>-->
-        <!--<groupId>org.slf4j</groupId>-->
-        <!--<artifactId>log4j-over-slf4j</artifactId>-->
-        <!--</exclusion>-->
-        <!--</exclusions>-->
-        <!--</dependency>-->
-        <!-- https://mvnrepository.com/artifact/org.apache.thrift/libthrift -->
-        <!--<dependency>-->
-        <!--<groupId>org.apache.thrift</groupId>-->
-        <!--<artifactId>libthrift</artifactId>-->
-        <!--<version>0.10.0</version>-->
-        <!--<type>pom</type>-->
-        <!--</dependency>-->
-        <!-- https://mvnrepository.com/artifact/org.apache.solr/solr-core -->
-        <!--<dependency>-->
-        <!--<groupId>org.apache.solr</groupId>-->
-        <!--<artifactId>solr-core</artifactId>-->
-        <!--<version>7.0.0</version>-->
-        <!--</dependency>-->
-
-        <!-- https://mvnrepository.com/artifact/org.apache.solr/solr-common -->
-        <!--<dependency>-->
-        <!--<groupId>org.apache.solr</groupId>-->
-        <!--<artifactId>solr-common</artifactId>-->
-        <!--<version>1.3.0</version>-->
-        <!--</dependency>-->
-
-        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>3.6</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>2.9.2</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/junit/junit -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -270,21 +193,6 @@
     </dependencies>
     <build>
         <plugins>
-            <!--<plugin>-->
-            <!--<groupId>org.springframework.boot</groupId>-->
-            <!--<artifactId>spring-boot-maven-plugin</artifactId>-->
-            <!--<version>1.5.8.RELEASE</version>-->
-            <!--<configuration>-->
-            <!--<mainClass>com.cicidi.bigdota.Dota2WinApplication</mainClass>-->
-            <!--</configuration>-->
-            <!--<executions>-->
-            <!--<execution>-->
-            <!--<goals>-->
-            <!--<goal>repackage</goal>-->
-            <!--</goals>-->
-            <!--</execution>-->
-            <!--</executions>-->
-            <!--</plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

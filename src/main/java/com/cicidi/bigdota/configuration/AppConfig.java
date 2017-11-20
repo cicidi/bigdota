@@ -7,7 +7,7 @@ import com.cicidi.bigdota.spark.SparkCassandraConnector;
 import com.cicidi.bigdota.spark.SparkJob;
 import com.cicidi.bigdota.util.EnvConfig;
 import com.cicidi.bigdota.validator.MatchDataValidator;
-import com.cicidi.bigdota.validator.Validator;
+import com.cicidi.validation.Validator;
 import com.sun.jersey.api.client.Client;
 import org.apache.spark.SparkConf;
 import org.apache.spark.SparkContext;

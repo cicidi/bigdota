@@ -2,18 +2,14 @@ package com.cicidi.bigdota.service.dota;
 
 import com.cicidi.bigdota.cassandra.repo.DotaPlayerRepository;
 import com.cicidi.bigdota.cassandra.repo.MatchReplayRepository;
-import com.cicidi.bigdota.converter.dota.DotaConverter;
 import com.cicidi.bigdota.domain.dota.DotaPlayer;
 import com.cicidi.bigdota.domain.dota.MatchReplay;
 import com.cicidi.bigdota.extermal.DotaReplayApi;
-import com.cicidi.bigdota.util.JSONUtil;
-import com.cicidi.bigdota.validator.MatchDataValidator;
-import com.cicidi.bigdota.validator.Validator;
+import com.cicidi.validation.Validator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.*;
 

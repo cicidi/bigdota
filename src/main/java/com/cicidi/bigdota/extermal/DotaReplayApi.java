@@ -1,11 +1,7 @@
 package com.cicidi.bigdota.extermal;
 
-import com.cicidi.bigdota.cassandra.repo.MatchReplayRepository;
-import com.cicidi.bigdota.converter.dota.DotaConverter;
 import com.cicidi.bigdota.domain.dota.DotaPlayer;
-import com.cicidi.bigdota.domain.dota.MatchReplay;
 import com.cicidi.bigdota.util.EnvConfig;
-import com.cicidi.bigdota.util.JSONUtil;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.jersey.api.client.Client;
@@ -17,13 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Retryable;
 
-import javax.ws.rs.client.InvocationCallback;
-import javax.ws.rs.client.WebTarget;
 import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.Future;
 
 /**
  * Created by cicidi on 9/5/2017.
