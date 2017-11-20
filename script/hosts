@@ -1,15 +1,4 @@
 127.0.0.1 localhost
-#127.0.1.1 ubuntu01
-
-# The following lines are desirable for IPv6 capable hosts
-#::1 ip6-localhost ip6-loopback
-#fe00::0 ip6-localnet
-#ff00::0 ip6-mcastprefix
-#ff02::1 ip6-allnodes
-#ff02::2 ip6-allrouters
-#ff02::3 ip6-allhosts
-
-10.0.0.38 windows
 10.0.0.28 ubuntu01
 10.0.0.37 ubuntu02
 10.0.0.34 ubuntu03
@@ -17,5 +6,5 @@
 10.0.0.35 ubuntu05
 10.0.0.36 ubuntu06
 10.0.0.49 dse01
-10.0.0.46 dse02
+10.0.0.38 dse02
 10.0.0.32 dse03

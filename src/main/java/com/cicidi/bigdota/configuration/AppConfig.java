@@ -37,7 +37,10 @@ public class AppConfig {
     @Bean
     public SparkConf sparkConf() {
 //        SparkConf sparkConf = new SparkConf().setAppName("bigdota").setMaster("local").set("spark.cassandra.connection.host", EnvConfig.CASSANDRA_IP).set("spark.driver.maxResultSize", "14g");
-        SparkConf sparkConf = new SparkConf().setAppName("bigdota").setMaster("spark://dse01:7078").set("spark.cassandra.connection.host", EnvConfig.CASSANDRA_IP).set("spark.driver.maxResultSize", "14g");
+        SparkConf sparkConf = new SparkConf().setAppName("bigdota").setMaster("spark://ubuntu03:7077")
+                .set("spark.cassandra.connection.host", EnvConfig.CASSANDRA_IP)
+                .set("spark.cassandra.connection.keep_alive_ms", "30000")
+                .set("spark.driver.maxResultSize", "14g");
 //        SparkConf sparkConf = new SparkConf().setAppName("bigdota").setMaster("local").set("spark.cassandra.connection.host", EnvConfig.CASSANDRA_IP).set("spark.driver.maxResultSize", "14g");
 
         String[] jars = new String[]{

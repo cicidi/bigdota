@@ -1,0 +1,7 @@
+1. Use same profile / spec / os / machine
+Otherwise perfernace decreate by the lowest one
+and hard to config host, and start cmd.
+
+2 windows os dose not work well with connections
+
+3 all machine use same copy or spark files.  Some dependency , like guava has to change to version 19.0
