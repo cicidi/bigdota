@@ -2,7 +2,20 @@ opendota.baseUrl :
   baseUrl: https://api.opendota.com/api/
   matches: /matches
 
-cassandra.ips: 10.0.0.32,10.0.0.38,10.0.0.49
+cassandra.ips:
+
+cassandra:
+  contactpoints: 10.0.0.32,10.0.0.38,10.0.0.49
+  port: 9042
+  keyspace: replays
+
+#cluster: local
+env.runtime: local
+#spring.datasource.url:
+#spring:
+#  datasource:
+#    url: jdbc:cassandra://10.0.0.32,10.0.0.38,10.0.0.49/replays
+#    driver-class-name: jdbc:cassandra://10.0.0.32,10.0.0.38,10.0.0.49
 #  ips: 10.0.0.32,10.0.0.38,10.0.0.49
 #  port: 9042
 #  big_dota_keyspace: big_dota_ks

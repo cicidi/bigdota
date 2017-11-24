@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 import org.apache.spark.SparkContext;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.function.Function;
+import org.apache.spark.util.LongAccumulator;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
@@ -35,17 +36,19 @@ public class SparkCassandraConnector implements Serializable {
     }
 
     public JavaRDD<MatchReplayView> read() {
-
+        LongAccumulator accumulator = sparkContext.longAccumulator();
         JavaRDD<MatchReplayView> cassandraRowsRDD = javaFunctions(sparkContext).cassandraTable(Constants.BIG_DOTA, Constants.REPLAY_TABLE)
-                .map((Function<CassandraRow, MatchReplayView>) cassandraRow -> new MatchReplayView(cassandraRow.getString("match_id"), cassandraRow.getString("data")));
+                .map((Function<CassandraRow, MatchReplayView>) cassandraRow -> {
+                    accumulator.add(1L);
+                    return new MatchReplayView(cassandraRow.getString("match_id"), cassandraRow.getString("data"));
+                });
 //        logger.debug("Data as CassandraRows: \n" + StringUtils.join("\n", cassandraRowsRDD.collect()));
+        logger.debug("accumulator size :" + accumulator.value());
         return cassandraRowsRDD;
 
     }
 
     public JavaRDD<MatchReplay> readRaw() {
-
-
         JavaRDD<MatchReplay> cassandraRowsRDD = javaFunctions(sparkContext).cassandraTable(Constants.BIG_DOTA, Constants.REPLAY_TABLE)
                 .map(cassandraRow -> {
                     String data = new DotaConverter(cassandraRow.getString("raw_data")).getFilteredData();

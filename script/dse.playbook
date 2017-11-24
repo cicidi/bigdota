@@ -38,7 +38,7 @@ dse02(ubuntu OS)
 
 log
 /home/dse02/dse/logs/cassandra/system.log
-
+/home/dse02/dse/bin/start_server
 #when add new dse cassandra
 #in cassandra.yaml
 # change cluster_name

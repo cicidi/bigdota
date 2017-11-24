@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.jayway.jsonpath.JsonPath;
 import com.jayway.jsonpath.PathNotFoundException;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.spark.util.LongAccumulator;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -22,6 +23,8 @@ public class MatchReplayUtil {
     public static int failed = 0;
     public static long totalCombination = 0;
     public static Map<String, Boolean> map = new TreeMap<>();
+    public static int team0_pick_amount;
+    public static int team1_pick_amount;
 
 
     public static void addGameMode(String mode, Boolean canPick) {
@@ -45,7 +48,7 @@ public class MatchReplayUtil {
         return byteBuffer;
     }
 
-    public static Iterator<String> combine(MatchReplayView matchReplayView) {
+    public static Iterator<String> combine(MatchReplayView matchReplayView, LongAccumulator longAccumulator) {
         List<String> result = new LinkedList<>();
         List<String> list_0 = new LinkedList<>();
         List<String> list_1 = new LinkedList<>();
@@ -70,7 +73,7 @@ public class MatchReplayUtil {
                 }
             }
         }
-        matchCount++;
+//        longAccumulator.add(1L);
         totalCombination += result.size();
         return result.iterator();
     }
@@ -79,7 +82,8 @@ public class MatchReplayUtil {
     public static boolean comboSizeFilter(String a, String b) {
         int count_a = StringUtils.countMatches(a, "+");
         int count_b = StringUtils.countMatches(b, "+");
-        if (count_a > 2 && count_b > 2)
+        if (count_a >= team0_pick_amount && count_b >= team1_pick_amount)
+//        if (count_a * count_b >= 1)
             return true;
         return false;
     }

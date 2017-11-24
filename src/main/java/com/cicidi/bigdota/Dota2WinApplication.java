@@ -9,9 +9,16 @@ import com.cicidi.bigdota.spark.SparkCassandraConnector;
 import com.cicidi.bigdota.spark.SparkJob;
 import com.cicidi.bigdota.util.MatchReplayUtil;
 import org.apache.log4j.Logger;
+import org.apache.spark.SparkContext;
 import org.apache.spark.api.java.JavaRDD;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
+import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
@@ -23,18 +30,28 @@ import java.io.IOException;
  * Created by cicidi on 8/21/2017.
  */
 @SpringBootApplication
-@EnableAutoConfiguration
+@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class, DataSourceTransactionManagerAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
 @ComponentScan("com.cicidi.bigdota.*")
 @PropertySource("classpath:application.yml")
-public class Dota2WinApplication {
+public class Dota2WinApplication implements ApplicationRunner {
 
     private static final Logger logger = Logger.getLogger(Dota2WinApplication.class);
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String... args) throws Exception {
+        SpringApplication.run(Dota2WinApplication.class, args);
+    }
+
+    @Override
+    public void run(ApplicationArguments arg) throws IOException {
+        MatchReplayUtil.team0_pick_amount = Integer.parseInt(arg.getSourceArgs()[0]);
+        MatchReplayUtil.team1_pick_amount = Integer.parseInt(arg.getSourceArgs()[1]);
+
+
         ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class, CassandraConfig.class);
         SparkCassandraConnector sparkCassandraConnector = context.getBean(SparkCassandraConnector.class);
         SparkJob sparkJob = (SparkJob) context.getBean("sparkJob");
         MatchReplayManagement matchReplayManagement = context.getBean(MatchReplayManagement.class);
+        SparkContext sparkContext = context.getBean(SparkContext.class);
 
         long start = System.currentTimeMillis();
 //        reloadDB(sparkJob, sparkCassandraConnector, matchReplayManagement);
@@ -44,6 +61,7 @@ public class Dota2WinApplication {
 
         logger.info("total time :" + (end - start));
         logger.info("total success matchReplay: " + MatchReplayUtil.matchCount);
+        logger.info("total accumulator: " + sparkContext.longAccumulator().value());
         logger.info("total combination: " + MatchReplayUtil.totalCombination);
         logger.info("mode map " + MatchReplayUtil.map);
         logger.info("failded replay" + MatchReplayUtil.failed);
