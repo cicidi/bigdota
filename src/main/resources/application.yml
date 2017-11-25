@@ -10,7 +10,7 @@ cassandra:
   keyspace: replays
 
 #cluster: local
-env.runtime: local
+env.runtime: cluster
 #spring.datasource.url:
 #spring:
 #  datasource:

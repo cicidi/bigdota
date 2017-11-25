@@ -11,7 +11,6 @@ import com.cicidi.validation.Validator;
 import com.sun.jersey.api.client.Client;
 import org.apache.spark.SparkConf;
 import org.apache.spark.SparkContext;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
@@ -36,23 +35,23 @@ public class AppConfig {
     }
 
     //
-    @Value("${env.runtime}")
-    private String runtime;
+//    @Value("${env.runtime}")
+//    private String runtime;
 
-    @Value("${cassandra.contactpoints}")
-    private String cassandraIps;
+//    @Value("${cassandra.contactpoints}")
+//    private String cassandraIps;
 
     @Bean
     public SparkConf sparkConf() {
         SparkConf sparkConf;
-        if (runtime.equals("local"))
-            sparkConf = new SparkConf().setAppName("bigdota").setMaster("local").set("spark.cassandra.connection.host", cassandraIps).set("spark.driver.maxResultSize", "14g");
-        else {
-            sparkConf = new SparkConf().setAppName("bigdota").setMaster("spark://ubuntu03:7077")
-                    .set("spark.cassandra.connection.host", EnvConfig.CASSANDRA_IP)
-                    .set("spark.cassandra.connection.keep_alive_ms", "30000")
-                    .set("spark.driver.maxResultSize", "14g");
-        }
+//        if (runtime.equals("local"))
+//            sparkConf = new SparkConf().setAppName("bigdota").setMaster("local").set("spark.cassandra.connection.host", cassandraIps).set("spark.driver.maxResultSize", "14g");
+//        else {
+        sparkConf = new SparkConf().setAppName("bigdota").setMaster("spark://ubuntu03:7077")
+                .set("spark.cassandra.connection.host", EnvConfig.CASSANDRA_IP)
+                .set("spark.cassandra.connection.keep_alive_ms", "30000")
+                .set("spark.driver.maxResultSize", "14g");
+//        }
 //        SparkConf sparkConf = new SparkConf().setAppName("bigdota").setMaster("local").set("spark.cassandra.connection.host", EnvConfig.CASSANDRA_IP).set("spark.driver.maxResultSize", "14g");
 
 //        String[] jars = new String[]{
