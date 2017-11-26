@@ -49,9 +49,9 @@ public class MatchReplayManagement {
             if (dotaPlayer != null && dotaPlayer.isPresent() && dotaPlayer.get().getMatchList() != null && dotaPlayer.get().getMatchList().length() > 0)
                 matchList.addAll(Arrays.asList(dotaPlayer.get().getMatchList().split(",")));
             else {
-                Callable<List<String>> playerThread = new PlayerThread(dp, dotaReplayApi, dotaPlayerRepository);
-                Future<List<String>> future = executor.submit(playerThread);
-                matchFutureList.add(future);//            if (i > 50) {  // skip first n players
+//                Callable<List<String>> playerThread = new PlayerThread(dp, dotaReplayApi, dotaPlayerRepository);
+//                Future<List<String>> future = executor.submit(playerThread);
+//                matchFutureList.add(future);//            if (i > 50) {  // skip first n players
             }
         }
         for (Future<List<String>> fut : matchFutureList) {
@@ -66,8 +66,10 @@ public class MatchReplayManagement {
         }
         while (matchList.size() > 0) {
             String matchId = matchList.poll();
+            if (i > 17) break;
             Callable<MatchReplay> worker = new MatchThread(matchId, dotaReplayApi, matchReplayRepository);
             Future<MatchReplay> future = executor.submit(worker);
+            i++;
             list.add(future);
             i++;
         }

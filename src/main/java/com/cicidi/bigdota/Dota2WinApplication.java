@@ -1,7 +1,5 @@
 package com.cicidi.bigdota;
 
-import com.cicidi.bigdota.configuration.AppConfig;
-import com.cicidi.bigdota.configuration.CassandraConfig;
 import com.cicidi.bigdota.domain.dota.MatchReplay;
 import com.cicidi.bigdota.ruleEngine.MatchReplayView;
 import com.cicidi.bigdota.service.dota.MatchReplayManagement;
@@ -11,6 +9,7 @@ import com.cicidi.bigdota.util.MatchReplayUtil;
 import org.apache.log4j.Logger;
 import org.apache.spark.SparkContext;
 import org.apache.spark.api.java.JavaRDD;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
@@ -19,8 +18,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
 
@@ -41,22 +38,23 @@ public class Dota2WinApplication implements ApplicationRunner {
         SpringApplication.run(Dota2WinApplication.class, args);
     }
 
+    @Autowired
+    SparkJob sparkJob;
+    @Autowired
+    SparkCassandraConnector sparkCassandraConnector;
+    @Autowired
+    SparkContext sparkContext;
+    @Autowired
+    MatchReplayManagement matchReplayManagement;
+
     @Override
     public void run(ApplicationArguments arg) throws IOException {
         MatchReplayUtil.team0_pick_amount = Integer.parseInt(arg.getSourceArgs()[0]);
         MatchReplayUtil.team1_pick_amount = Integer.parseInt(arg.getSourceArgs()[1]);
-
-
-        ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class, CassandraConfig.class);
-        SparkCassandraConnector sparkCassandraConnector = context.getBean(SparkCassandraConnector.class);
-        SparkJob sparkJob = (SparkJob) context.getBean("sparkJob");
-        MatchReplayManagement matchReplayManagement = context.getBean(MatchReplayManagement.class);
-        SparkContext sparkContext = context.getBean(SparkContext.class);
-
         long start = System.currentTimeMillis();
 //        reloadDB(sparkJob, sparkCassandraConnector, matchReplayManagement);
-//        downloadMatch(matchReplayManagement);
-        mapReduceJob(sparkJob, sparkCassandraConnector);
+        downloadMatch(matchReplayManagement);
+//        mapReduceJob(sparkJob, sparkCassandraConnector);
         long end = System.currentTimeMillis();
 
         logger.info("total time :" + (end - start));

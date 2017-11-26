@@ -7,6 +7,7 @@ import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.PreparedStatement;
 import com.datastax.driver.core.Session;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Value;
 
 
 /**
@@ -17,7 +18,8 @@ public class CassandraConnection {
 
     private final Logger logger = Logger.getLogger(getClass());
 
-    private String cassandraIps = EnvConfig.CASSANDRA_IP;
+    @Value("${cassandra.contactpoints}")
+    private String cassandraIps;
 
     private String port = EnvConfig.CASSANDRA_PORT;
 

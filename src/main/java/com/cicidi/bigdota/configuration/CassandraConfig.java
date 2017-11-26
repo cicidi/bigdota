@@ -2,6 +2,7 @@ package com.cicidi.bigdota.configuration;
 
 import com.cicidi.bigdota.util.Constants;
 import com.cicidi.bigdota.util.EnvConfig;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.cassandra.config.AbstractCassandraConfiguration;
@@ -20,11 +21,14 @@ public class CassandraConfig extends AbstractCassandraConfiguration {
         return Constants.BIG_DOTA;
     }
 
+    @Value("${cassandra.contactpoints}")
+    private String cassandraIps;
+
     @Bean
     public CassandraClusterFactoryBean cluster() {
         CassandraClusterFactoryBean cluster =
                 new CassandraClusterFactoryBean();
-        cluster.setContactPoints(EnvConfig.CASSANDRA_IP);
+        cluster.setContactPoints(cassandraIps);
         cluster.setPort(Integer.parseInt(EnvConfig.CASSANDRA_PORT));
         return cluster;
     }
@@ -34,6 +38,6 @@ public class CassandraConfig extends AbstractCassandraConfiguration {
             throws ClassNotFoundException {
         return new BasicCassandraMappingContext();
     }
-    
+
 
 }

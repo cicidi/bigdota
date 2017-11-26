@@ -31,10 +31,6 @@ public class SparkCassandraConnector implements Serializable {
     @Autowired
     transient MatchReplayRepository matchReplayRepository;
 
-    public SparkCassandraConnector(SparkContext sparkContext) {
-        this.sparkContext = sparkContext;
-    }
-
     public JavaRDD<MatchReplayView> read() {
         LongAccumulator accumulator = sparkContext.longAccumulator("MATCH");
         JavaRDD<MatchReplayView> cassandraRowsRDD = javaFunctions(sparkContext).cassandraTable(Constants.BIG_DOTA, Constants.REPLAY_TABLE)

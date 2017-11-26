@@ -5,3 +5,8 @@ and hard to config host, and start cmd.
 2 windows os dose not work well with connections
 
 3 all machine use same copy or spark files.  Some dependency , like guava has to change to version 19.0
+
+4.    a. I have 3 dse running cassandra. I found this machine query is very slow
+      b. I guess dse02  spark only access dse02 cassandra, because dse02 spark  accumulator always gives 2, but I have 18 record
+      actually. Then I found that my dse02 cassandra only have 2 record
+      c. when running application on cluster , in accumualtor only see dse03 contribute 11 , but didnot show how many dse02 contributed

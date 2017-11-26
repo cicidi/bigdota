@@ -39,6 +39,8 @@ dse02(ubuntu OS)
 log
 /home/dse02/dse/logs/cassandra/system.log
 /home/dse02/dse/bin/start_server
+
+****************************************
 #when add new dse cassandra
 #in cassandra.yaml
 # change cluster_name
@@ -64,3 +66,8 @@ This is caused when seed: parameter and listen_host are different in cassandra.y
 
 resize ubuntu vm
 #VBoxManage modifyhd “C:\Users\Chris\VirtualBox VMs\Windows 7\Windows 7.vdi” --resize 81920
+
+#cassandra force sync
+nodetool repair
+#check cassandra data
+nodetool cfstats

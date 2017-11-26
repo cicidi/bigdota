@@ -5,12 +5,14 @@ opendota.baseUrl :
 cassandra.ips:
 
 cassandra:
-  contactpoints: 10.0.0.32,10.0.0.38,10.0.0.49
+#  contactpoints: 10.0.0.32,10.0.0.38,10.0.0.49
+  contactpoints: 10.0.0.32
   port: 9042
   keyspace: replays
 
-#cluster: local
+app.name : bigdota
 env.runtime: cluster
+#env.runtime: local
 #spring.datasource.url:
 #spring:
 #  datasource:
