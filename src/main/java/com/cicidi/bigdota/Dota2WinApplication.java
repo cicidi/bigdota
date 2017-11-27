@@ -5,11 +5,13 @@ import com.cicidi.bigdota.ruleEngine.MatchReplayView;
 import com.cicidi.bigdota.service.dota.MatchReplayManagement;
 import com.cicidi.bigdota.spark.SparkCassandraConnector;
 import com.cicidi.bigdota.spark.SparkJob;
+import com.cicidi.bigdota.util.Constants;
 import com.cicidi.bigdota.util.MatchReplayUtil;
 import org.apache.log4j.Logger;
 import org.apache.spark.SparkContext;
 import org.apache.spark.api.java.JavaRDD;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
@@ -39,20 +41,28 @@ public class Dota2WinApplication implements ApplicationRunner {
     }
 
     @Autowired
-    SparkJob sparkJob;
+    private SparkJob sparkJob;
+
     @Autowired
-    SparkCassandraConnector sparkCassandraConnector;
+    private SparkCassandraConnector sparkCassandraConnector;
+
     @Autowired
-    SparkContext sparkContext;
+    private SparkContext sparkContext;
+
     @Autowired
-    MatchReplayManagement matchReplayManagement;
+    private MatchReplayManagement matchReplayManagement;
+
+    @Value("${cassandra.keyspace}")
+    private String keyspace;
+
+    private String tableName = Constants.REPLAY_TABLE;
 
     @Override
     public void run(ApplicationArguments arg) throws IOException {
         MatchReplayUtil.team0_pick_amount = Integer.parseInt(arg.getSourceArgs()[0]);
         MatchReplayUtil.team1_pick_amount = Integer.parseInt(arg.getSourceArgs()[1]);
         long start = System.currentTimeMillis();
-//        reloadDB(sparkJob, sparkCassandraConnector, matchReplayManagement);
+        reloadDB(sparkJob, sparkCassandraConnector, matchReplayManagement);
         downloadMatch(matchReplayManagement);
 //        mapReduceJob(sparkJob, sparkCassandraConnector);
         long end = System.currentTimeMillis();
@@ -65,18 +75,18 @@ public class Dota2WinApplication implements ApplicationRunner {
         logger.info("failded replay" + MatchReplayUtil.failed);
     }
 
-    public static void reloadDB(SparkJob sparkJob, SparkCassandraConnector sparkCassandraConnector, MatchReplayManagement matchReplayManagement) throws IOException {
-        JavaRDD<MatchReplay> matchReplayJavaRDD = sparkCassandraConnector.readRaw();
-        sparkCassandraConnector.reloadDB(matchReplayJavaRDD);
+    public void reloadDB(SparkJob sparkJob, SparkCassandraConnector sparkCassandraConnector, MatchReplayManagement matchReplayManagement) throws IOException {
+        JavaRDD<MatchReplay> matchReplayJavaRDD = sparkCassandraConnector.readRaw(keyspace, tableName);
+        sparkCassandraConnector.reloadDB(matchReplayJavaRDD, keyspace, tableName);
     }
 
-    public static void downloadMatch(MatchReplayManagement matchReplayManagement) {
+    public void downloadMatch(MatchReplayManagement matchReplayManagement) {
         matchReplayManagement.loadAllMatchMultithread();
 
     }
 
-    public static void mapReduceJob(SparkJob sparkJob, SparkCassandraConnector sparkCassandraConnector) throws IOException {
-        JavaRDD<MatchReplayView> matchReplayJavaRDD = sparkCassandraConnector.read();
+    public void mapReduceJob(SparkJob sparkJob, SparkCassandraConnector sparkCassandraConnector) throws IOException {
+        JavaRDD<MatchReplayView> matchReplayJavaRDD = sparkCassandraConnector.read(keyspace, tableName);
         sparkJob.reduceJob(matchReplayJavaRDD);
     }
 

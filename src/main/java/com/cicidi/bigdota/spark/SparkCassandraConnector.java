@@ -4,7 +4,7 @@ import com.cicidi.bigdota.cassandra.repo.MatchReplayRepository;
 import com.cicidi.bigdota.converter.dota.DotaConverter;
 import com.cicidi.bigdota.domain.dota.MatchReplay;
 import com.cicidi.bigdota.ruleEngine.MatchReplayView;
-import com.cicidi.bigdota.util.Constants;
+import com.cicidi.bigdota.util.AccumulatorConstants;
 import com.datastax.spark.connector.japi.CassandraRow;
 import org.apache.log4j.Logger;
 import org.apache.spark.SparkContext;
@@ -31,9 +31,9 @@ public class SparkCassandraConnector implements Serializable {
     @Autowired
     transient MatchReplayRepository matchReplayRepository;
 
-    public JavaRDD<MatchReplayView> read() {
-        LongAccumulator accumulator = sparkContext.longAccumulator("MATCH");
-        JavaRDD<MatchReplayView> cassandraRowsRDD = javaFunctions(sparkContext).cassandraTable(Constants.BIG_DOTA, Constants.REPLAY_TABLE)
+    public JavaRDD<MatchReplayView> read(String keyspace, String tableName) {
+        LongAccumulator accumulator = sparkContext.longAccumulator(AccumulatorConstants.MATCH);
+        JavaRDD<MatchReplayView> cassandraRowsRDD = javaFunctions(sparkContext).cassandraTable(keyspace, tableName)
                 .map((Function<CassandraRow, MatchReplayView>) cassandraRow -> {
                     accumulator.add(1L);
                     return new MatchReplayView(cassandraRow.getString("match_id"), cassandraRow.getString("data"));
@@ -44,8 +44,8 @@ public class SparkCassandraConnector implements Serializable {
 
     }
 
-    public JavaRDD<MatchReplay> readRaw() {
-        JavaRDD<MatchReplay> cassandraRowsRDD = javaFunctions(sparkContext).cassandraTable(Constants.BIG_DOTA, Constants.REPLAY_TABLE)
+    public JavaRDD<MatchReplay> readRaw(String keyspace, String tableName) {
+        JavaRDD<MatchReplay> cassandraRowsRDD = javaFunctions(sparkContext).cassandraTable(keyspace, tableName)
                 .map(cassandraRow -> {
                     String data = new DotaConverter(cassandraRow.getString("raw_data")).getFilteredData();
                     MatchReplay matchReplay = new MatchReplay(cassandraRow.getString("match_id"), data, cassandraRow.getString("raw_data"), System.currentTimeMillis());
@@ -56,8 +56,8 @@ public class SparkCassandraConnector implements Serializable {
         return cassandraRowsRDD;
     }
 
-    public void reloadDB(JavaRDD<MatchReplay> cassandraRowsRDD) {
-        javaFunctions(cassandraRowsRDD).writerBuilder(Constants.BIG_DOTA, Constants.REPLAY_TABLE, mapToRow(MatchReplay.class)).saveToCassandra();
+    public void reloadDB(JavaRDD<MatchReplay> cassandraRowsRDD, String keyspace, String tableName) {
+        javaFunctions(cassandraRowsRDD).writerBuilder(keyspace, tableName, mapToRow(MatchReplay.class)).saveToCassandra();
     }
 
 

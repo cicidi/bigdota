@@ -1,10 +1,7 @@
 #set log4j.properties path
 /Volumes/WD/app/spark-2.2.0-bin-hadoop2.7/bin/spark-submit --class com.cicidi.bigdota.Dota2WinApplication --master spark://ubuntu03:70778 --driver-java-options "-Dlog4j.configuration=file:///Volumes/WD/project/bigdota/src/main/resources/log4j.properties" --files /Volumes/WD/project/bigdota/src/main/resources/log4j.properties --conf "spark.executor.extraJavaOptions='-Dlog4j.configuration=log4j.properties'" /Volumes/WD/project/bigdota/target/bigdota-1.0-SNAPSHOT.jar
 
- http://ubuntu03:4040/
+http://ubuntu03:8080/ master portal
 
+In the instance where you submit the job . Go to portal 4040/jobs
 
- this is error in job ()
- 17/11/19 13:52:56 INFO TaskSetManager: Finished task 18.1 in stage 0.0 (TID 280) in 589 ms on 10.0.0.32 (executor 0) (268/295)
- 17/11/19 13:52:58 WARN TaskSetManager: Lost task 19.0 in stage 0.0 (TID 19, 10.0.0.38, executor 1): java.io.IOException: Failed to open native connection to Cassandra at {10.0.0.32, 10.0.0.46, 10.0.0.49}:9042
- 	at com.datastax.spark.connector.cql.CassandraConnector$.com$datastax$spark$connector$cql$CassandraConnector$$createSession(CassandraConnector.scala:168)

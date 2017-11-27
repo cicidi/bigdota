@@ -1,7 +1,6 @@
 package com.cicidi.bigdota.extermal;
 
 import com.cicidi.bigdota.domain.dota.DotaPlayer;
-import com.cicidi.bigdota.util.EnvConfig;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.jersey.api.client.Client;
@@ -10,6 +9,7 @@ import com.sun.jersey.api.client.WebResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Retryable;
 
@@ -28,8 +28,18 @@ public class DotaReplayApi {
 
     @Autowired
     private Client client;
-    private String openDotaUrl = EnvConfig.OPENDOTA_API;
-    private String matchEndpoint = EnvConfig.OPENDOTA_MATCHES;
+
+    @Value("${service.opendota.baseUrl}")
+    private String openDotaUrl;
+
+    @Value("${service.opendota.match_endpoint}")
+    private String matchEndpoint;
+
+    @Value("${service.opendota.players_endpoint}")
+    private String playersEndpoint;
+
+    @Value("${pro_players_endpoint}")
+    private String proPlayerEndpoint;
 
     @Retryable(
             value = {RuntimeException.class},
@@ -61,7 +71,7 @@ public class DotaReplayApi {
     public List<LinkedHashMap> getMatchIdByAccountId(String id) {
         try {
             WebResource webResource = client
-                    .resource("https://api.opendota.com/api/players/" + id + "/matches");
+                    .resource(playersEndpoint + id + matchEndpoint);
             ClientResponse response = webResource.accept("application/json")
                     .get(ClientResponse.class);
             if (response.getStatus() != 200) {
@@ -81,7 +91,7 @@ public class DotaReplayApi {
 
     public List<DotaPlayer> getAllPlayers() {
         WebResource webResource = client
-                .resource("https://api.opendota.com/api/proPlayers");
+                .resource(openDotaUrl + proPlayerEndpoint);
         ClientResponse response = webResource.accept("application/json")
                 .get(ClientResponse.class);
         List<DotaPlayer> matchList = null;

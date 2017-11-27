@@ -4,14 +4,7 @@
 2. install ubuntu / java 
 3. 关闭防火墙
 4. 修改ip
-5. 修改/etc/hosts 
-    * 127.0.0.1 localhost  （不要设置127.0.1.1）   
-10.0.0.28 ubuntu01
-10.0.0.32 ubuntu02
-10.0.0.33 ubuntu03
-10.0.0.29 ubuntu04
-10.0.0.30 ubuntu05
-10.0.0.31 ubuntu06
+5. 修改/etc/hosts  see "hosts" file
 6. use ssh-keygen -t rsa
 7. use ssh-copy-id root@ubuntu01  (change root password first, otherwise can not login)
 8. install hadoop /scp hadoop
@@ -30,49 +23,6 @@
     1. add data dir, and machine ip
     2. zooKeeperDir/conf 里面的zoo.cfg 里面配置zookeep的机器ip
     3. 在hadoop 的core-site.xml 里面配置了zookeeper 
- <property>
-   <name>ha.zookeeper.quorum</name>
-   <value>zk1.example.com:2181,zk2.example.com:2181,zk3.example.com:2181</value>
- </property>
-
-
-* MR 离线计算框架
-* Strom实时计算框架
-* Spark 内存计算框架
-
-
-//MAC+HP+LENOVO Machine
-
-1. install virtualbox
-2. install ubuntu / java / change root password first, otherwise can not login)
-3. 关闭防火墙
-4. 修改ip
-5. 修改/etc/hosts
-* 127.0.0.1 localhost  （不要设置127.0.1.1）
-10.0.0.28 ubuntu01
-10.0.0.32 ubuntu02
-10.0.0.33 ubuntu03
-10.0.0.49 dse01
-10.0.0.38 dse02
-10.0.0.32 dse03  (user cicidi)
-6. use ssh-keygen -t rsa
-7. use ssh-copy-id root@ubuntu01
-8. install hadoop /scp hadoop
-9. 集群规划
-    1. 主机名 ubuntu01-03(jdk,hadoop), dse01-dse03(jdk,hadoop,zookeeper)
-    2. 两个namenode  ubuntu01,ubuntu02，一个处于active，一个处于standby
-    3. 设置了一个zookeeper 集群，用于ZKFC（DFSZKFailoverContoller）故障转换，复杂均衡，分布式锁
-    4.
-        * ubuntu01: NameNode（HDFS老大）,DFSZKFailoverController
-        * ubuntu02: NameNode,DFSZKFailoverController
-        * ubuntu03: ResourceManager(yarn的老大)
-        * dse01: DataNode（HDFS小弟）, NodeManager（yarn的小弟）, JournalNode（实时的数据同步）, QuorumPeerMain（zk的进程 master 选举）
-        * dse02: DataNode, NodeManager, JournalNode, QuorumPeerMain
-        * dse03: DataNode, NodeManager, JournalNode, QuorumPeerMain
-10. zooKeeper change file
-    1. add data dir, and machine ip
-    2. zooKeeperDir/conf 里面的zoo.cfg 里面配置zookeep的机器ip
-    3. 在hadoop 的core-site.xml 里面配置了zookeeper
  <property>
    <name>ha.zookeeper.quorum</name>
    <value>zk1.example.com:2181,zk2.example.com:2181,zk3.example.com:2181</value>

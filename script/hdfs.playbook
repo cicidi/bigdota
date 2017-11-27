@@ -1,4 +1,4 @@
-//gets the namenode rpc addresses
+#gets the namenode rpc addresses
 hdfs getconf -nnRpcAddresses
-//
+
 hadoop fs -ls hdfs://ubuntu01:9000/

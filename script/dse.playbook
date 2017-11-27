@@ -41,33 +41,29 @@ log
 /home/dse02/dse/bin/start_server
 
 ****************************************
-#when add new dse cassandra
-#in cassandra.yaml
-# change cluster_name
-# change num_tokens
-# seeds
-#listen_address to instance ip
-#rpc_address: 0.0.0.0
-#broadcast_rpc_address: instance ip
-# check dse config  if all feature enabled
+#install new dse node
+# cassandra.yaml
+1. change cluster_name
+2.change num_tokens
+3. set seeds to one of the existing node. Better use same ip for all instance
+4.listen_address to instance ip
+5.rpc_address: 0.0.0.0
+6.broadcast_rpc_address: instance ip
+7.check dse config  if all feature enabled
 
-#vim /Volumes/WD/app/dse/resources/cassandra/conf/cassandra-env.sh    CassandraDaemon.java:705 - Cannot start node if
-#snitch's data center (SearchGraphAnalytics) differs from previous data center (Cassandra).
-#Please fix the snitch configuration, decommission and rebootstrap this node or use the flag -Dcassandra.ignore_dc=true.
-
-#other cmd
-
-#ifstat check network
-#nodetool removenode d0844a21-3698-4883-ab66-9e2fd5150edd
-
-#exceptions
-Exception (java.lang.RuntimeException) encountered during startup: Unable to gossip with any seeds
+****************************************
+1.Exception (java.lang.RuntimeException) encountered during startup: Unable to gossip with any seeds
 This is caused when seed: parameter and listen_host are different in cassandra.yaml configuration file under conf directory
 
-resize ubuntu vm
+2.#other cmd
+
+3.#ifstat check network
+#nodetool removenode d0844a21-3698-4883-ab66-9e2fd5150edd
+
+4.resize ubuntu vm
 #VBoxManage modifyhd “C:\Users\Chris\VirtualBox VMs\Windows 7\Windows 7.vdi” --resize 81920
 
-#cassandra force sync
+5.#cassandra force sync
 nodetool repair
-#check cassandra data
+6.#check cassandra data
 nodetool cfstats

@@ -41,17 +41,17 @@ public class AppConfig {
     private String runtime;
 
     @Value("${cassandra.contactpoints}")
-    private String cassandraIps;
+    private String contactpoints;
 
     @Bean
     public SparkConf sparkConf() {
         SparkConf sparkConf;
         if (runtime.equals("local"))
-            sparkConf = new SparkConf().setAppName("bigdota").setMaster("local").set("spark.cassandra.connection.host",cassandraIps).set("spark.driver.maxResultSize", "14g");
+            sparkConf = new SparkConf().setAppName("bigdota").setMaster("local").set("spark.cassandra.connection.host", contactpoints).set("spark.driver.maxResultSize", "14g");
         else {
             sparkConf = new SparkConf().setAppName(appName)
                     .setMaster("spark://ubuntu03:7077")
-                    .set("spark.cassandra.connection.host", cassandraIps)
+                    .set("spark.cassandra.connection.host", contactpoints)
                     .set("spark.cassandra.connection.keep_alive_ms", "30000")
                     .set("spark.driver.maxResultSize", "14g");
         }

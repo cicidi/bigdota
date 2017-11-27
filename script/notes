@@ -1,4 +1,4 @@
-1. Use same profile / spec / os / machine
+1. Use same level hardware for the machines.
 Otherwise perfernace decreate by the lowest one
 and hard to config host, and start cmd.
 
