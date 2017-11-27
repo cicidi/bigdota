@@ -14,7 +14,7 @@
     </parent>
     <properties>
         <start-class>com.cicidi.bigdota.Dota2WinApplication</start-class>
-        <cassandra.driver.core>3.3.0</cassandra.driver.core>
+        <cassandra.driver.core>3.1.0</cassandra.driver.core>
         <jersy.client.version>1.19.4</jersy.client.version>
         <json.path>2.3.0</json.path>
         <log4j.version>1.2.17</log4j.version>
@@ -37,9 +37,8 @@
             <dependency>
                 <groupId>io.netty</groupId>
                 <artifactId>netty-all</artifactId>
-                <version>4.0.43.Final</version>
+                <version>4.0.41.Final</version>
             </dependency>
-
         </dependencies>
     </dependencyManagement>
     <dependencies>
@@ -105,6 +104,12 @@
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-cassandra</artifactId>
             <version>${spring.data.cassandra.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.datastax.cassandra</groupId>
+                    <artifactId>cassandra-driver-core</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework.data</groupId>

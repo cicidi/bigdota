@@ -66,20 +66,16 @@ public class Dota2WinApplication implements ApplicationRunner {
         MatchReplayUtil.team0_pick_amount = Integer.parseInt(arg.getSourceArgs()[0]);
         MatchReplayUtil.team1_pick_amount = Integer.parseInt(arg.getSourceArgs()[1]);
         long start = System.currentTimeMillis();
-        reloadDB(sparkJob, sparkCassandraConnector, matchReplayManagement);
-//        downloadMatch(matchReplayManagement);
-        mapReduceJob(sparkJob, sparkCassandraConnector);
+        this.reloadDB(sparkCassandraConnector);
+        this.mapReduceJob(sparkCassandraConnector);
         long end = System.currentTimeMillis();
-
+//        downloadMatch(matchReplayManagement);
         logger.info("total time :" + (end - start));
         logger.info("total success matchReplay: " + MatchReplayUtil.matchCount);
-        logger.info("total accumulator: " + sparkContext.longAccumulator().value());
-        logger.info("total combination: " + MatchReplayUtil.totalCombination);
         logger.info("mode map " + MatchReplayUtil.map);
-        logger.info("failded replay" + MatchReplayUtil.failed);
     }
 
-    public void reloadDB(SparkJob sparkJob, SparkCassandraConnector sparkCassandraConnector, MatchReplayManagement matchReplayManagement) throws IOException {
+    public void reloadDB(SparkCassandraConnector sparkCassandraConnector) throws IOException {
         sparkCassandraConnector.setAbstractConverter(dotaConvertor);
         JavaRDD<MatchReplay> matchReplayJavaRDD = sparkCassandraConnector.readRaw(keyspace, tableName);
         sparkCassandraConnector.reloadDB(matchReplayJavaRDD, keyspace, tableName);
@@ -90,7 +86,7 @@ public class Dota2WinApplication implements ApplicationRunner {
 
     }
 
-    public void mapReduceJob(SparkJob sparkJob, SparkCassandraConnector sparkCassandraConnector) throws IOException {
+    public void mapReduceJob(SparkCassandraConnector sparkCassandraConnector) throws IOException {
         JavaRDD<MatchReplayView> matchReplayJavaRDD = sparkCassandraConnector.read(keyspace, tableName);
         sparkJob.reduceJob(matchReplayJavaRDD);
     }

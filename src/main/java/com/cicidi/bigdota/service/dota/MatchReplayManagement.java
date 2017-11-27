@@ -3,7 +3,6 @@ package com.cicidi.bigdota.service.dota;
 import com.cicidi.bigdota.cassandra.repo.DotaPlayerRepository;
 import com.cicidi.bigdota.cassandra.repo.MatchReplayRepository;
 import com.cicidi.bigdota.converter.AbstractConverter;
-import com.cicidi.bigdota.converter.dota.DotaConverter;
 import com.cicidi.bigdota.domain.dota.DotaPlayer;
 import com.cicidi.bigdota.domain.dota.MatchReplay;
 import com.cicidi.bigdota.extermal.DotaReplayApi;
@@ -54,9 +53,9 @@ public class MatchReplayManagement {
             if (dotaPlayer != null && dotaPlayer.isPresent() && dotaPlayer.get().getMatchList() != null && dotaPlayer.get().getMatchList().length() > 0)
                 matchList.addAll(Arrays.asList(dotaPlayer.get().getMatchList().split(",")));
             else {
-//                Callable<List<String>> playerThread = new PlayerThread(dp, dotaReplayApi, dotaPlayerRepository);
-//                Future<List<String>> future = executor.submit(playerThread);
-//                matchFutureList.add(future);//            if (i > 50) {  // skip first n players
+                Callable<List<String>> playerThread = new PlayerThread(dp, dotaReplayApi, dotaPlayerRepository);
+                Future<List<String>> future = executor.submit(playerThread);
+                matchFutureList.add(future);//            if (i > 50) {  // skip first n players
             }
         }
         for (Future<List<String>> fut : matchFutureList) {
@@ -71,10 +70,9 @@ public class MatchReplayManagement {
         }
         while (matchList.size() > 0) {
             String matchId = matchList.poll();
-            if (i > 17) break;
+//            if (i > 17) break;
             Callable<MatchReplay> worker = new MatchThread(matchId, dotaReplayApi, matchReplayRepository, dotaConverter);
             Future<MatchReplay> future = executor.submit(worker);
-            i++;
             list.add(future);
             i++;
         }
