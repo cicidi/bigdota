@@ -2,6 +2,7 @@ package com.cicidi.bigdota.util;
 
 import com.cicidi.bigdota.ruleEngine.DotaAnalyticsfield;
 import com.cicidi.bigdota.ruleEngine.MatchReplayView;
+import com.cicidi.bigdota.spark.PipelineContext;
 import com.cicidi.utilities.CompressUtil;
 import com.cicidi.utilities.JSONUtil;
 import com.fasterxml.jackson.core.JsonParseException;
@@ -9,7 +10,6 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.jayway.jsonpath.JsonPath;
 import com.jayway.jsonpath.PathNotFoundException;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.spark.util.LongAccumulator;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -48,7 +48,7 @@ public class MatchReplayUtil {
         return byteBuffer;
     }
 
-    public static Iterator<String> combine(MatchReplayView matchReplayView, LongAccumulator longAccumulator) {
+    public static Iterator<String> combine(MatchReplayView matchReplayView, PipelineContext pipelineContext, String accumulatorName) {
         List<String> result = new LinkedList<>();
         List<String> list_0 = new LinkedList<>();
         List<String> list_1 = new LinkedList<>();
@@ -73,7 +73,7 @@ public class MatchReplayUtil {
                 }
             }
         }
-//        longAccumulator.add(1L);
+        pipelineContext.addAmount(accumulatorName, result.size());
         totalCombination += result.size();
         return result.iterator();
     }

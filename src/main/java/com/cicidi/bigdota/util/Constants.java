@@ -5,6 +5,8 @@ package com.cicidi.bigdota.util;
  */
 public class Constants {
 
+    public static final String KEYSPACE = "keyspace";
+    public static final String TABLE = "table";
     public static final String TEAM_0_HEROS = "team_0_heros";
     public static final String TEAM_1_HEROS = "team_1_heros";
     public static final String TEAM_0_WIN = "team_0_win";

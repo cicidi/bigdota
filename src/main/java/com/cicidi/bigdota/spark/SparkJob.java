@@ -75,7 +75,7 @@ class Split implements FlatMapFunction<MatchReplayView, String> {
 
     @Override
     public Iterator<String> call(MatchReplayView matchReplayView) throws Exception {
-        return MatchReplayUtil.combine(matchReplayView, longAccumulator);
+        return MatchReplayUtil.combine(matchReplayView, null, null);
     }
 
 
