@@ -8,8 +8,14 @@ import com.cicidi.bigdota.util.MatchReplayUtil;
 public class GameModeStrategy extends AbstractConvertStrategy<String, GameModeEnum, Object, DotaAnalyticsfield> {
 
 
-    public GameModeStrategy(DotaAnalyticsfield fieldName, AbstractConvertStrategy... abstractConvertStrategy) {
-        super(fieldName, abstractConvertStrategy);
+//    public GameModeStrategy(DotaAnalyticsfield fieldName, AbstractConvertStrategy... abstractConvertStrategy) {
+//        super(fieldName, abstractConvertStrategy);
+//    }
+
+    private GameModeStrategy(Builder builder) {
+        super();
+        fieldName = builder.fieldName;
+        successors = builder.successors;
     }
 
     @Override
@@ -24,5 +30,28 @@ public class GameModeStrategy extends AbstractConvertStrategy<String, GameModeEn
         Boolean canPick = MatchReplayUtil.getPick_Ban(rawData) != null;
         MatchReplayUtil.addGameMode(gameModeEnum.name(), canPick);
         return gameModeEnum;
+    }
+
+
+    public static final class Builder {
+        private DotaAnalyticsfield fieldName;
+        private AbstractConvertStrategy[] successors;
+
+        public Builder() {
+        }
+
+        public Builder fieldName(DotaAnalyticsfield val) {
+            fieldName = val;
+            return this;
+        }
+
+        public Builder successors(AbstractConvertStrategy... val) {
+            successors = val;
+            return this;
+        }
+
+        public GameModeStrategy build() {
+            return new GameModeStrategy(this);
+        }
     }
 }

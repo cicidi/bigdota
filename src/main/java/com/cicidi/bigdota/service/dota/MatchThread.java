@@ -1,15 +1,12 @@
 package com.cicidi.bigdota.service.dota;
 
 import com.cicidi.bigdota.cassandra.repo.MatchReplayRepository;
-import com.cicidi.bigdota.converter.dota.DotaConverter;
+import com.cicidi.bigdota.converter.AbstractConverter;
 import com.cicidi.bigdota.domain.dota.MatchReplay;
 import com.cicidi.bigdota.extermal.DotaReplayApi;
-import com.cicidi.utilities.JSONUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
-import java.util.Map;
 import java.util.concurrent.Callable;
 
 /**
@@ -23,27 +20,23 @@ public class MatchThread implements Callable<MatchReplay> {
 
     private DotaReplayApi dotaReplayApi;
 
+    private AbstractConverter dotaConverter;
+
     private final static Logger logger = LoggerFactory.getLogger(MatchThread.class);
 
-    public MatchThread(String matchId, DotaReplayApi dotaReplayApi, MatchReplayRepository matchReplayRepository) {
+    public MatchThread(String matchId, DotaReplayApi dotaReplayApi, MatchReplayRepository matchReplayRepository, AbstractConverter dotaConverter) {
         this.matchId = matchId;
         this.dotaReplayApi = dotaReplayApi;
         this.matchReplayRepository = matchReplayRepository;
+        this.dotaConverter = dotaConverter;
     }
 
     @Override
     public MatchReplay call() {
         if (!matchReplayRepository.existsById(matchId)) {
             String rawData = dotaReplayApi.getReplay(matchId);
-            Map map = new DotaConverter(rawData).process();
-            String str = null;
-            try {
-                str = JSONUtil.getObjectMapper().writeValueAsString(map);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            if (map.size() > 0) {
-
+            String str = dotaConverter.extract(rawData);
+            if (str.length() > 2) {
                 MatchReplay matchReplay = new MatchReplay(matchId, str, rawData, System.currentTimeMillis());
                 MatchReplay saved = matchReplayRepository.save(matchReplay);
                 logger.debug(Thread.currentThread().getName() + " End.");

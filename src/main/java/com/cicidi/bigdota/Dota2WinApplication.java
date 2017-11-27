@@ -1,5 +1,6 @@
 package com.cicidi.bigdota;
 
+import com.cicidi.bigdota.converter.AbstractConverter;
 import com.cicidi.bigdota.domain.dota.MatchReplay;
 import com.cicidi.bigdota.ruleEngine.MatchReplayView;
 import com.cicidi.bigdota.service.dota.MatchReplayManagement;
@@ -52,6 +53,9 @@ public class Dota2WinApplication implements ApplicationRunner {
     @Autowired
     private MatchReplayManagement matchReplayManagement;
 
+    @Autowired
+    private AbstractConverter dotaConvertor;
+
     @Value("${cassandra.keyspace}")
     private String keyspace;
 
@@ -63,8 +67,8 @@ public class Dota2WinApplication implements ApplicationRunner {
         MatchReplayUtil.team1_pick_amount = Integer.parseInt(arg.getSourceArgs()[1]);
         long start = System.currentTimeMillis();
         reloadDB(sparkJob, sparkCassandraConnector, matchReplayManagement);
-        downloadMatch(matchReplayManagement);
-//        mapReduceJob(sparkJob, sparkCassandraConnector);
+//        downloadMatch(matchReplayManagement);
+        mapReduceJob(sparkJob, sparkCassandraConnector);
         long end = System.currentTimeMillis();
 
         logger.info("total time :" + (end - start));
@@ -76,6 +80,7 @@ public class Dota2WinApplication implements ApplicationRunner {
     }
 
     public void reloadDB(SparkJob sparkJob, SparkCassandraConnector sparkCassandraConnector, MatchReplayManagement matchReplayManagement) throws IOException {
+        sparkCassandraConnector.setAbstractConverter(dotaConvertor);
         JavaRDD<MatchReplay> matchReplayJavaRDD = sparkCassandraConnector.readRaw(keyspace, tableName);
         sparkCassandraConnector.reloadDB(matchReplayJavaRDD, keyspace, tableName);
     }

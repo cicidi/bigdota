@@ -2,6 +2,8 @@ package com.cicidi.bigdota.service.dota;
 
 import com.cicidi.bigdota.cassandra.repo.DotaPlayerRepository;
 import com.cicidi.bigdota.cassandra.repo.MatchReplayRepository;
+import com.cicidi.bigdota.converter.AbstractConverter;
+import com.cicidi.bigdota.converter.dota.DotaConverter;
 import com.cicidi.bigdota.domain.dota.DotaPlayer;
 import com.cicidi.bigdota.domain.dota.MatchReplay;
 import com.cicidi.bigdota.extermal.DotaReplayApi;
@@ -27,6 +29,9 @@ public class MatchReplayManagement {
 
     @Autowired
     private DotaPlayerRepository dotaPlayerRepository;
+
+    @Autowired
+    private AbstractConverter dotaConverter;
 
     private final static Logger logger = LoggerFactory.getLogger(MatchReplayManagement.class);
 
@@ -67,7 +72,7 @@ public class MatchReplayManagement {
         while (matchList.size() > 0) {
             String matchId = matchList.poll();
             if (i > 17) break;
-            Callable<MatchReplay> worker = new MatchThread(matchId, dotaReplayApi, matchReplayRepository);
+            Callable<MatchReplay> worker = new MatchThread(matchId, dotaReplayApi, matchReplayRepository, dotaConverter);
             Future<MatchReplay> future = executor.submit(worker);
             i++;
             list.add(future);

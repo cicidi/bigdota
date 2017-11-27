@@ -1,12 +1,9 @@
 package com.cicidi.bigdota.configuration;
 
-import com.cicidi.bigdota.domain.dota.MatchReplay;
 import com.cicidi.bigdota.extermal.DotaReplayApi;
 import com.cicidi.bigdota.service.dota.MatchReplayManagement;
 import com.cicidi.bigdota.spark.SparkCassandraConnector;
 import com.cicidi.bigdota.spark.SparkJob;
-import com.cicidi.bigdota.validator.MatchDataValidator;
-import com.cicidi.validation.Validator;
 import com.sun.jersey.api.client.Client;
 import org.apache.spark.SparkConf;
 import org.apache.spark.SparkContext;
@@ -102,8 +99,5 @@ public class AppConfig {
         return retryTemplate;
     }
 
-    @Bean
-    public Validator<MatchReplay> validator() {
-        return new MatchDataValidator();
-    }
+
 }

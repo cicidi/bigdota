@@ -7,9 +7,9 @@ import com.cicidi.bigdota.util.MatchReplayUtil;
 
 public class Team0WinStrategy extends AbstractConvertStrategy<String, Boolean, GameModeEnum, DotaAnalyticsfield> {
 
-
-    public Team0WinStrategy(DotaAnalyticsfield fieldName, AbstractConvertStrategy abstractConvertStrategy) {
-        super(fieldName, abstractConvertStrategy);
+    private Team0WinStrategy(Builder builder) {
+        fieldName = builder.fieldName;
+        successors = builder.successors;
     }
 
     @Override
@@ -20,5 +20,27 @@ public class Team0WinStrategy extends AbstractConvertStrategy<String, Boolean, G
     @Override
     protected Boolean process(String rawData, GameModeEnum gameModeEnum) {
         return MatchReplayUtil.getMatchResult(rawData);
+    }
+
+    public static final class Builder {
+        private DotaAnalyticsfield fieldName;
+        private AbstractConvertStrategy[] successors;
+
+        public Builder() {
+        }
+
+        public Builder fieldName(DotaAnalyticsfield val) {
+            fieldName = val;
+            return this;
+        }
+
+        public Builder successors(AbstractConvertStrategy... val) {
+            successors = val;
+            return this;
+        }
+
+        public Team0WinStrategy build() {
+            return new Team0WinStrategy(this);
+        }
     }
 }

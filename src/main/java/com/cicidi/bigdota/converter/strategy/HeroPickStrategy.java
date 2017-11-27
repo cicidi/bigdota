@@ -9,9 +9,9 @@ import java.util.Map;
 
 public class HeroPickStrategy extends AbstractConvertStrategy<String, Map<DotaAnalyticsfield, Object>, GameModeEnum, DotaAnalyticsfield> {
 
-
-    public HeroPickStrategy(DotaAnalyticsfield fieldName, AbstractConvertStrategy abstractConvertStrategy) {
-        super(fieldName, abstractConvertStrategy);
+    private HeroPickStrategy(Builder builder) {
+        fieldName = builder.fieldName;
+        successors = builder.successors;
     }
 
     @Override
@@ -35,5 +35,27 @@ public class HeroPickStrategy extends AbstractConvertStrategy<String, Map<DotaAn
             map = MatchReplayUtil.getHeros_normalModel(rawData);
         }
         return map;
+    }
+
+    public static final class Builder {
+        private DotaAnalyticsfield fieldName;
+        private AbstractConvertStrategy[] successors;
+
+        public Builder() {
+        }
+
+        public Builder fieldName(DotaAnalyticsfield val) {
+            fieldName = val;
+            return this;
+        }
+
+        public Builder successors(AbstractConvertStrategy[] val) {
+            successors = val;
+            return this;
+        }
+
+        public HeroPickStrategy build() {
+            return new HeroPickStrategy(this);
+        }
     }
 }

@@ -17,7 +17,7 @@ public class DefaultListenerSupport extends RetryListenerSupport {
     public <T, E extends Throwable> void close(RetryContext context,
                                                RetryCallback<T, E> callback, Throwable throwable) {
         logger.info("onClose");
-        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class, CassandraConfig.class);
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class, CassandraConfig.class, JobConfig.class);
         FailedRepository failedRepository = applicationContext.getBean(FailedRepository.class);
         failedRepository.save(new Download_failed("333"));
         super.close(context, callback, throwable);

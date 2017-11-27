@@ -1,59 +1,56 @@
 package com.cicidi.bigdota.converter;
 
 import com.cicidi.utilities.JSONUtil;
-import org.codehaus.jackson.map.ObjectMapper;
+import org.apache.commons.collections.CollectionUtils;
 
+import javax.ws.rs.BadRequestException;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public abstract class AbstractConverter<IN> {
-    protected IN input;
+public abstract class AbstractConverter<IN> implements Serializable {
 
     protected List<AbstractConvertStrategy> convertStrategyList;
 
-    protected Map output = new ConcurrentHashMap();
-
-    protected abstract void init();
-
-    protected abstract void validate();
-
-    protected ObjectMapper objectMapper = JSONUtil.getObjectMapper();
-
-    public AbstractConverter(IN input) {
-        this.input = input;
-        init();
-        validate();
+    public AbstractConverter() {
     }
 
-    public Map process() {
+    public abstract IN format(IN input);
+
+    protected void validate() {
+        if (CollectionUtils.isEmpty(convertStrategyList)) {
+            throw new BadRequestException("DataConverter strategy can not be null");
+        }
+    }
+
+    public Map extractToMap(IN input) {
+        IN formatted = format(input);
+        this.validate();
+        Map output = new ConcurrentHashMap();
+
         for (AbstractConvertStrategy convertStrategy : convertStrategyList) {
-            convertStrategy.start(this.input, null, output);
+            convertStrategy.start(formatted, null, output);
         }
-        return this.output;
+        return output;
     }
 
-    public void addStrategy(AbstractConvertStrategy convertStrategy) {
-
-        if (convertStrategyList == null) {
-            convertStrategyList = new ArrayList<>();
-        }
-        this.convertStrategyList.add(convertStrategy);
-    }
-
-    public String getFilteredData() {
-        process();
+    public String extract(IN input) {
         try {
-            if (this.output.size() > 0) {
-                String str = objectMapper.writeValueAsString(this.output);
-                return str;
-            }
+            String str = JSONUtil.getObjectMapper().writeValueAsString(this.extractToMap(input));
+            return str;
         } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
     }
 
+    public void addStrategy(AbstractConvertStrategy convertStrategy) {
+        if (convertStrategyList == null) {
+            convertStrategyList = new ArrayList<>();
+        }
+        this.convertStrategyList.add(convertStrategy);
+    }
 }
