@@ -1,6 +1,8 @@
-package com.cicidi.bigdota.spark;
+package com.cicidi.bigdota.spark.job;
 
 import com.cicidi.bigdota.mapper.Mapper;
+import com.cicidi.bigdota.spark.PipelineContext;
+import com.cicidi.bigdota.spark.SparkCassandraConnector;
 import org.apache.log4j.Logger;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.function.Function;

@@ -1,5 +1,6 @@
-package com.cicidi.bigdota.spark;
+package com.cicidi.bigdota.spark.job;
 
+import com.cicidi.bigdota.spark.PipelineContext;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.function.Function2;
 
