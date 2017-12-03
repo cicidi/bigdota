@@ -1,6 +1,7 @@
 package com.cicidi.bigdota.spark;
 
 import com.cicidi.bigdota.ruleEngine.MatchReplayView;
+import com.cicidi.bigdota.service.dota.HeroDetailMapService;
 import com.cicidi.bigdota.util.EnvConfig;
 import com.cicidi.bigdota.util.MatchReplayUtil;
 import com.cicidi.validation.Validator;
@@ -45,8 +46,10 @@ public class SparkJob implements Serializable {
         List list = counts.takeOrdered(1000, MyTupleComparator.INSTANCE);
         int i = 0;
         for (Object object : list) {
-            if (i++ < 10)
+            if (i++ < 10) {
                 logger.debug("top n: " + object.toString());
+                logger.debug("hero vs:" + HeroDetailMapService.convert(object.toString()));
+            }
         }
         FileUtils.deleteDirectory(new File(EnvConfig.outputPath));
         counts.saveAsTextFile(EnvConfig.outputPath);
@@ -75,7 +78,7 @@ class Split implements FlatMapFunction<MatchReplayView, String> {
 
     @Override
     public Iterator<String> call(MatchReplayView matchReplayView) throws Exception {
-        return MatchReplayUtil.combine(matchReplayView, null, null);
+        return MatchReplayUtil.combine(matchReplayView, null, "COUNT");
     }
 
 

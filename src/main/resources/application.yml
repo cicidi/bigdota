@@ -6,12 +6,20 @@ service:
     pro_players_endpoint: /proPlayers
 
 cassandra:
-#  ips: 10.0.0.32,10.0.0.38,10.0.0.49
-  contactpoints: 10.0.0.32
+  contactpoints: 10.0.0.32,10.0.0.38,10.0.0.49
   port: 9042
   keyspace: big_dota_ks
-#  replay_table: replay_3
 
 app.name : bigdota
 #env.runtime: cluster
 env.runtime: local
+
+---
+spring:
+  profiles: dev
+env: dev
+
+---
+spring:
+  profiles: prod
+env: prod

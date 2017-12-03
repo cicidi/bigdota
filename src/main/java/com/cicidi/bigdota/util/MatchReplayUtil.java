@@ -73,7 +73,7 @@ public class MatchReplayUtil {
                 }
             }
         }
-        pipelineContext.addAmount(accumulatorName, result.size());
+//        pipelineContext.addAmount(accumulatorName, result.size());
         totalCombination += result.size();
         return result.iterator();
     }
