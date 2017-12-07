@@ -7,6 +7,7 @@ public class Constants {
 
     public static final String KEYSPACE = "keyspace";
     public static final String TABLE = "table";
+    public static final String PATH = "path";
     public static final String TEAM_0_HEROS = "team_0_heros";
     public static final String TEAM_1_HEROS = "team_1_heros";
     public static final String TEAM_0_WIN = "team_0_win";
@@ -16,4 +17,5 @@ public class Constants {
     public static final String TEAM1_PICK_AMOUNT = "team1_pick_amount";
 
 
+    public static final String TOPN = "TOPN";
 }

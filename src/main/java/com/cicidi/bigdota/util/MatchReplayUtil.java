@@ -2,7 +2,7 @@ package com.cicidi.bigdota.util;
 
 import com.cicidi.bigdota.ruleEngine.DotaAnalyticsfield;
 import com.cicidi.bigdota.ruleEngine.MatchReplayView;
-import com.cicidi.bigdota.spark.PipelineContext;
+import com.cicidi.framework.spark.pipeline.PipelineContext;
 import com.cicidi.utilities.CompressUtil;
 import com.cicidi.utilities.JSONUtil;
 import com.fasterxml.jackson.core.JsonParseException;

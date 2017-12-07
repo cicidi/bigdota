@@ -4,6 +4,7 @@ import com.cicidi.bigdota.converter.AbstractConverter;
 import com.cicidi.bigdota.domain.dota.MatchReplay;
 import com.cicidi.bigdota.ruleEngine.MatchReplayView;
 import com.cicidi.bigdota.service.dota.MatchReplayManagement;
+import com.cicidi.bigdota.spark.HeroDraftJob;
 import com.cicidi.bigdota.spark.SparkCassandraConnector;
 import com.cicidi.bigdota.spark.SparkJob;
 import com.cicidi.bigdota.util.Constants;
@@ -56,6 +57,10 @@ public class Dota2WinApplication implements ApplicationRunner {
     @Autowired
     private AbstractConverter dotaConvertor;
 
+
+    @Autowired
+    private HeroDraftJob heroDraftJob;
+
     @Value("${cassandra.keyspace}")
     private String keyspace;
 
@@ -66,10 +71,12 @@ public class Dota2WinApplication implements ApplicationRunner {
         MatchReplayUtil.team0_pick_amount = Integer.parseInt(arg.getSourceArgs()[0]);
         MatchReplayUtil.team1_pick_amount = Integer.parseInt(arg.getSourceArgs()[1]);
         long start = System.currentTimeMillis();
-        this.reloadDB(sparkCassandraConnector);
-        this.mapReduceJob(sparkCassandraConnector);
+//        this.reloadDB(sparkCassandraConnector);
+//        this.mapReduceJob(sparkCassandraConnector);
         long end = System.currentTimeMillis();
 //        downloadMatch(matchReplayManagement);
+
+        heroDraftJob.create();
         logger.info("total time :" + (end - start));
         logger.info("total success matchReplay: " + MatchReplayUtil.matchCount);
         logger.info("mode map " + MatchReplayUtil.map);
