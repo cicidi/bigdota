@@ -1,6 +1,6 @@
 package com.cicidi.framework.spark.db;
 
-import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
+import org.apache.commons.lang.Validate;
 
 public class CassandraDataSource extends DataSource {
 
@@ -10,9 +10,9 @@ public class CassandraDataSource extends DataSource {
 
     public CassandraDataSource(String contactpoints, String keyspace, String tableName) {
         super(DataSourceType.CASSANDRA);
-        assertNotNull(contactpoints);
-        assertNotNull(keyspace);
-        assertNotNull(tableName);
+        Validate.notNull(contactpoints);
+        Validate.notNull(keyspace);
+        Validate.notNull(tableName);
         this.contactpoints = contactpoints;
         this.keyspace = keyspace;
         this.tableName = tableName;

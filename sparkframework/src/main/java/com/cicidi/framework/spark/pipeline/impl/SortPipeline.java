@@ -2,7 +2,6 @@ package com.cicidi.framework.spark.pipeline.impl;
 
 import com.cicidi.framework.spark.pipeline.Pipeline;
 import com.cicidi.framework.spark.pipeline.PipelineContext;
-import com.cicidi.bigdota.util.Constants;
 
 import java.util.Comparator;
 import java.util.List;
@@ -20,6 +19,6 @@ public class SortPipeline extends Pipeline {
     @Override
     public void process() {
         List list = pipelineContext.getJavaRDD().takeOrdered(topN, this.comparator);
-        pipelineContext.addResult(Constants.TOPN, list);
+        pipelineContext.addResult("TOPN", list);
     }
 }

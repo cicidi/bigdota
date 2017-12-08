@@ -1,6 +1,7 @@
 package com.cicidi.framework.spark.pipeline;
 
 import com.cicidi.exception.ServiceException;
+import org.apache.commons.lang.Validate;
 import org.apache.spark.SparkContext;
 import org.apache.spark.api.java.AbstractJavaRDDLike;
 import org.apache.spark.util.LongAccumulator;
@@ -8,8 +9,6 @@ import org.apache.spark.util.LongAccumulator;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
-
-import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
 
 public class PipelineContext implements Serializable {
 
@@ -26,7 +25,7 @@ public class PipelineContext implements Serializable {
     public PipelineContext(SparkContext sparkContext) {
         config = new HashMap<>();
         outPut = new HashMap();
-        assertNotNull(sparkContext);
+        Validate.notNull(sparkContext);
         this.sparkContext = sparkContext;
         this.accumulatorMap = new HashMap<>();
     }
