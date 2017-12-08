@@ -1,6 +1,8 @@
 package com.cicidi.framework.spark.pipeline;
 
-public abstract class Pipeline {
+import java.io.Serializable;
+
+public abstract class Pipeline implements Serializable {
     protected PipelineContext pipelineContext;
 
     public Pipeline(PipelineContext pipelineContext) {

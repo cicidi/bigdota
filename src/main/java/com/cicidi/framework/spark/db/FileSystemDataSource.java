@@ -9,6 +9,7 @@ public class FileSystemDataSource extends DataSource {
     public FileSystemDataSource(String path) {
         super(DataSourceType.FILESYSTEM);
         assertNotNull(path);
+        this.path = path;
     }
 
     public String getPath() {

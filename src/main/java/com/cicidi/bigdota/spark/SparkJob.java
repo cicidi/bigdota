@@ -1,10 +1,9 @@
 package com.cicidi.bigdota.spark;
 
-import com.cicidi.bigdota.ruleEngine.MatchReplayView;
+import com.cicidi.bigdota.domain.dota.ruleEngine.MatchReplayView;
 import com.cicidi.bigdota.service.dota.HeroDetailMapService;
 import com.cicidi.bigdota.util.EnvConfig;
 import com.cicidi.bigdota.util.MatchReplayUtil;
-import com.cicidi.validation.Validator;
 import org.apache.commons.io.FileUtils;
 import org.apache.spark.SparkContext;
 import org.apache.spark.api.java.JavaPairRDD;
@@ -32,8 +31,8 @@ public class SparkJob implements Serializable {
     private final static Logger logger = LoggerFactory.getLogger(SparkJob.class);
     //    @Autowired
 //    transient MatchReplayRepository matchReplayRepository;
-    @Autowired
-    Validator matchDataValidator;
+//    @Autowired
+//    Validator matchDataValidator;
 
     @Autowired
     SparkContext sparkContext;

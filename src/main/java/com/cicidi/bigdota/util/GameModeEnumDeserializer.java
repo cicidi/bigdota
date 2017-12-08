@@ -1,6 +1,6 @@
 package com.cicidi.bigdota.util;
 
-import com.cicidi.bigdota.ruleEngine.GameModeEnum;
+import com.cicidi.bigdota.domain.dota.ruleEngine.GameModeEnum;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.JsonProcessingException;

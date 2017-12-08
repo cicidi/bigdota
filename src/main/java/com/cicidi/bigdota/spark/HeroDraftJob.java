@@ -8,9 +8,11 @@ import org.apache.spark.SparkContext;
 import org.apache.spark.api.java.function.FlatMapFunction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 import java.util.Comparator;
 
+@Component
 public class HeroDraftJob {
     @Autowired
     SparkContext sparkContext;
@@ -34,16 +36,17 @@ public class HeroDraftJob {
     @Qualifier(value = "matchReplayViewMapper_heroDraftJob")
     Mapper matchReplayViewMapper_heroDraftJob;
 
-    public void create() {
+    public PipelineContext create() {
         PipelineContext pipelineContext = new PipelineContext(sparkContext);
         new PipelineBuilder(pipelineContext)
                 .readFrom(sparkCassandraRepository_heroDraftJob, matchReplayViewMapper_heroDraftJob)
                 .flapmap(flatMapFunction_heroDraftJob_MatchReplayView)
                 .mapToPair(1)
                 .reduceByKey()
-                .sortBy(comparator__heroDraftJob_count, 10)
+                .sortBy(comparator__heroDraftJob_count, 5)
                 .saveTo(sparkFileSystemRepository__heroDraftJob)
                 .run();
+        return pipelineContext;
     }
 
 }

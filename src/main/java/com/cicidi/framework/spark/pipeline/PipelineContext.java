@@ -5,14 +5,15 @@ import org.apache.spark.SparkContext;
 import org.apache.spark.api.java.AbstractJavaRDDLike;
 import org.apache.spark.util.LongAccumulator;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
 
-public class PipelineContext {
+public class PipelineContext implements Serializable {
 
-    private SparkContext sparkContext;
+    private transient SparkContext sparkContext;
 
     private AbstractJavaRDDLike javaRDD;
 
@@ -67,5 +68,10 @@ public class PipelineContext {
     public void setJavaRDD(AbstractJavaRDDLike javaRDD) {
         this.javaRDD = javaRDD;
     }
+
+    public Map getOutPut() {
+        return outPut;
+    }
+
 }
 

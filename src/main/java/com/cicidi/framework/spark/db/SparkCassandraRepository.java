@@ -2,6 +2,7 @@ package com.cicidi.framework.spark.db;
 
 import com.cicidi.framework.spark.mapper.Mapper;
 import org.apache.spark.SparkContext;
+import org.apache.spark.api.java.AbstractJavaRDDLike;
 import org.apache.spark.api.java.JavaRDD;
 
 import static com.datastax.spark.connector.japi.CassandraJavaUtil.javaFunctions;
@@ -14,9 +15,9 @@ public class SparkCassandraRepository<T> extends SparkRepository {
     }
 
     @Override
-    public void save(SparkContext sparkContext, JavaRDD javaRDD) {
+    public void save(SparkContext sparkContext, AbstractJavaRDDLike javaRDD) {
         sparkContext.getConf().set("spark.cassandra.connection.host", ((CassandraDataSource) (this.dataSource)).getContactpoints());
-        javaFunctions(javaRDD).
+        javaFunctions((JavaRDD) javaRDD).
                 writerBuilder(((CassandraDataSource) (this.dataSource)).getKeyspace(),
                         ((CassandraDataSource) (this.dataSource)).getTableName(),
                         mapToRow(this.classType))

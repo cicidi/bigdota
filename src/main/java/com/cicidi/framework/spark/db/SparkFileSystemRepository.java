@@ -3,6 +3,7 @@ package com.cicidi.framework.spark.db;
 import com.cicidi.framework.spark.mapper.Mapper;
 import org.apache.commons.io.FileUtils;
 import org.apache.spark.SparkContext;
+import org.apache.spark.api.java.AbstractJavaRDDLike;
 import org.apache.spark.api.java.JavaRDD;
 
 import java.io.File;
@@ -15,7 +16,7 @@ public class SparkFileSystemRepository extends SparkRepository {
     }
 
     @Override
-    public void save(SparkContext sparkContext, JavaRDD javaRDD) {
+    public void save(SparkContext sparkContext, AbstractJavaRDDLike javaRDD) {
         try {
             String path = ((FileSystemDataSource) this.dataSource).getPath();
             FileUtils.deleteDirectory(new File(path));

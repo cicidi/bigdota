@@ -1,6 +1,6 @@
 package com.cicidi.bigdota.spark;
 
-import com.cicidi.bigdota.ruleEngine.MatchReplayView;
+import com.cicidi.bigdota.domain.dota.ruleEngine.MatchReplayView;
 import com.cicidi.framework.spark.mapper.Mapper;
 import com.datastax.spark.connector.japi.CassandraRow;
 

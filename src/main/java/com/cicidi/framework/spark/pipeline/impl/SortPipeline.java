@@ -21,12 +21,5 @@ public class SortPipeline extends Pipeline {
     public void process() {
         List list = pipelineContext.getJavaRDD().takeOrdered(topN, this.comparator);
         pipelineContext.addResult(Constants.TOPN, list);
-        //        int i = 0;
-//        for (Object object : list) {
-//            if (i++ < 10) {
-////                logger.debug("top n: " + object.toString());
-//                logger.debug("hero vs:" + HeroDetailMapService.convert(object.toString()));
-//            }
-//        }
     }
 }

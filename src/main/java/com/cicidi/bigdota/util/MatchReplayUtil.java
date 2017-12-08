@@ -1,7 +1,7 @@
 package com.cicidi.bigdota.util;
 
-import com.cicidi.bigdota.ruleEngine.DotaAnalyticsfield;
-import com.cicidi.bigdota.ruleEngine.MatchReplayView;
+import com.cicidi.bigdota.domain.dota.ruleEngine.DotaAnalyticsfield;
+import com.cicidi.bigdota.domain.dota.ruleEngine.MatchReplayView;
 import com.cicidi.framework.spark.pipeline.PipelineContext;
 import com.cicidi.utilities.CompressUtil;
 import com.cicidi.utilities.JSONUtil;

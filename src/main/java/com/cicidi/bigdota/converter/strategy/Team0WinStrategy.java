@@ -1,8 +1,8 @@
 package com.cicidi.bigdota.converter.strategy;
 
 import com.cicidi.bigdota.converter.AbstractConvertStrategy;
-import com.cicidi.bigdota.ruleEngine.DotaAnalyticsfield;
-import com.cicidi.bigdota.ruleEngine.GameModeEnum;
+import com.cicidi.bigdota.domain.dota.ruleEngine.DotaAnalyticsfield;
+import com.cicidi.bigdota.domain.dota.ruleEngine.GameModeEnum;
 import com.cicidi.bigdota.util.MatchReplayUtil;
 
 public class Team0WinStrategy extends AbstractConvertStrategy<String, Boolean, GameModeEnum, DotaAnalyticsfield> {

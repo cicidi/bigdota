@@ -1,4 +1,4 @@
-package com.cicidi.bigdota.ruleEngine;
+package com.cicidi.bigdota.domain.dota.ruleEngine;
 
 import com.cicidi.bigdota.util.GameModeEnumDeserializer;
 import com.fasterxml.jackson.annotation.JsonFormat;

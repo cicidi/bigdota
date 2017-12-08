@@ -6,7 +6,6 @@ import com.cicidi.bigdota.converter.AbstractConverter;
 import com.cicidi.bigdota.domain.dota.DotaPlayer;
 import com.cicidi.bigdota.domain.dota.MatchReplay;
 import com.cicidi.bigdota.extermal.DotaReplayApi;
-import com.cicidi.validation.Validator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +36,8 @@ public class MatchReplayManagement {
 
     Queue<String> matchList = new LinkedList<>();
 
-    @Autowired
-    private Validator matchDataValidator;
+//    @Autowired
+//    private Validator matchDataValidator;
 
     public void loadAllMatchMultithread() {
         ExecutorService executor = Executors.newFixedThreadPool(20);

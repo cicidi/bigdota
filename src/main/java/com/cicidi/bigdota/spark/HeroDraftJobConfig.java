@@ -6,8 +6,8 @@ import com.cicidi.bigdota.converter.strategy.GameModeStrategy;
 import com.cicidi.bigdota.converter.strategy.HeroPickStrategy;
 import com.cicidi.bigdota.converter.strategy.Team0WinStrategy;
 import com.cicidi.bigdota.domain.dota.MatchReplay;
-import com.cicidi.bigdota.ruleEngine.DotaAnalyticsfield;
-import com.cicidi.bigdota.ruleEngine.MatchReplayView;
+import com.cicidi.bigdota.domain.dota.ruleEngine.DotaAnalyticsfield;
+import com.cicidi.bigdota.domain.dota.ruleEngine.MatchReplayView;
 import com.cicidi.bigdota.util.Constants;
 import com.cicidi.bigdota.util.MatchReplayUtil;
 import com.cicidi.framework.spark.db.*;
@@ -15,13 +15,14 @@ import com.cicidi.framework.spark.mapper.Mapper;
 import org.apache.spark.api.java.function.FlatMapFunction;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
 import scala.Tuple2;
 
+import java.io.Serializable;
 import java.util.Comparator;
 
-@Component
-public class HeroDraftJobConfig {
+@Configuration
+public class HeroDraftJobConfig implements Serializable {
     /* repository config*/
     @Value("${cassandra.contactpoints}")
     private String contactpoints;
@@ -84,8 +85,6 @@ public class HeroDraftJobConfig {
 
     @Bean(name = "comparator__heroDraftJob_count")
     public Comparator<Tuple2<String, Integer>> comparator() {
-        return (t1, t2) -> {
-            return -t1._2.compareTo(t2._2);    // sort descending
-        };
+        return MyTupleComparator.INSTANCE;
     }
 }

@@ -2,6 +2,7 @@ package com.cicidi.framework.spark.db;
 
 import com.cicidi.framework.spark.mapper.Mapper;
 import org.apache.spark.SparkContext;
+import org.apache.spark.api.java.AbstractJavaRDDLike;
 import org.apache.spark.api.java.JavaRDD;
 
 public abstract class SparkRepository {
@@ -11,7 +12,7 @@ public abstract class SparkRepository {
 
     protected Class classType;
 
-    public abstract void save(SparkContext sparkContext, JavaRDD javaRDD);
+    public abstract void save(SparkContext sparkContext, AbstractJavaRDDLike javaRDD);
 
     public abstract JavaRDD fetchAll(SparkContext sparkContext, Mapper mapper);
 

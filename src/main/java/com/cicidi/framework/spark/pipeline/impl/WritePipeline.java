@@ -3,7 +3,7 @@ package com.cicidi.framework.spark.pipeline.impl;
 import com.cicidi.framework.spark.db.SparkRepository;
 import com.cicidi.framework.spark.pipeline.Pipeline;
 import com.cicidi.framework.spark.pipeline.PipelineContext;
-import org.apache.spark.api.java.JavaRDD;
+import org.apache.spark.api.java.JavaPairRDD;
 
 public abstract class WritePipeline extends Pipeline {
     protected SparkRepository sparkRepository;
@@ -17,6 +17,6 @@ public abstract class WritePipeline extends Pipeline {
 
     @Override
     public void process() {
-        sparkRepository.save(pipelineContext.getSparkContext(), (JavaRDD) pipelineContext.getJavaRDD());
+        sparkRepository.save(pipelineContext.getSparkContext(), (JavaPairRDD) pipelineContext.getJavaRDD());
     }
 }
