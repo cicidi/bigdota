@@ -39,7 +39,8 @@ public class HeroDraftJob {
     public PipelineContext create() {
         PipelineContext pipelineContext = new PipelineContext(sparkContext);
         new PipelineBuilder(pipelineContext)
-                .readFrom(sparkCassandraRepository_heroDraftJob, matchReplayViewMapper_heroDraftJob)
+                .readFrom(sparkCassandraRepository_heroDraftJob,
+                        matchReplayViewMapper_heroDraftJob.setPipelineContext(pipelineContext))
                 .flapmap(flatMapFunction_heroDraftJob_MatchReplayView)
                 .mapToPair(1)
                 .reduceByKey()
