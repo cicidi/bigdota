@@ -5,10 +5,16 @@ import com.cicidi.bigdota.domain.dota.MatchReplay;
 import com.cicidi.framework.spark.analyze.Accumulator;
 import com.cicidi.framework.spark.mapper.Mapper;
 import com.datastax.spark.connector.japi.CassandraRow;
+import org.apache.spark.SparkContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-public class MatchReplayMapper extends Mapper<CassandraRow, MatchReplay> {
+@Component
+public class MatchReplayMapper extends Mapper<CassandraRow, MatchReplay> implements Accumulator {
 
     private AbstractConverter abstractConverter;
+    @Autowired
+    private transient SparkContext sparkContext;
 
     public MatchReplayMapper(AbstractConverter abstractConverter) {
         super();
@@ -17,8 +23,13 @@ public class MatchReplayMapper extends Mapper<CassandraRow, MatchReplay> {
 
     @Override
     public MatchReplay call(CassandraRow cassandraRow) throws Exception {
-        Accumulator.accumulate(this.pipelineContext.getSparkContext(), "MatchReplay_COUNT", 1);
+        this.accumulate("MatchReplay_COUNT", 1, Accumulator.LONG);
         String data = abstractConverter.extract(cassandraRow.getString("raw_data"));
         return new MatchReplay(cassandraRow.getString("match_id"), data, cassandraRow.getString("raw_data"), System.currentTimeMillis());
+    }
+
+    @Override
+    public SparkContext getSparkContext() {
+        return this.sparkContext;
     }
 }

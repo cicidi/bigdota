@@ -4,9 +4,10 @@ import com.cicidi.framework.spark.db.SparkRepository;
 import com.cicidi.framework.spark.mapper.Mapper;
 import com.cicidi.framework.spark.pipeline.Pipeline;
 import com.cicidi.framework.spark.pipeline.PipelineContext;
+import org.apache.spark.SparkContext;
 import org.apache.spark.api.java.JavaRDD;
 
-public abstract class ReadPipeline extends Pipeline {
+public abstract class ReadPipeline<T> extends Pipeline {
     protected SparkRepository sparkRepository;
     protected Mapper mapper;
 
@@ -19,7 +20,7 @@ public abstract class ReadPipeline extends Pipeline {
 
     @Override
     public void process() {
-        JavaRDD javaRDD = sparkRepository.fetchAll(this.pipelineContext.getSparkContext(), this.mapper);
+        JavaRDD<T> javaRDD = sparkRepository.fetchAll(this.pipelineContext.getSparkContext(), this.mapper);
         pipelineContext.setJavaRDD(javaRDD);
     }
 }

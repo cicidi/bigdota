@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class PipelineBuilder implements Serializable {
+public class PipelineBuilder<T> implements Serializable {
 
     private PipelineContext pipelineContext;
     private List<Pipeline> pipelineList = new ArrayList<Pipeline>();
@@ -31,10 +31,10 @@ public class PipelineBuilder implements Serializable {
         ReadPipeline readPipeline = null;
         switch (sparkRepository.getDataSource().getDataSourceType()) {
             case CASSANDRA:
-                readPipeline = new CassandraReadPipeline(pipelineContext, (SparkCassandraRepository) sparkRepository, mapper);
+                readPipeline = new CassandraReadPipeline<T>(pipelineContext, (SparkCassandraRepository) sparkRepository, mapper);
                 break;
             case FILESYSTEM:
-                readPipeline = new FileSystemReadPipeline(pipelineContext, (SparkFileSystemRepository) sparkRepository, mapper);
+                readPipeline = new FileSystemReadPipeline<T>(pipelineContext, (SparkFileSystemRepository) sparkRepository, mapper);
                 break;
             default:
                 break;

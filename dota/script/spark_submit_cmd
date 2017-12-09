@@ -1,5 +1,7 @@
 #set log4j.properties path
 /Volumes/WD/app/spark-2.2.0-bin-hadoop2.7/bin/spark-submit --class com.cicidi.bigdota.Dota2WinApplication --master spark://ubuntu03:70778 --driver-java-options "-Dlog4j.configuration=file:///Volumes/WD/project/bigdota/src/main/resources/log4j.properties" --files /Volumes/WD/project/bigdota/src/main/resources/log4j.properties --conf "spark.executor.extraJavaOptions='-Dlog4j.configuration=log4j.properties'" /Volumes/WD/project/bigdota/target/bigdota-1.0-SNAPSHOT.jar
+#after split module
+/Volumes/WD/app/spark-2.2.0-bin-hadoop2.7/bin/spark-submit --class com.cicidi.bigdota.Dota2WinApplication --master spark://ubuntu03:7077 --driver-java-options "-Dlog4j.configuration=file:///Volumes/WD/project/bigdota/dota/src/main/resources/log4j.properties -Dspring.profiles.active=prod" --files /Volumes/WD/project/bigdota/dota/src/main/resources/log4j.properties --conf "spark.executor.extraJavaOptions='-Dlog4j.configuration=log4j.properties'" /Volumes/WD/project/bigdota/dota/target/dota-1.0-SNAPSHOT.jar 1 1
 
 http://ubuntu03:8080/ master portal
 

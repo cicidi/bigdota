@@ -15,6 +15,7 @@ public class Constants {
     public static final String REPLAY_TABLE = "replay_3";
     public static final String TEAM0_PICK_AMOUNT = "team0_pick_amount";
     public static final String TEAM1_PICK_AMOUNT = "team1_pick_amount";
+    public static final String DOUBLE = "DOUBLE";
 
 
     public static final String TOPN = "TOPN";

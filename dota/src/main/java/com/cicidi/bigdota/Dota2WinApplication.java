@@ -44,8 +44,14 @@ public class Dota2WinApplication implements ApplicationRunner {
     @Value("${cassandra.keyspace}")
     private String keyspace;
 
+    @Value("${env}")
+    private String env;
+
     @Override
     public void run(ApplicationArguments arg) throws IOException {
+        logger.info("*********************************");
+        logger.info("env: " + env);
+        logger.info("*********************************");
         MatchReplayUtil.team0_pick_amount = Integer.parseInt(arg.getSourceArgs()[0]);
         MatchReplayUtil.team1_pick_amount = Integer.parseInt(arg.getSourceArgs()[1]);
         long start = System.currentTimeMillis();

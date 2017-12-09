@@ -1,5 +1,6 @@
 package com.cicidi.bigdota.spark;
 
+import com.cicidi.bigdota.domain.dota.ruleEngine.MatchReplayView;
 import com.cicidi.framework.spark.db.SparkRepository;
 import com.cicidi.framework.spark.mapper.Mapper;
 import com.cicidi.framework.spark.pipeline.PipelineBuilder;
@@ -33,14 +34,14 @@ public class HeroDraftJob {
     Comparator comparator__heroDraftJob_count;
 
     @Autowired
-    @Qualifier(value = "matchReplayViewMapper_heroDraftJob")
-    Mapper matchReplayViewMapper_heroDraftJob;
+//    @Qualifier(value = "matchReplayViewMapper_heroDraftJob")
+            MatchReplayViewMapper matchReplayViewMapper_heroDraftJob;
 
     public PipelineContext create() {
         PipelineContext pipelineContext = new PipelineContext(sparkContext);
-        new PipelineBuilder(pipelineContext)
+        new PipelineBuilder<MatchReplayView>(pipelineContext)
                 .readFrom(sparkCassandraRepository_heroDraftJob,
-                        matchReplayViewMapper_heroDraftJob.setPipelineContext(pipelineContext))
+                        matchReplayViewMapper_heroDraftJob)
                 .flapmap(flatMapFunction_heroDraftJob_MatchReplayView)
                 .mapToPair(1)
                 .reduceByKey()

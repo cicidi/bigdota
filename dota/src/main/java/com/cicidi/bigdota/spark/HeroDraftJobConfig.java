@@ -12,7 +12,9 @@ import com.cicidi.bigdota.util.Constants;
 import com.cicidi.bigdota.util.MatchReplayUtil;
 import com.cicidi.framework.spark.db.*;
 import com.cicidi.framework.spark.mapper.Mapper;
+import org.apache.spark.SparkContext;
 import org.apache.spark.api.java.function.FlatMapFunction;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -35,6 +37,9 @@ public class HeroDraftJobConfig implements Serializable {
     private String path;
 
     private String table = Constants.REPLAY_TABLE;
+
+    @Autowired
+    private SparkContext sparkContext;
 
     @Bean
     public DataSource cassandraDataSource() {
@@ -67,15 +72,15 @@ public class HeroDraftJobConfig implements Serializable {
     }
 
 
-    @Bean(name = "matchReplayMapper_heroDraftJob")
-    public Mapper matchReplayMapper() {
-        return new MatchReplayMapper(matchConverter());
-    }
+//    @Bean(name = "matchReplayMapper_heroDraftJob")
+//    public Mapper matchReplayMapper() {
+//        return new MatchReplayMapper(sparkContext, matchConverter());
+//    }
 
-    @Bean(name = "matchReplayViewMapper_heroDraftJob")
-    public Mapper matchReplayViewMapper() {
-        return new MatchReplayViewMapper();
-    }
+//    @Bean(name = "matchReplayViewMapper_heroDraftJob")
+//    public Mapper matchReplayViewMapper() {
+//        return new MatchReplayViewMapper(sparkContext);
+//    }
 
     @Bean(name = "flatMapFunction_heroDraftJob_MatchReplayView")
     public FlatMapFunction<MatchReplayView, String> flatMapFunction() {
