@@ -19,6 +19,6 @@ public class SortPipeline extends Pipeline {
     @Override
     public void process() {
         List list = pipelineContext.getJavaRDD().takeOrdered(topN, this.comparator);
-        pipelineContext.addResult("TOPN", list);
+        pipelineContext.addResult(this.getClass().getSimpleName(), list);
     }
 }

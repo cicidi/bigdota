@@ -4,6 +4,7 @@ import com.cicidi.exception.ServiceException;
 import org.apache.commons.lang.Validate;
 import org.apache.spark.SparkContext;
 import org.apache.spark.api.java.AbstractJavaRDDLike;
+import org.apache.spark.util.AccumulatorV2;
 import org.apache.spark.util.LongAccumulator;
 
 import java.io.Serializable;
@@ -20,7 +21,7 @@ public class PipelineContext implements Serializable {
 
     private Map outPut;
 
-    private Map<String, LongAccumulator> accumulatorMap;
+    private Map<String, AccumulatorV2> accumulatorMap;
 
     public PipelineContext(SparkContext sparkContext) {
         config = new HashMap<>();
@@ -72,5 +73,27 @@ public class PipelineContext implements Serializable {
         return outPut;
     }
 
+    public void accumlate(String name, Object addValue, String type) {
+        AccumulatorV2 accumulatorV2 = this.accumulatorMap.get(name);
+        if (accumulatorV2 == null) {
+            accumulatorV2 = this.createAccumulator(name, type);
+        }
+        accumulatorV2.add(addValue);
+    }
+
+    public AccumulatorV2 createAccumulator(String accumulateName, String type) {
+        Validate.notNull(this.sparkContext, "sparkcontext cannot be null");
+        AccumulatorV2 accumulatorV2 = null;
+        switch (type) {
+            case "DOUBLE":
+                accumulatorV2 = sparkContext.doubleAccumulator(accumulateName);
+                break;
+
+            case "LONG":
+                accumulatorV2 = sparkContext.longAccumulator(accumulateName);
+                break;
+        }
+        return accumulatorV2;
+    }
 }
 

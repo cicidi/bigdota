@@ -5,6 +5,7 @@ import com.cicidi.bigdota.spark.HeroDraftJob;
 import com.cicidi.bigdota.util.Constants;
 import com.cicidi.bigdota.util.MatchReplayUtil;
 import com.cicidi.framework.spark.pipeline.PipelineContext;
+import com.cicidi.framework.spark.pipeline.impl.SortPipeline;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -55,9 +56,10 @@ public class Dota2WinApplication implements ApplicationRunner {
         MatchReplayUtil.team0_pick_amount = Integer.parseInt(arg.getSourceArgs()[0]);
         MatchReplayUtil.team1_pick_amount = Integer.parseInt(arg.getSourceArgs()[1]);
         long start = System.currentTimeMillis();
-        PipelineContext pipelineContext = heroDraftJob.create();
-        List<Tuple2<String, Integer>> topN = (List) (pipelineContext.getOutPut().get(Constants.TOPN));
+        PipelineContext pipelineContext = heroDraftJob.job_1();
+        List<Tuple2<String, Integer>> topN = (List) (pipelineContext.getOutPut().get(SortPipeline.class.getSimpleName()));
 //        downloadMatch(matchReplayManagement)
+
         logger.info("topN");
         topN.forEach(tuple2 -> {
             logger.info("key: " + tuple2._1);
@@ -67,6 +69,8 @@ public class Dota2WinApplication implements ApplicationRunner {
         logger.info("total time :" + (end - start));
         logger.info("total success matchReplay: " + MatchReplayUtil.matchCount);
         logger.info("mode map " + MatchReplayUtil.map);
+        pipelineContext = heroDraftJob.job_2();
+
     }
 
     public void downloadMatch(MatchReplayManagement matchReplayManagement) {

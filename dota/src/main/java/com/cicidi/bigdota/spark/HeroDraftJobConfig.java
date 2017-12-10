@@ -72,15 +72,15 @@ public class HeroDraftJobConfig implements Serializable {
     }
 
 
-//    @Bean(name = "matchReplayMapper_heroDraftJob")
-//    public Mapper matchReplayMapper() {
-//        return new MatchReplayMapper(sparkContext, matchConverter());
-//    }
+    @Bean(name = "matchReplayMapper_heroDraftJob")
+    public Mapper matchReplayMapper() {
+        return new MatchReplayMapper(sparkContext, matchConverter());
+    }
 
-//    @Bean(name = "matchReplayViewMapper_heroDraftJob")
-//    public Mapper matchReplayViewMapper() {
-//        return new MatchReplayViewMapper(sparkContext);
-//    }
+    @Bean(name = "matchReplayViewMapper_heroDraftJob")
+    public Mapper matchReplayViewMapper() {
+        return new MatchReplayViewMapper(sparkContext);
+    }
 
     @Bean(name = "flatMapFunction_heroDraftJob_MatchReplayView")
     public FlatMapFunction<MatchReplayView, String> flatMapFunction() {
@@ -90,6 +90,6 @@ public class HeroDraftJobConfig implements Serializable {
 
     @Bean(name = "comparator__heroDraftJob_count")
     public Comparator<Tuple2<String, Integer>> comparator() {
-        return MyTupleComparator.INSTANCE;
+        return new TupleComparator(sparkContext);
     }
 }

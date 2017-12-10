@@ -7,7 +7,7 @@ import com.cicidi.framework.spark.pipeline.PipelineContext;
 import org.apache.spark.SparkContext;
 import org.apache.spark.api.java.JavaRDD;
 
-public abstract class ReadPipeline<T> extends Pipeline {
+public abstract class ReadPipeline extends Pipeline {
     protected SparkRepository sparkRepository;
     protected Mapper mapper;
 
@@ -20,7 +20,8 @@ public abstract class ReadPipeline<T> extends Pipeline {
 
     @Override
     public void process() {
-        JavaRDD<T> javaRDD = sparkRepository.fetchAll(this.pipelineContext.getSparkContext(), this.mapper);
+        JavaRDD javaRDD = sparkRepository.fetchAll(this.pipelineContext.getSparkContext(), this.mapper);
         pipelineContext.setJavaRDD(javaRDD);
+        pipelineContext.addResult(this.getClass().getSimpleName(), javaRDD);
     }
 }

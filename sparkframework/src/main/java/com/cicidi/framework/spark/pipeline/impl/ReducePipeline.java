@@ -13,7 +13,10 @@ public class ReducePipeline<K> extends Pipeline {
 
     @Override
     public void process() {
-        pipelineContext.setJavaRDD(
-                ((JavaPairRDD<K, Integer>) pipelineContext.getJavaRDD()).reduceByKey((Function2<Integer, Integer, Integer>) (a, b) -> a + b));
+
+        JavaPairRDD<K, Integer> javaRDD = ((JavaPairRDD<K, Integer>) pipelineContext.getJavaRDD())
+                .reduceByKey((Function2<Integer, Integer, Integer>) (a, b) -> a + b);
+        pipelineContext.setJavaRDD(javaRDD);
+        pipelineContext.addResult(this.getClass().getSimpleName(), javaRDD);
     }
 }
