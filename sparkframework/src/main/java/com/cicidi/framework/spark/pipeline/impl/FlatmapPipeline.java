@@ -18,6 +18,6 @@ public class FlatmapPipeline extends Pipeline {
 //        pipelineContext.setJavaRDD(
         AbstractJavaRDDLike abstractJavaRDDLike = pipelineContext.getJavaRDD().flatMap(flatMapFunction);
         pipelineContext.setJavaRDD(abstractJavaRDDLike);
-        pipelineContext.addResult(this.getClass().getSimpleName(), abstractJavaRDDLike);
+        pipelineContext.addResult(FlatmapPipeline.class.getSimpleName(), abstractJavaRDDLike);
     }
 }

@@ -1,6 +1,6 @@
 package com.cicidi.bigdota.spark;
 
-import com.cicidi.bigdota.converter.AbstractConverter;
+import com.cicidi.framework.spark.converter.AbstractConverter;
 import com.cicidi.bigdota.converter.dota.DotaConverter;
 import com.cicidi.bigdota.converter.strategy.GameModeStrategy;
 import com.cicidi.bigdota.converter.strategy.HeroPickStrategy;

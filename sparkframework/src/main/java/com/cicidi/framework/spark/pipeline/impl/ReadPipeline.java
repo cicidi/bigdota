@@ -11,7 +11,6 @@ public abstract class ReadPipeline extends Pipeline {
     protected SparkRepository sparkRepository;
     protected Mapper mapper;
 
-    //    public ReadPipeline(PipelineContext pipelineContext, DataSource dataSource, Mapper mapper) {
     public ReadPipeline(PipelineContext pipelineContext, SparkRepository sparkRepository, Mapper mapper) {
         super(pipelineContext);
         this.sparkRepository = sparkRepository;
@@ -22,6 +21,7 @@ public abstract class ReadPipeline extends Pipeline {
     public void process() {
         JavaRDD javaRDD = sparkRepository.fetchAll(this.pipelineContext.getSparkContext(), this.mapper);
         pipelineContext.setJavaRDD(javaRDD);
-        pipelineContext.addResult(this.getClass().getSimpleName(), javaRDD);
+        pipelineContext.addResult(ReadPipeline.class.getSimpleName(), javaRDD);
+        pipelineContext.getAccumulatorMap().put(mapper.getAccumulator().name().toString(), mapper.getAccumulator());
     }
 }

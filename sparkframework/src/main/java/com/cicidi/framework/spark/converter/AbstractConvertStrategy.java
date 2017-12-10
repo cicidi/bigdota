@@ -1,4 +1,4 @@
-package com.cicidi.bigdota.converter;
+package com.cicidi.framework.spark.converter;
 
 import java.io.Serializable;
 import java.util.Map;
@@ -25,8 +25,4 @@ public abstract class AbstractConvertStrategy<IN, OUT, PREDECESSOR_OUTPUT, FIELD
 
     protected abstract OUT process(IN m, PREDECESSOR_OUTPUT predecessorOutput);
 
-//    public AbstractConvertStrategy(FIELD fieldName, AbstractConvertStrategy... successors) {
-//        this.fieldName = fieldName;
-//        this.successors = successors;
-//    }
 }

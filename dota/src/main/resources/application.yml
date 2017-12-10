@@ -12,8 +12,6 @@ cassandra:
   table: replay_3
 
 app.name : bigdota
-#env.runtime: cluster
-env.runtime: local
 out.path: /tmp/dota
 ---
 spring:

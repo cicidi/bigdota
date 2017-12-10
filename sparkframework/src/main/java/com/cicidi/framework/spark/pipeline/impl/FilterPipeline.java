@@ -1,6 +1,6 @@
 package com.cicidi.framework.spark.pipeline.impl;
 
-import com.cicidi.framework.spark.Filter;
+import com.cicidi.framework.spark.filter.Filter;
 import com.cicidi.framework.spark.pipeline.Pipeline;
 import com.cicidi.framework.spark.pipeline.PipelineContext;
 

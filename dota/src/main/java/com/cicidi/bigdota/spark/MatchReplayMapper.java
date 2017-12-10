@@ -1,6 +1,6 @@
 package com.cicidi.bigdota.spark;
 
-import com.cicidi.bigdota.converter.AbstractConverter;
+import com.cicidi.framework.spark.converter.AbstractConverter;
 import com.cicidi.bigdota.domain.dota.MatchReplay;
 import com.cicidi.framework.spark.analyze.Accumulatable;
 import com.cicidi.framework.spark.mapper.Mapper;
@@ -14,7 +14,6 @@ public class MatchReplayMapper extends Mapper<CassandraRow, MatchReplay> impleme
 
     private AbstractConverter abstractConverter;
 
-    private AccumulatorV2 accumulatorV2;
 
     public MatchReplayMapper(SparkContext sparkContext, AbstractConverter abstractConverter) {
         super();
@@ -29,8 +28,8 @@ public class MatchReplayMapper extends Mapper<CassandraRow, MatchReplay> impleme
         return new MatchReplay(cassandraRow.getString("match_id"), data, cassandraRow.getString("raw_data"), System.currentTimeMillis());
     }
 
-    @Override
-    public AccumulatorV2 getAccumulator() {
-        return this.accumulatorV2;
-    }
+//    @Override
+//    public AccumulatorV2 getAccumulator() {
+//        return this.accumulatorV2;
+//    }
 }

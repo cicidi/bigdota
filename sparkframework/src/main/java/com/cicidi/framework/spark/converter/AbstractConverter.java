@@ -1,4 +1,4 @@
-package com.cicidi.bigdota.converter;
+package com.cicidi.framework.spark.converter;
 
 import com.cicidi.utilities.JSONUtil;
 import org.apache.commons.collections.CollectionUtils;

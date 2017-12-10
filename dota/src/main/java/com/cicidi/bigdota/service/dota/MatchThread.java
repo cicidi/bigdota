@@ -1,7 +1,7 @@
 package com.cicidi.bigdota.service.dota;
 
 import com.cicidi.bigdota.cassandra.repo.MatchReplayRepository;
-import com.cicidi.bigdota.converter.AbstractConverter;
+import com.cicidi.framework.spark.converter.AbstractConverter;
 import com.cicidi.bigdota.domain.dota.MatchReplay;
 import com.cicidi.bigdota.extermal.DotaReplayApi;
 import org.slf4j.Logger;

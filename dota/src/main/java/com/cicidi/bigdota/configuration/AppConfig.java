@@ -31,7 +31,7 @@ public class AppConfig {
     public SparkConf sparkConf() {
         SparkConf sparkConf;
         if (env.equals("dev"))
-            sparkConf = new SparkConf().setAppName("bigdota").setMaster("local")
+            sparkConf = new SparkConf().setAppName(appName).setMaster("local")
                     .set("spark.driver.maxResultSize", "14g");
         else {
             sparkConf = new SparkConf().setAppName(appName)
@@ -62,21 +62,4 @@ public class AppConfig {
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
         return new PropertySourcesPlaceholderConfigurer();
     }
-//
-//    @Bean
-//    public RetryTemplate retryTemplate() {
-//        RetryTemplate retryTemplate = new RetryTemplate();
-//
-//        FixedBackOffPolicy fixedBackOffPolicy = new FixedBackOffPolicy();
-//        fixedBackOffPolicy.setBackOffPeriod(20000l);
-//        retryTemplate.setBackOffPolicy(fixedBackOffPolicy);
-//
-//        SimpleRetryPolicy retryPolicy = new SimpleRetryPolicy();
-//        retryPolicy.setMaxAttempts(3);
-//        retryTemplate.setRetryPolicy(retryPolicy);
-//        retryTemplate.registerListener(new DefaultListenerSupport());
-//        return retryTemplate;
-//    }
-
-
 }

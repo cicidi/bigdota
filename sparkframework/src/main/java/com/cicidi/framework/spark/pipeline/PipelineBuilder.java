@@ -1,9 +1,9 @@
 package com.cicidi.framework.spark.pipeline;
 
-import com.cicidi.framework.spark.Filter;
 import com.cicidi.framework.spark.db.SparkCassandraRepository;
 import com.cicidi.framework.spark.db.SparkFileSystemRepository;
 import com.cicidi.framework.spark.db.SparkRepository;
+import com.cicidi.framework.spark.filter.Filter;
 import com.cicidi.framework.spark.mapper.Mapper;
 import com.cicidi.framework.spark.pipeline.impl.*;
 import org.apache.spark.api.java.function.FlatMapFunction;

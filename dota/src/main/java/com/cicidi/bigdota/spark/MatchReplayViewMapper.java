@@ -5,17 +5,16 @@ import com.cicidi.framework.spark.analyze.Accumulatable;
 import com.cicidi.framework.spark.mapper.Mapper;
 import com.datastax.spark.connector.japi.CassandraRow;
 import org.apache.spark.SparkContext;
-import org.apache.spark.util.AccumulatorV2;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.cicidi.bigdota.util.Constants;
 
 public class MatchReplayViewMapper extends Mapper<CassandraRow, MatchReplayView> implements Accumulatable {
     private final Logger logger = LoggerFactory.getLogger(getClass());
-    private AccumulatorV2 accumulatorV2;
 
     public MatchReplayViewMapper(SparkContext sparkContext) {
         super();
-        this.accumulatorV2 = this.createAccumulator(sparkContext, "TOTAL_MATCH_COUNT", Accumulatable.LONG);
+        this.accumulatorV2 = this.createAccumulator(sparkContext, Constants.TOTAL_MATCH_COUNT, Accumulatable.LONG);
     }
 
     @Override
@@ -24,8 +23,8 @@ public class MatchReplayViewMapper extends Mapper<CassandraRow, MatchReplayView>
         return new MatchReplayView(cassandraRow.getString("match_id"), cassandraRow.getString("data"));
     }
 
-    @Override
-    public AccumulatorV2 getAccumulator() {
-        return this.accumulatorV2;
-    }
+//    @Override
+//    public AccumulatorV2 getAccumulator() {
+//        return this.accumulatorV2;
+//    }
 }

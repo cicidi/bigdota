@@ -22,6 +22,6 @@ public class MapToPairPipeline<K, V> extends Pipeline {
         AbstractJavaRDDLike abstractJavaRDDLike = (pipelineContext.getJavaRDD())
                 .mapToPair((PairFunction<K, K, V>) s -> new Tuple2<>(s, v));
         pipelineContext.setJavaRDD(abstractJavaRDDLike);
-        pipelineContext.addResult(this.getClass().getSimpleName(), abstractJavaRDDLike);
+        pipelineContext.addResult(MapToPairPipeline.class.getSimpleName(), abstractJavaRDDLike);
     }
 }

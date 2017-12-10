@@ -4,9 +4,12 @@ import com.cicidi.bigdota.service.dota.MatchReplayManagement;
 import com.cicidi.bigdota.spark.HeroDraftJob;
 import com.cicidi.bigdota.util.Constants;
 import com.cicidi.bigdota.util.MatchReplayUtil;
+import com.cicidi.framework.spark.analyze.Accumulatable;
 import com.cicidi.framework.spark.pipeline.PipelineContext;
+import com.cicidi.framework.spark.pipeline.impl.ReadPipeline;
 import com.cicidi.framework.spark.pipeline.impl.SortPipeline;
 import org.apache.log4j.Logger;
+import org.apache.spark.util.AccumulatorV2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
@@ -67,9 +70,12 @@ public class Dota2WinApplication implements ApplicationRunner {
         });
         long end = System.currentTimeMillis();
         logger.info("total time :" + (end - start));
-        logger.info("total success matchReplay: " + MatchReplayUtil.matchCount);
+        logger.info("total success matchReplay: "
+                + pipelineContext.getAccumulatorMap()
+                .get(Accumulatable.convertAccumulatorName(Constants.TOTAL_MATCH_COUNT))
+                .value());
         logger.info("mode map " + MatchReplayUtil.map);
-        pipelineContext = heroDraftJob.job_2();
+//        pipelineContext = heroDraftJob.job_2();
 
     }
 

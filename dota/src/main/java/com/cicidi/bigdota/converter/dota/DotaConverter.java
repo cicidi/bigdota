@@ -1,6 +1,6 @@
 package com.cicidi.bigdota.converter.dota;
 
-import com.cicidi.bigdota.converter.AbstractConverter;
+import com.cicidi.framework.spark.converter.AbstractConverter;
 
 public class DotaConverter extends AbstractConverter<String> {
 

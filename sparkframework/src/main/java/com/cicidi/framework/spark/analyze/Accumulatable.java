@@ -35,4 +35,8 @@ public interface Accumulatable {
     }
 
     AccumulatorV2 getAccumulator();
+
+    public static String convertAccumulatorName(String name) {
+        return "Some(" + name + ")";
+    }
 }

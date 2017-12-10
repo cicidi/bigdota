@@ -1,9 +1,8 @@
 package com.cicidi.bigdota.spark;
 
-import com.cicidi.bigdota.converter.AbstractConverter;
+import com.cicidi.framework.spark.converter.AbstractConverter;
 import com.cicidi.bigdota.domain.dota.MatchReplay;
 import com.cicidi.bigdota.domain.dota.ruleEngine.MatchReplayView;
-import com.cicidi.bigdota.util.AccumulatorConstants;
 import com.cicidi.exception.ServiceException;
 import com.datastax.spark.connector.japi.CassandraRow;
 import org.apache.log4j.Logger;
@@ -21,6 +20,7 @@ import static com.datastax.spark.connector.japi.CassandraJavaUtil.mapToRow;
 /**
  * Created by cicidi on 10/9/2017.
  */
+@Deprecated
 public class SparkCassandraConnector implements Serializable {
 
     private static final Logger logger = Logger.getLogger(SparkCassandraConnector.class);
@@ -31,7 +31,7 @@ public class SparkCassandraConnector implements Serializable {
     private AbstractConverter abstractConverter;
 
     public JavaRDD<MatchReplayView> read(String keyspace, String tableName) {
-        LongAccumulator accumulator = sparkContext.longAccumulator(AccumulatorConstants.MATCH);
+        LongAccumulator accumulator = sparkContext.longAccumulator("Match");
         JavaRDD<MatchReplayView> cassandraRowsRDD = javaFunctions(sparkContext).cassandraTable(keyspace, tableName)
                 .map((Function<CassandraRow, MatchReplayView>) cassandraRow -> {
                     accumulator.add(1L);

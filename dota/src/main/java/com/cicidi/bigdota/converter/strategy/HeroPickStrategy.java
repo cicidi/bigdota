@@ -1,6 +1,6 @@
 package com.cicidi.bigdota.converter.strategy;
 
-import com.cicidi.bigdota.converter.AbstractConvertStrategy;
+import com.cicidi.framework.spark.converter.AbstractConvertStrategy;
 import com.cicidi.bigdota.domain.dota.ruleEngine.DotaAnalyticsfield;
 import com.cicidi.bigdota.domain.dota.ruleEngine.GameModeEnum;
 import com.cicidi.bigdota.util.MatchReplayUtil;

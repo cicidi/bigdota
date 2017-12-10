@@ -18,6 +18,6 @@ public abstract class WritePipeline extends Pipeline {
     @Override
     public void process() {
         sparkRepository.save(pipelineContext.getSparkContext(), pipelineContext.getJavaRDD());
-        pipelineContext.addResult(this.getClass().getSimpleName(), pipelineContext.getJavaRDD());
+        pipelineContext.addResult(WritePipeline.class.getSimpleName(), pipelineContext.getJavaRDD());
     }
 }
