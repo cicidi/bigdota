@@ -71,7 +71,7 @@ public class DotaReplayApi {
     public List<LinkedHashMap> getMatchIdByAccountId(String id) {
         try {
             WebResource webResource = client
-                    .resource(playersEndpoint + id + matchEndpoint);
+                    .resource(openDotaUrl + playersEndpoint + "/" + id + matchEndpoint);
             ClientResponse response = webResource.accept("application/json")
                     .get(ClientResponse.class);
             if (response.getStatus() != 200) {

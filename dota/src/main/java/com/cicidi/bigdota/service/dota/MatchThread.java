@@ -12,7 +12,7 @@ import java.util.concurrent.Callable;
 /**
  * Created by cicidi on 10/16/2017.
  */
-public class MatchThread implements Callable<MatchReplay> {
+public class MatchThread implements Callable<String> {
 
     private String matchId;
 
@@ -32,7 +32,7 @@ public class MatchThread implements Callable<MatchReplay> {
     }
 
     @Override
-    public MatchReplay call() {
+    public String call() {
         if (!matchReplayRepository.existsById(matchId)) {
             String rawData = dotaReplayApi.getReplay(matchId);
             String str = dotaConverter.extract(rawData);
@@ -41,9 +41,9 @@ public class MatchThread implements Callable<MatchReplay> {
                 MatchReplay saved = matchReplayRepository.save(matchReplay);
                 logger.debug(Thread.currentThread().getName() + " End.");
                 logger.debug("Thread :" + Thread.currentThread().getName() + " : dotaReplayApiId" + dotaReplayApi.toString());
-                return saved;
+                return saved.getMatchId();
             }
         }
-        return null;
+        return "exist";
     }
 }

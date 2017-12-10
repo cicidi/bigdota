@@ -41,27 +41,23 @@ public class HeroDraftJob {
     @Qualifier(value = "matchReplayMapper_heroDraftJob")
     Mapper matchReplayMapper_heroDraftJob;
 
-    public PipelineContext job_1() {
+
+    public PipelineBuilder job_1() {
         PipelineContext pipelineContext = new PipelineContext(sparkContext);
-        new PipelineBuilder<MatchReplayView>(pipelineContext)
+        return new PipelineBuilder<MatchReplayView>(pipelineContext)
                 .readFrom(sparkCassandraRepository_heroDraftJob,
                         matchReplayViewMapper_heroDraftJob)
                 .flapmap(flatMapFunction_heroDraftJob_MatchReplayView)
                 .mapToPair(1)
                 .reduceByKey()
                 .sortBy(comparator__heroDraftJob_count, 5)
-                .saveTo(sparkFileSystemRepository__heroDraftJob)
-                .run();
-        return pipelineContext;
+                .saveTo(sparkFileSystemRepository__heroDraftJob);
     }
 
-    public PipelineContext job_2() {
+    public PipelineBuilder job_2() {
         PipelineContext pipelineContext = new PipelineContext(sparkContext);
-        new PipelineBuilder(pipelineContext)
+        return new PipelineBuilder(pipelineContext)
                 .readFrom(sparkCassandraRepository_heroDraftJob, matchReplayMapper_heroDraftJob)
-                .saveTo(sparkCassandraRepository_heroDraftJob)
-                .run();
-        return pipelineContext;
+                .saveTo(sparkCassandraRepository_heroDraftJob);
     }
-
 }

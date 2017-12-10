@@ -83,10 +83,11 @@ public class PipelineBuilder<T> implements Serializable {
         return this;
     }
 
-    public void run() {
+    public PipelineContext run() {
         for (Pipeline pipeline : pipelineList) {
             pipeline.process();
         }
+        return pipelineContext;
     }
 //    read cassandra keyspace tabble  mapper
 //    flatmap mapper

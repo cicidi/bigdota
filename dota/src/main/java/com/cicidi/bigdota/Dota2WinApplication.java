@@ -5,6 +5,7 @@ import com.cicidi.bigdota.spark.HeroDraftJob;
 import com.cicidi.bigdota.util.Constants;
 import com.cicidi.bigdota.util.MatchReplayUtil;
 import com.cicidi.framework.spark.analyze.Accumulatable;
+import com.cicidi.framework.spark.pipeline.PipelineBuilder;
 import com.cicidi.framework.spark.pipeline.PipelineContext;
 import com.cicidi.framework.spark.pipeline.impl.ReadPipeline;
 import com.cicidi.framework.spark.pipeline.impl.SortPipeline;
@@ -51,6 +52,10 @@ public class Dota2WinApplication implements ApplicationRunner {
     @Value("${env}")
     private String env;
 
+
+    @Autowired
+    MatchReplayManagement matchReplayManagement;
+
     @Override
     public void run(ApplicationArguments arg) throws IOException {
         logger.info("*********************************");
@@ -58,11 +63,14 @@ public class Dota2WinApplication implements ApplicationRunner {
         logger.info("*********************************");
         MatchReplayUtil.team0_pick_amount = Integer.parseInt(arg.getSourceArgs()[0]);
         MatchReplayUtil.team1_pick_amount = Integer.parseInt(arg.getSourceArgs()[1]);
+        int load_start = Integer.parseInt(arg.getSourceArgs()[2]);
+        int load_end = Integer.parseInt(arg.getSourceArgs()[3]);
         long start = System.currentTimeMillis();
-        PipelineContext pipelineContext = heroDraftJob.job_1();
-        List<Tuple2<String, Integer>> topN = (List) (pipelineContext.getOutPut().get(SortPipeline.class.getSimpleName()));
-//        downloadMatch(matchReplayManagement)
+        downloadMatch(load_start, load_end);
+        PipelineBuilder pipelineBuilder = heroDraftJob.job_1();
+        PipelineContext pipelineContext = pipelineBuilder.run();
 
+        List<Tuple2<String, Integer>> topN = (List) (pipelineContext.getOutPut().get(SortPipeline.class.getSimpleName()));
         logger.info("topN");
         topN.forEach(tuple2 -> {
             logger.info("key: " + tuple2._1);
@@ -79,8 +87,8 @@ public class Dota2WinApplication implements ApplicationRunner {
 
     }
 
-    public void downloadMatch(MatchReplayManagement matchReplayManagement) {
-        matchReplayManagement.loadAllMatchMultithread();
+    public void downloadMatch(int start, int end) {
+        matchReplayManagement.loadAllMatchMultithread(start, end);
 
     }
 }

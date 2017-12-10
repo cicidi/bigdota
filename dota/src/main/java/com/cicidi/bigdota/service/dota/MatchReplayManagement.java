@@ -39,22 +39,36 @@ public class MatchReplayManagement {
 //    @Autowired
 //    private Validator matchDataValidator;
 
-    public void loadAllMatchMultithread() {
+    public void loadAllMatchMultithread(int start, int end) {
         ExecutorService executor = Executors.newFixedThreadPool(20);
+
+        //total player 1156
         List<DotaPlayer> playerList = dotaReplayApi.getAllPlayers();
 
-        List<Future<MatchReplay>> list = new ArrayList<Future<MatchReplay>>();
+        List<Future<String>> list = new ArrayList<Future<String>>();
         List<Future<List<String>>> matchFutureList = new ArrayList<Future<List<String>>>();
         int i = 0;
 
         for (DotaPlayer dp : playerList) {
+            if (i < start) {
+                i++;
+                continue;
+            }
+            if (i > end) {
+                break;
+            }  // skip first n players
+            i++;
             Optional<DotaPlayer> dotaPlayer = dotaPlayerRepository.findById(dp.getAccount_id());
-            if (dotaPlayer != null && dotaPlayer.isPresent() && dotaPlayer.get().getMatchList() != null && dotaPlayer.get().getMatchList().length() > 0)
+            if (dotaPlayer != null
+                    && dotaPlayer.isPresent()
+                    && dotaPlayer.get().getMatchList() != null
+                    && dotaPlayer.get().getMatchList().length() > 0)
                 matchList.addAll(Arrays.asList(dotaPlayer.get().getMatchList().split(",")));
             else {
                 Callable<List<String>> playerThread = new PlayerThread(dp, dotaReplayApi, dotaPlayerRepository);
                 Future<List<String>> future = executor.submit(playerThread);
-                matchFutureList.add(future);//            if (i > 50) {  // skip first n players
+                matchFutureList.add(future);
+
             }
         }
         for (Future<List<String>> fut : matchFutureList) {
@@ -67,18 +81,34 @@ public class MatchReplayManagement {
                 e.printStackTrace();
             }
         }
+        //total game 5096959
+        int totalload = 0;
         while (matchList.size() > 0) {
             String matchId = matchList.poll();
 //            if (i > 17) break;
-            Callable<MatchReplay> worker = new MatchThread(matchId, dotaReplayApi, matchReplayRepository, dotaConverter);
-            Future<MatchReplay> future = executor.submit(worker);
+            Callable<String> worker = new MatchThread(matchId, dotaReplayApi, matchReplayRepository, dotaConverter);
+            Future<String> future = executor.submit(worker);
             list.add(future);
-            i++;
+            totalload++;
+            logger.debug("total  future: " + totalload);
         }
 
-        for (Future<MatchReplay> fut : list) {
+        int loaded = 0;
+        int saved = 0;
+        for (Future<String> fut : list) {
             try {
-                System.out.println("saved match" + ":" + fut.get().getMatchId());
+                loaded++;
+                logger.debug("total  loaded: " + loaded + "/" + totalload);
+                if (fut == null || fut.get() == null) {
+                    logger.error("future is null");
+                } else {
+                    if (fut.get().equals("exist")) {
+                    } else {
+                        saved++;
+                        logger.debug("total  saved: " + saved + "/" + loaded + "/" + totalload);
+                        logger.debug("saved match" + ":" + fut.get());
+                    }
+                }
             } catch (InterruptedException | ExecutionException e) {
                 e.printStackTrace();
             }

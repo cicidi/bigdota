@@ -115,6 +115,9 @@ public class MatchReplayUtil {
         }
         for (int i = 0, team_0 = 0, team_1 = 0; i < 10; i++) {
             List<LinkedHashMap> players = (List<LinkedHashMap>) json.get("players");
+            if (players.size() != 10) {
+                return null;
+            }
             if ((int) players.get(i).get("player_slot") < 5) {
                 if ((int) players.get(i).get("hero_id") == 0) {
                     System.out.println("error");

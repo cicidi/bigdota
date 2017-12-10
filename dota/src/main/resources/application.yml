@@ -9,7 +9,8 @@ cassandra:
   contactpoints: 10.0.0.32,10.0.0.38,10.0.0.49
   port: 9042
   keyspace: big_dota_ks
-  table: replay_3
+#  table: replay_3
+  table: replay
 
 app.name : bigdota
 out.path: /tmp/dota
