@@ -100,6 +100,8 @@ public class MatchReplayUtil {
     public static Map<DotaAnalyticsfield, Object> getHeros_normalModel(String rawData) {
         int[] team0_heros = new int[5];
         int[] team1_heros = new int[5];
+        int[] team0_players = new int[5];
+        int[] team1_players = new int[5];
         LinkedHashMap json = null;
         try {
             json = JSONUtil.getObjectMapper().readValue(rawData, LinkedHashMap.class);
@@ -124,17 +126,34 @@ public class MatchReplayUtil {
                     return null;
                 }
                 team0_heros[team_0] = (int) players.get(i).get("hero_id");
+                team0_players[team_0] = (int) players.get(i).get("account_id");
                 team_0++;
             } else {
+                if ((int) players.get(i).get("hero_id") == 0) {
+                    System.out.println("error");
+                    return null;
+                }
                 team1_heros[team_1] = (int) players.get(i).get("hero_id");
+                team1_players[team_1] = (int) players.get(i).get("account_id");
                 team_1++;
             }
         }
         Arrays.sort(team0_heros);
         Arrays.sort(team1_heros);
+        Arrays.sort(team0_players);
+        Arrays.sort(team1_players);
+        Map<DotaAnalyticsfield, Object> hearPick = new HashMap<>();
+        hearPick.put(DotaAnalyticsfield.TEAM_0_HERO_PICK, team0_heros);
+        hearPick.put(DotaAnalyticsfield.TEAM_1_HERO_PICK, team1_heros);
+
+        Map<DotaAnalyticsfield, Object> playersId = new HashMap<>();
+        playersId.put(DotaAnalyticsfield.TEAM_0_PLAYERS, team0_players);
+        playersId.put(DotaAnalyticsfield.TEAM_1_PLAYERS, team1_players);
         Map<DotaAnalyticsfield, Object> result = new HashMap<>();
-        result.put(DotaAnalyticsfield.TEAM_0_HERO_PICK, team0_heros);
-        result.put(DotaAnalyticsfield.TEAM_1_HERO_PICK, team1_heros);
+
+        result.put(DotaAnalyticsfield.HERO_PICK, hearPick);
+        result.put(DotaAnalyticsfield.PLAYERS_ID, playersId team1_players);
+
         return result;
     }
 
@@ -142,7 +161,51 @@ public class MatchReplayUtil {
         List<LinkedHashMap> pickBan = getPick_Ban(rawData);
         if (pickBan == null) return null;
         Map map = getHeros(pickBan);
+        List<LinkedHashMap> players = getPlayers(rawData);
+        Map mapPlayers = getAccountId(players);
         return map;
+    }
+
+    private static Map getAccountId(List<LinkedHashMap> players) {
+        if (players == null) {
+            return null;
+        }
+        int[] team0_account_id = new int[5];
+        int[] team1_account_id = new int[5];
+        int team_0 = 0;
+        int team_1 = 0;
+        int
+        for (LinkedHashMap player : players) {
+            if (player != null) {
+                Boolean isRadiant = (Boolean) player.get("isRadiant");
+                if (isRadiant) {
+                    team0_account_id[team_0] = (int) player.get("account_id");
+                    team_0++;
+                } else {
+                    team1_account_id[team_1] = (int) player.get("account_id");
+                    team_1++;
+                }
+            } else {
+                return null;
+            }
+        }
+        Arrays.sort(team0_account_id);
+        Arrays.sort(team1_account_id);
+        Map<DotaAnalyticsfield, Object> playersId = new HashMap<>();
+        playersId.put(DotaAnalyticsfield.TEAM_0_PLAYERS, team0_account_id);
+        playersId.put(DotaAnalyticsfield.TEAM_1_PLAYERS, team1_account_id);
+        Map<DotaAnalyticsfield, Object> result = new HashMap<>();
+        result.put(DotaAnalyticsfield.PLAYERS_ID, playersId);
+        return result;
+
+    }
+
+    private static List<LinkedHashMap> getPlayers(String matchData) {
+        try {
+            return JsonPath.read(matchData, MatchJsonPath.players);
+        } catch (PathNotFoundException pathNotFoundException) {
+            return null;
+        }
     }
 
     public static List<LinkedHashMap> getPick_Ban(String matchData) {
@@ -207,4 +270,7 @@ public class MatchReplayUtil {
         }
     }
 
+    public static Map<DotaAnalyticsfield, Object> getPlayerAccountId(String rawData) {
+
+    }
 }

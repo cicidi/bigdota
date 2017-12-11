@@ -18,4 +18,5 @@ public class Constants {
     public static final String DOUBLE = "DOUBLE";
     public static final String TOTAL_COMBO = "TOTAL_COMBO";
     public static final String TOTAL_MATCH_COUNT = "TOTAL_MATCH_COUNT";
+    public static final String HEROFILTER = "HEROFILTER";
 }

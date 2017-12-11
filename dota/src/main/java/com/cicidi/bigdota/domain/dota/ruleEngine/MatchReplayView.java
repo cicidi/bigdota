@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -81,6 +82,12 @@ public class MatchReplayView implements Serializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return null;
+    }
+
+    public List<Integer> getTeamPlayer(int team) {
+//        this.
+
         return null;
     }
 }

@@ -1,5 +1,7 @@
 package com.cicidi.bigdota.spark;
 
+import com.cicidi.bigdota.spark.mapper.MatchReplayMapper;
+import com.cicidi.bigdota.spark.mapper.MatchReplayViewMapper;
 import com.cicidi.framework.spark.converter.AbstractConverter;
 import com.cicidi.bigdota.converter.dota.DotaConverter;
 import com.cicidi.bigdota.converter.strategy.GameModeStrategy;
@@ -22,6 +24,7 @@ import scala.Tuple2;
 
 import java.io.Serializable;
 import java.util.Comparator;
+import java.util.Iterator;
 
 @Configuration
 public class HeroDraftJobConfig implements Serializable {
@@ -84,7 +87,12 @@ public class HeroDraftJobConfig implements Serializable {
 
     @Bean(name = "flatMapFunction_heroDraftJob_MatchReplayView")
     public FlatMapFunction<MatchReplayView, String> flatMapFunction() {
-        return (FlatMapFunction<MatchReplayView, String>) matchReplayView -> MatchReplayUtil.combine(matchReplayView, null, "COUNT");
+        return new FlatMapFunction<MatchReplayView, String>() {
+            @Override
+            public Iterator<String> call(MatchReplayView matchReplayView) throws Exception {
+                return MatchReplayUtil.combine(matchReplayView, null, "COUNT");
+            }
+        };
     }
 
 
