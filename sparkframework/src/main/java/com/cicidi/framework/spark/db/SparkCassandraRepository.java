@@ -16,7 +16,6 @@ public class SparkCassandraRepository<T> extends SparkRepository {
 
     @Override
     public void save(SparkContext sparkContext, AbstractJavaRDDLike javaRDD) {
-        sparkContext.getConf().set("spark.cassandra.connection.host", ((CassandraDataSource) (this.dataSource)).getContactpoints());
         javaFunctions((JavaRDD) javaRDD).
                 writerBuilder(((CassandraDataSource) (this.dataSource)).getKeyspace(),
                         ((CassandraDataSource) (this.dataSource)).getTableName(),
@@ -27,7 +26,6 @@ public class SparkCassandraRepository<T> extends SparkRepository {
 
     @Override
     public JavaRDD fetchAll(SparkContext sparkContext, Mapper mapper) {
-        sparkContext.getConf().set("spark.cassandra.connection.host", ((CassandraDataSource) (this.dataSource)).getContactpoints());
 //        LongAccumulator accumulator = sparkContext.longAccumulator(AccumulatorConstants.MATCH);
         JavaRDD<T> cassandraRowsRDD = javaFunctions(sparkContext)
                 .cassandraTable(((CassandraDataSource) (this.dataSource)).getKeyspace(),

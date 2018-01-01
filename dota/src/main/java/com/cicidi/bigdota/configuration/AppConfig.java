@@ -27,17 +27,25 @@ public class AppConfig {
     @Value("${env}")
     private String env;
 
+    @Value("${cassandra.contactpoints}")
+    private String contactpoints;
+
     @Bean
     public SparkConf sparkConf() {
         SparkConf sparkConf;
         if (env.equals("dev"))
             sparkConf = new SparkConf().setAppName(appName).setMaster("local")
-                    .set("spark.driver.maxResultSize", "14g");
+                    .set("spark.driver.maxResultSize", "14g")
+                    .set("spark.cassandra.connection.host", contactpoints);
         else {
             sparkConf = new SparkConf().setAppName(appName)
                     .setMaster("spark://ubuntu03:7077")
                     .set("spark.cassandra.connection.keep_alive_ms", "30000")
-                    .set("spark.driver.maxResultSize", "14g");
+                    .set("spark.driver.maxResultSize", "14g")
+                    .set("spark.cassandra.connection.host", contactpoints)
+//                    .set("spark.cassandra.connection.local_dc", "dca")
+                    .set("spark.cassandra.query.retry.count", "10")
+                    .set("spark.cassandra.read.timeout_ms", "120000");
         }
         return sparkConf;
     }

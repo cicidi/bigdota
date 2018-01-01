@@ -10,3 +10,4 @@ and hard to config host, and start cmd.
       b. I guess dse02  spark only access dse02 cassandra, because dse02 spark  accumulator always gives 2, but I have 18 record
       actually. Then I found that my dse02 cassandra only have 2 record
       c. when running application on cluster , in accumualtor only see dse03 contribute 11 , but didnot show how many dse02 contributed
+5 spark cassandra connection point cannot be set at runtime.
