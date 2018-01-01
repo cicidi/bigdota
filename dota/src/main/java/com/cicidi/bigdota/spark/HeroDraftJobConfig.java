@@ -1,5 +1,6 @@
 package com.cicidi.bigdota.spark;
 
+import com.cicidi.bigdota.spark.filter.HeroFilter;
 import com.cicidi.bigdota.spark.mapper.MatchReplayMapper;
 import com.cicidi.bigdota.spark.mapper.MatchReplayViewMapper;
 import com.cicidi.framework.spark.converter.AbstractConverter;
@@ -13,6 +14,7 @@ import com.cicidi.bigdota.domain.dota.ruleEngine.MatchReplayView;
 import com.cicidi.bigdota.util.Constants;
 import com.cicidi.bigdota.util.MatchReplayUtil;
 import com.cicidi.framework.spark.db.*;
+import com.cicidi.framework.spark.filter.Filter;
 import com.cicidi.framework.spark.mapper.Mapper;
 import org.apache.spark.SparkContext;
 import org.apache.spark.api.java.function.FlatMapFunction;
@@ -85,14 +87,15 @@ public class HeroDraftJobConfig implements Serializable {
         return new MatchReplayViewMapper(sparkContext);
     }
 
+
+    @Bean(name = "matchReplayViewMapper_heroDraftJob")
+    public Filter heroFilter() {
+        return new HeroFilter(sparkContext);
+    }
+
     @Bean(name = "flatMapFunction_heroDraftJob_MatchReplayView")
     public FlatMapFunction<MatchReplayView, String> flatMapFunction() {
-        return new FlatMapFunction<MatchReplayView, String>() {
-            @Override
-            public Iterator<String> call(MatchReplayView matchReplayView) throws Exception {
-                return MatchReplayUtil.combine(matchReplayView, null, "COUNT");
-            }
-        };
+        return (FlatMapFunction<MatchReplayView, String>) matchReplayView -> MatchReplayUtil.combine(matchReplayView, null, "COUNT");
     }
 
 

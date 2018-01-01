@@ -2,6 +2,7 @@ package com.cicidi.bigdota.spark;
 
 import com.cicidi.bigdota.domain.dota.ruleEngine.MatchReplayView;
 import com.cicidi.framework.spark.db.SparkRepository;
+import com.cicidi.framework.spark.filter.Filter;
 import com.cicidi.framework.spark.mapper.Mapper;
 import com.cicidi.framework.spark.pipeline.PipelineBuilder;
 import com.cicidi.framework.spark.pipeline.PipelineContext;
@@ -41,12 +42,16 @@ public class HeroDraftJob {
     @Qualifier(value = "matchReplayMapper_heroDraftJob")
     Mapper matchReplayMapper_heroDraftJob;
 
+    @Autowired
+    @Qualifier(value = "matchReplayFilter")
+    Filter matchReplayFilter;
 
     public PipelineBuilder job_1() {
         PipelineContext pipelineContext = new PipelineContext(sparkContext);
         return new PipelineBuilder<MatchReplayView>(pipelineContext)
                 .readFrom(sparkCassandraRepository_heroDraftJob,
                         matchReplayViewMapper_heroDraftJob)
+                .filter(matchReplayFilter)
                 .flapmap(flatMapFunction_heroDraftJob_MatchReplayView)
                 .mapToPair(1)
                 .reduceByKey()

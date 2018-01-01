@@ -6,10 +6,10 @@ import org.apache.spark.util.AccumulatorV2;
 
 public abstract class Filter<T> implements Function<T, Boolean>, Accumulatable {
 
-    private AccumulatorV2 accumulator;
+    protected AccumulatorV2 accumulatorV2;
 
     @Override
     public AccumulatorV2 getAccumulator() {
-        return this.accumulator;
+        return this.accumulatorV2;
     }
 }
