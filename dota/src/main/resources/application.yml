@@ -8,7 +8,7 @@ service:
 cassandra:
 #  contactpoints: 10.0.0.38,10.0.0.49
   contactpoints: 10.0.0.50
-  port: 9042t s
+  port: 9042
   keyspace: big_dota_ks
 #  table: replay_3
   table: replay

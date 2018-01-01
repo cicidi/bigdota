@@ -14,7 +14,7 @@ public interface Accumulatable {
 
     default void accumulate(Object addValue) {
         Validate.notNull(this.getAccumulator(), "sparkContext cannot be null");
-        logger.info("MatchReplayViewCount addValue: {}", addValue);
+//        logger.info("MatchReplayViewCount addValue: {}", addValue);
         this.getAccumulator().add(addValue);
     }
 
