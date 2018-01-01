@@ -12,7 +12,7 @@ to hook up the cluster , i am following this video https://www.youtube.com/watch
 
 dse01 (hp)
 less /var/log/cassandra/output.log
-vim ubuntu /etc/dse/cassandra/cassandra.yaml
+vim /etc/dse/cassandra/cassandra.yaml
 /etc/default/dse  set datacenter
 /etc/dse/cassandra/cassandra-env.sh
 sudo vim /etc/dse/cassandra/jvm.options
@@ -20,6 +20,7 @@ sudo vim /etc/dse/cassandra/jvm.options
 dse02(lenovo)
 less ~/dse/logs/cassandra/output.log
 ~/dse/bin/start_server
+vim ~/dse/resources/cassandra/conf/cassandra.yaml
 ~/dse/bin/stop_server
 ~/dse/bin/nodetool status
 

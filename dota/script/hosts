@@ -1,4 +1,3 @@
-127.0.0.1 localhost
 10.0.0.28 ubuntu01
 10.0.0.37 ubuntu02
 10.0.0.34 ubuntu03
@@ -8,3 +7,4 @@
 10.0.0.49 dse01
 10.0.0.38 dse02
 10.0.0.32 dse03
+10.0.0.30 jianming-ThinkPad-T410
