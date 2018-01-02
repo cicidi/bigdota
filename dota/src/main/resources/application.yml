@@ -6,8 +6,8 @@ service:
     pro_players_endpoint: /proPlayers
 
 cassandra:
-  contactpoints: 10.0.0.38
-#  contactpoints: 10.0.0.49
+#  contactpoints: 10.0.0.38,10.0.0.49
+  contactpoints: 10.0.0.50
   port: 9042
   keyspace: big_dota_ks
 #  table: replay_3
