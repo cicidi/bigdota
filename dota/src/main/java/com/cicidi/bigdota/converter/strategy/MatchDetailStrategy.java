@@ -7,9 +7,9 @@ import com.cicidi.bigdota.util.MatchReplayUtil;
 
 import java.util.Map;
 
-public class HeroPickStrategy extends AbstractConvertStrategy<String, Map<DotaAnalyticsfield, Object>, GameModeEnum, DotaAnalyticsfield> {
+public class MatchDetailStrategy extends AbstractConvertStrategy<String, Map<DotaAnalyticsfield, Object>, GameModeEnum, DotaAnalyticsfield> {
 
-    private HeroPickStrategy(Builder builder) {
+    private MatchDetailStrategy(Builder builder) {
         fieldName = builder.fieldName;
         successors = builder.successors;
     }
@@ -30,7 +30,8 @@ public class HeroPickStrategy extends AbstractConvertStrategy<String, Map<DotaAn
 //                return MatchReplayUtil.getHeros_normalModel(rawData);
 //        }
 
-        Map<DotaAnalyticsfield, Object> map = MatchReplayUtil.getDraft(rawData);
+        Map<DotaAnalyticsfield, Object> map = MatchReplayUtil.getMatchDetails(rawData);
+
         if (map == null || map.get(DotaAnalyticsfield.HERO_PICK) == null) {
             map = MatchReplayUtil.getHeros_normalModel(rawData);
         }
@@ -54,8 +55,8 @@ public class HeroPickStrategy extends AbstractConvertStrategy<String, Map<DotaAn
             return this;
         }
 
-        public HeroPickStrategy build() {
-            return new HeroPickStrategy(this);
+        public MatchDetailStrategy build() {
+            return new MatchDetailStrategy(this);
         }
     }
 }

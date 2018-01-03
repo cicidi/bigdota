@@ -9,5 +9,6 @@ public class MatchJsonPath {
     public static final String picks_bans = "$.picks_bans";
     public static final String game_mode = "$.game_mode";
     public static final String normal_mode_hero = "$['players'][?]['hero_id']";
+    public static final String account_id = "$['players'][?]['account_id']";
     public static final String players = "$.players";
 }

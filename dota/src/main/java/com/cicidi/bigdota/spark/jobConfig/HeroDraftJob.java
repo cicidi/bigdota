@@ -1,4 +1,4 @@
-package com.cicidi.bigdota.spark;
+package com.cicidi.bigdota.spark.jobConfig;
 
 import com.cicidi.bigdota.domain.dota.ruleEngine.MatchReplayView;
 import com.cicidi.framework.spark.db.SparkRepository;
@@ -8,6 +8,7 @@ import com.cicidi.framework.spark.pipeline.PipelineBuilder;
 import com.cicidi.framework.spark.pipeline.PipelineContext;
 import org.apache.spark.SparkContext;
 import org.apache.spark.api.java.function.FlatMapFunction;
+import org.apache.spark.api.java.function.Function;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -43,19 +44,22 @@ public class HeroDraftJob {
     Mapper matchReplayMapper_heroDraftJob;
 
     @Autowired
-    @Qualifier(value = "matchReplayFilter")
-    Filter matchReplayFilter;
+    @Qualifier(value = "heroFilter")
+    Function heroFilter;
+    @Autowired
+    @Qualifier(value = "playerFilter")
+    Function playerFilter;
 
     public PipelineBuilder job_1() {
         PipelineContext pipelineContext = new PipelineContext(sparkContext);
         return new PipelineBuilder<MatchReplayView>(pipelineContext)
                 .readFrom(sparkCassandraRepository_heroDraftJob,
                         matchReplayViewMapper_heroDraftJob)
-                .filter(matchReplayFilter)
+                .filter(playerFilter, heroFilter)
                 .flapmap(flatMapFunction_heroDraftJob_MatchReplayView)
                 .mapToPair(1)
                 .reduceByKey()
-                .sortBy(comparator__heroDraftJob_count, 5)
+                .sortBy(comparator__heroDraftJob_count, 10000)
                 .saveTo(sparkFileSystemRepository__heroDraftJob);
     }
 

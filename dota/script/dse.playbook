@@ -27,7 +27,7 @@ vim ~/dse/resources/cassandra/conf/cassandra.yaml
 
 dse03  (mac)
 config
-/Volumes/WD/app/dse/resources/cassandra/conf/cassandra.yaml
+vim /Volumes/WD/app/dse/resources/cassandra/conf/cassandra.yaml
 start cmd in
 /Volumes/WD/app/dse/bin/start_server
 /Volumes/WD/app/dse/bin/stop_server

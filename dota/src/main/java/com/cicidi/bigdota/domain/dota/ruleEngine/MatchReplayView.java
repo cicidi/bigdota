@@ -48,19 +48,21 @@ public class MatchReplayView implements Serializable {
         this.currentTimeStamp = currentTimeStamp;
     }
 
-    public ArrayList getTeam_hero(int team) {
-        ArrayList team_pick = null;
+    public ArrayList<Integer> getTeam_hero(int team) {
+        ArrayList<Integer> team_pick = null;
         try {
             if (data == null)
                 return null;
-            Map heroPick = (Map) this.data.get(DotaAnalyticsfield.HERO_PICK.name());
+            Map matchDetail = (Map) this.data.get(DotaAnalyticsfield.MATCH_DETAIL.name());
+            if (matchDetail == null)
+                return null;
+            Map heroPick = (Map) matchDetail.get(DotaAnalyticsfield.HERO_PICK.name());
             if (heroPick == null)
                 return null;
-
             if (team == 0)
-                team_pick = (ArrayList) heroPick.get(DotaAnalyticsfield.TEAM_0_HERO_PICK.name());
+                team_pick = (ArrayList<Integer>) heroPick.get(DotaAnalyticsfield.TEAM_0_HERO_PICK.name());
             else {
-                team_pick = (ArrayList) heroPick.get(DotaAnalyticsfield.TEAM_1_HERO_PICK.name());
+                team_pick = (ArrayList<Integer>) heroPick.get(DotaAnalyticsfield.TEAM_1_HERO_PICK.name());
             }
         } catch (NullPointerException e) {
             e.printStackTrace();
@@ -85,9 +87,26 @@ public class MatchReplayView implements Serializable {
         return null;
     }
 
-    public List<Integer> getTeamPlayer(int team) {
-//        this.
-
-        return null;
+    public ArrayList<Integer> getTeamPlayer(int team) {
+        ArrayList<Integer> team_players = null;
+        try {
+            if (data == null)
+                return null;
+            Map matchDetail = (Map) this.data.get(DotaAnalyticsfield.MATCH_DETAIL.name());
+            if (matchDetail == null)
+                return null;
+            Map playersId = (Map) matchDetail.get(DotaAnalyticsfield.PLAYERS_ID.name());
+            if (playersId == null)
+                return null;
+            if (team == 0)
+                team_players = (ArrayList<Integer>) playersId.get(DotaAnalyticsfield.TEAM_0_PLAYERS.name());
+            else {
+                team_players = (ArrayList<Integer>) playersId.get(DotaAnalyticsfield.TEAM_1_PLAYERS.name());
+            }
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return team_players;
     }
 }
