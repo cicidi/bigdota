@@ -7,6 +7,7 @@ import com.cicidi.framework.spark.filter.Filter;
 import com.cicidi.framework.spark.mapper.Mapper;
 import com.cicidi.framework.spark.pipeline.impl.*;
 import org.apache.spark.api.java.function.FlatMapFunction;
+import org.apache.spark.api.java.function.Function;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -43,8 +44,8 @@ public class PipelineBuilder<T> implements Serializable {
         return this;
     }
 
-    public PipelineBuilder filter(Filter filter) {
-        this.pipelineList.add(new FilterPipeline(pipelineContext, filter));
+    public PipelineBuilder filter(Function... function) {
+        this.pipelineList.add(new FilterPipeline(pipelineContext, function));
         return this;
     }
 

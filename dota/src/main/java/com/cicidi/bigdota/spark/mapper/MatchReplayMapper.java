@@ -1,4 +1,4 @@
-package com.cicidi.bigdota.spark;
+package com.cicidi.bigdota.spark.mapper;
 
 import com.cicidi.framework.spark.converter.AbstractConverter;
 import com.cicidi.bigdota.domain.dota.MatchReplay;
@@ -27,9 +27,4 @@ public class MatchReplayMapper extends Mapper<CassandraRow, MatchReplay> impleme
         String data = abstractConverter.extract(cassandraRow.getString("raw_data"));
         return new MatchReplay(cassandraRow.getString("match_id"), data, cassandraRow.getString("raw_data"), System.currentTimeMillis());
     }
-
-//    @Override
-//    public AccumulatorV2 getAccumulator() {
-//        return this.accumulatorV2;
-//    }
 }

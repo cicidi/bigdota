@@ -1,4 +1,4 @@
-package com.cicidi.bigdota.spark;
+package com.cicidi.bigdota.spark.mapper;
 
 import com.cicidi.bigdota.domain.dota.ruleEngine.MatchReplayView;
 import com.cicidi.framework.spark.analyze.Accumulatable;
