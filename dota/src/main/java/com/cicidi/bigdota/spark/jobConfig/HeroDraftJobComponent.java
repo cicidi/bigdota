@@ -18,6 +18,7 @@ import com.cicidi.framework.spark.mapper.Mapper;
 import org.apache.spark.SparkContext;
 import org.apache.spark.api.java.function.FlatMapFunction;
 import org.apache.spark.api.java.function.Function;
+import org.apache.spark.sql.execution.columnar.BOOLEAN;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -25,7 +26,9 @@ import org.springframework.context.annotation.Configuration;
 import scala.Tuple2;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 @Configuration
 public class HeroDraftJobComponent implements Serializable {
@@ -44,8 +47,8 @@ public class HeroDraftJobComponent implements Serializable {
 
     @Autowired
     private SparkContext sparkContext;
-
     @Bean
+
     public DataSource cassandraDataSource() {
         return new CassandraDataSource(contactpoints, keyspace, table);
     }
@@ -90,13 +93,31 @@ public class HeroDraftJobComponent implements Serializable {
     @Bean(name = "heroFilter")
     public Function<MatchReplayView, Boolean> heroFilter() {
         int hero_Id = 108;
-        return v1 -> v1.getTeam_hero(0).contains(hero_Id) || v1.getTeam_hero(1).contains(hero_Id);
+        return (Function<MatchReplayView, Boolean>) matchReplayView -> {
+            if (matchReplayView == null)
+                return false;
+            List<Integer> team0 = matchReplayView.getTeam_hero(0);
+            team0 = team0 != null ? team0 : new ArrayList<>();
+            List<Integer> team1 = matchReplayView.getTeam_hero(1);
+            team1 = team1 != null ? team1 : new ArrayList<>();
+
+            return team0.contains(hero_Id) || team1.contains(hero_Id);
+        };
     }
 
     @Bean(name = "playerFilter")
     public Function<MatchReplayView, Boolean> playerFilter() {
         int account_id = 151018536;
-        return v1 -> v1.getTeamPlayer(0).contains(account_id) || v1.getTeamPlayer(1).contains(account_id);
+        return (Function<MatchReplayView, Boolean>) matchReplayView -> {
+            if (matchReplayView == null)
+                return false;
+            List<Integer> team0 = matchReplayView.getTeamPlayer(0);
+            team0 = team0 != null ? team0 : new ArrayList<>();
+            List<Integer> team1 = matchReplayView.getTeamPlayer(1);
+            team1 = team1 != null ? team1 : new ArrayList<>();
+
+            return team0.contains(account_id) || team1.contains(account_id);
+        };
     }
 
     @Bean(name = "flatMapFunction_heroDraftJob_MatchReplayView")

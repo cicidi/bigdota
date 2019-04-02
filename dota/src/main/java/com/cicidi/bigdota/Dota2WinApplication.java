@@ -64,8 +64,8 @@ public class Dota2WinApplication implements ApplicationRunner {
         int load_start = Integer.parseInt(arg.getSourceArgs()[2]);
         int load_end = Integer.parseInt(arg.getSourceArgs()[3]);
         long start = System.currentTimeMillis();
-        downloadMatch(load_start, load_end);
-        PipelineContext pipelineContext_2 = heroDraftJob.job_2().run();
+//        downloadMatch(load_start, load_end);
+//        PipelineContext pipelineContext_2 = heroDraftJob.job_2().run();
         PipelineContext pipelineContext = heroDraftJob.job_1().run();
 
         List<Tuple2<String, Integer>> topN = (List) (pipelineContext.getOutPut().get(SortPipeline.class.getSimpleName()));

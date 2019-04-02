@@ -15,12 +15,18 @@ The project is using
 
 
 
-## Markdown and I
+## What is this project doing
 
-**Markdown** is a plain text formatting syntax created by John Gruber, aiming to provide a easy-to-read and feasible markup. The original Markdown syntax specification can be found [here](http://daringfireball.net/projects/markdown/syntax).
+**BigDota** is an application that analyze the dota hero encounter win rate. 
 
-**MacDown** is created as a simple-to-use editor for Markdown documents. I render your Markdown contents real-time into HTML, and display them in a preview panel.
-
+For example, image that dota hero is just like soccoer player, pick 11 strikers in the world and play a game wont make
+ you win. you need to pick a combination of the players, but which is the best combination?. In the project, I am using 
+ 5,000,000 professiona lplayer's game replay to find which combination is over which one. Each game there are 5 player 
+ on each side. So in each game, there are (C(5,5)+C(5,4)+C(5,3)+C(5,2)+C(5,1))^2 =1024 combinations.  5,000,000 * 1024 >= 5 billion. 
+ The game has around 120 heros. The total combintation is (C(120,5)+C(120,4)+C(120,3)+C(120,2)+C(120,1))^2 = 199,080,694. Eventually,
+ these 5 billion game combination gonna mapreduce in to 199,080,694 combinations. You ca
+ By using my project, we can simple find all which combation is the best counter of any combintation
+ 
 ![MacDown Screenshot](http://d.pr/i/10UGP+)
 
 I support all the original Markdown syntaxes. But I can do so much more! Various popular but non-standard syntaxes can be turned on/off from the [**Markdown** preference pane](#markdown-pane).

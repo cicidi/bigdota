@@ -5,8 +5,8 @@ package com.cicidi.bigdota.util;
  */
 public class Constants {
     //dota
-    public static final String REPLAY_TABLE = "replay_3";
-    //    public static final String REPLAY_TABLE = "replay";
+//    public static final String REPLAY_TABLE = "replay_3";
+    public static final String REPLAY_TABLE = "replay";
     public static final String KEYSPACE = "keyspace";
     public static final String TABLE = "table";
     public static final String PATH = "path";

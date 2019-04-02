@@ -6,7 +6,7 @@ service:
     pro_players_endpoint: /proPlayers
 
 cassandra:
-  contactpoints: 10.0.0.38,10.0.0.32,10.0.0.50
+  contactpoints: 192.168.1.2,192.168.1.5,192.168.1.10
 #  contactpoints: 10.0.0.50
   port: 9042
   keyspace: big_dota_ks
