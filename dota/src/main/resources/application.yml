@@ -13,6 +13,14 @@ cassandra:
 #  table: replay_3
   table: replay
 
+jdbc:
+  url: "192.168.1.10"
+  port: "5432"
+  userName: "postgres"
+  password: "password"
+  database: "big_dota"
+  tableName: "best_combination"
+  driver: "org.postgresql.Driver"
 app.name : bigdota
 out.path: /tmp/dota
 ---

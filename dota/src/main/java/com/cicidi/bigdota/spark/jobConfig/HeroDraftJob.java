@@ -25,6 +25,10 @@ public class HeroDraftJob {
     SparkRepository sparkCassandraRepository_heroDraftJob;
 
     @Autowired
+    @Qualifier(value = "sparkJdbcRepository_heroDraftJob")
+    SparkRepository sparkJdbcRepository_heroDraftJob;
+
+    @Autowired
     @Qualifier(value = "sparkFileSystemRepository__heroDraftJob")
     SparkRepository sparkFileSystemRepository__heroDraftJob;
 
@@ -55,12 +59,14 @@ public class HeroDraftJob {
         return new PipelineBuilder<MatchReplayView>(pipelineContext)
                 .readFrom(sparkCassandraRepository_heroDraftJob,
                         matchReplayViewMapper_heroDraftJob)
+//                .filter(playerFilter)
                 .filter(playerFilter, heroFilter)
                 .flapmap(flatMapFunction_heroDraftJob_MatchReplayView)
                 .mapToPair(1)
                 .reduceByKey()
-                .sortBy(comparator__heroDraftJob_count, 10000)
-                .saveTo(sparkFileSystemRepository__heroDraftJob);
+                .sortBy(comparator__heroDraftJob_count, 10000000)
+//                .saveTo(sparkFileSystemRepository__heroDraftJob);
+                .saveTo(sparkJdbcRepository_heroDraftJob);
     }
 
     public PipelineBuilder job_2() {
