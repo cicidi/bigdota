@@ -4,7 +4,7 @@ import com.cicidi.bigdota.service.dota.MatchReplayManagement;
 import com.cicidi.bigdota.spark.jobConfig.HeroDraftJob;
 import com.cicidi.bigdota.util.MatchReplayUtil;
 import com.cicidi.framework.spark.analyze.Accumulatable;
-import com.cicidi.framework.spark.pipeline.PipelineBuilder;
+import com.cicidi.framework.spark.db.JDBCDataSource;
 import com.cicidi.framework.spark.pipeline.PipelineContext;
 import com.cicidi.framework.spark.pipeline.impl.SortPipeline;
 import org.apache.log4j.Logger;
@@ -24,6 +24,7 @@ import scala.Tuple2;
 import com.cicidi.bigdota.util.Constants;
 
 import java.io.IOException;
+import java.sql.*;
 import java.util.List;
 
 /**
@@ -50,7 +51,10 @@ public class Dota2WinApplication implements ApplicationRunner {
     @Value("${env}")
     private String env;
 
+    @Autowired
+    private JDBCDataSource jdbcDataSource;
 
+    Connection connection;
     @Autowired
     MatchReplayManagement matchReplayManagement;
 
@@ -64,16 +68,13 @@ public class Dota2WinApplication implements ApplicationRunner {
         int load_start = Integer.parseInt(arg.getSourceArgs()[2]);
         int load_end = Integer.parseInt(arg.getSourceArgs()[3]);
         long start = System.currentTimeMillis();
-        downloadMatch(load_start, load_end);
-        PipelineContext pipelineContext_2 = heroDraftJob.job_2().run();
+//        downloadMatch(load_start, load_end);
+//        PipelineContext pipelineContext_2 = heroDraftJob.job_2().run();
         PipelineContext pipelineContext = heroDraftJob.job_1().run();
 
         List<Tuple2<String, Integer>> topN = (List) (pipelineContext.getOutPut().get(SortPipeline.class.getSimpleName()));
         logger.info("topN");
-        topN.forEach(tuple2 -> {
-            logger.info("key: " + tuple2._1);
-            logger.info("value: " + tuple2._2);
-        });
+        topN.forEach(tuple2 -> insertFinalResult(tuple2));
         long end = System.currentTimeMillis();
         logger.info("total time :" + (end - start));
         logger.info("total success matchReplay: "
@@ -88,5 +89,21 @@ public class Dota2WinApplication implements ApplicationRunner {
     public void downloadMatch(int start, int end) {
         matchReplayManagement.loadAllMatchMultithread(start, end);
 
+    }
+
+
+    public void insertFinalResult(Tuple2<String, Integer> tuple2) {
+        String sql = "INSERT INTO best_combination (combination , total)"
+                + "VALUES('" + tuple2._1 + "'," + tuple2._2 + ")";
+        try {
+            if (connection == null)
+                this.connection = DriverManager.getConnection("jdbc:postgresql://" + jdbcDataSource.getUrl() + ":" + jdbcDataSource.getPort() + "/", jdbcDataSource.getUsername(), jdbcDataSource.getPassword());
+            Statement stmt = null;
+            stmt = this.connection.createStatement();
+            stmt.executeUpdate(sql);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

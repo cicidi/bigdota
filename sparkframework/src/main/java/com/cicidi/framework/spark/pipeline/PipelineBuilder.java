@@ -2,6 +2,7 @@ package com.cicidi.framework.spark.pipeline;
 
 import com.cicidi.framework.spark.db.SparkCassandraRepository;
 import com.cicidi.framework.spark.db.SparkFileSystemRepository;
+import com.cicidi.framework.spark.db.SparkJDBCRepository;
 import com.cicidi.framework.spark.db.SparkRepository;
 import com.cicidi.framework.spark.filter.Filter;
 import com.cicidi.framework.spark.mapper.Mapper;
@@ -77,6 +78,9 @@ public class PipelineBuilder<T> implements Serializable {
                 break;
             case FILESYSTEM:
                 writePipeline = new FileSystemWritePipeline(pipelineContext, (SparkFileSystemRepository) sparkRepository);
+                break;
+            case JDBC:
+                writePipeline = new JdbcWritePipeline(pipelineContext, (SparkJDBCRepository) sparkRepository);
                 break;
             default:
         }

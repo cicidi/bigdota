@@ -1,3 +1,4 @@
+# To install DataStat
 curl --user walterchen.ca@gmail.com:Ajaxxxxx -O https://downloads.datastax.com/enterprise/DataStaxEnterprise-5.1.3-linux-x64-installer.run
 chmod +x DataStaxEnterprise-5.1.3-linux-x64-installer.run
 ./DataStaxEnterprise-5.1.3-linux-x64-installer.run --help
@@ -7,10 +8,11 @@ chmod +x DataStaxEnterprise-5.1.3-linux-x64-installer.run
 I used defalut install be it is installed to different path in the machines
 
 to hook up the cluster , i am following this video https://www.youtube.com/watch?v=DS4XIVYEeW8
-
+tonychen02.ca@gmail.com
 
 
 dse01 (hp)
+sudo service dse start
 less /var/log/cassandra/output.log
 vim /etc/dse/cassandra/cassandra.yaml
 /etc/default/dse  set datacenter

@@ -60,6 +60,6 @@ public class DataSource {
     }
 
     public enum DataSourceType {
-        FILESYSTEM, CASSANDRA, MYSQL, HDFS
+        FILESYSTEM, CASSANDRA, MYSQL, HDFS, JDBC
     }
 }
